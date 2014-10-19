@@ -1,0 +1,46 @@
+<!-- 	
+/*
+ * Chronolabs XOOPS Chat Module - xALKY
+ * 
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ 
+ * @copyright 		Chronolabs Cooperative http://labs.coop
+ * @license 		General Software Licence (https://web.labs.coop/public/legal/general-software-license/10,3.html)
+ * @package 		xalky
+ * @since 			1.111
+ * @author 			Antony Cipher <cipher@labs.coop>
+ * @author 			Simon Roberts <meshy@labs.coop>
+ * @subpackage		templates
+ * @description		Chronolabs XOOPS Module for Chat and Walky Talky Services
+ * 
+ */ 
+-->
+<div id="loginContent">
+	<div id="loginHeadlineContainer">
+		<h1><{$chattitle}></h1>
+	</div>
+	<form id="loginForm" action="<{$xalky_options.LOGIN_URL}>" method="post" enctype="application/x-www-form-urlencoded">
+		<div id="loginFormContainer">
+			<input type="hidden" name="login" id="loginField" value="login"/>
+			<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
+			<div><label for="userNameField"><{$xalky_options.userName}>:</label><br />
+			<input type="text" name="userName" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
+			<div><label for="passwordField"><{$xalky_options.password}>:</label><br />
+			<input type="password" name="password" id="passwordField"/></div>
+			<div><label for="channelField"><{$xalky_options.channel}>:</label><br />
+			<select name="channelName" id="channelField"><{$xalky_options.CHANNEL_OPTIONS}></select></div>
+			<div><label for="languageSelection"><{$xalky_options.language}>:</label><br />
+			<select id="languageSelection" name="lang" onchange="xalkyChat.switchLanguage(this.value);"><{$xalky_options.LANGUAGE_OPTIONS}></select></div>
+			<div style="font-weight:bold;"><label for="registerField">Do you wish to register now?</label><input type="checkbox" name="registerUser" id="registerField" value="1" /></div>
+			<div><input type="submit" name="submit" id="loginButton" value="<{$xalky_options.login}>"/></div>
+			<div id="loginRegisteredUsers"><{$xalky_options.registeredUsers}></div>
+		</div>
+	</form>
+	<div id="errorContainer"><{$xalky_options.ERROR_MESSAGES}><noscript><div><{$xalky_options.requiresJavaScript}></div></noscript></div>
+</div>
+

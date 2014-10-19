@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteCond %{SERVER_PORT} !^80$
+RewriteRule .http://%{SERVER_NAME}%{REQUEST_URI} [R,L=301]
+
+<Files ~ "^.(htaccess|htpasswd)$">
+deny from all
+</Files>
+AddCharset UTF-8 .utf8
+AddDefaultCharset UTF-8
+DirectoryIndex home.php index.php home.html index.html home.htm index.htm
