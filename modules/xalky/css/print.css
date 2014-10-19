@@ -1,0 +1,122 @@
+/*
+ * Chronolabs XOOPS Chat Module - xALKY
+ * 
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ 
+ * @copyright 		Chronolabs Cooperative http://labs.coop
+ * @license 		General Software Licence (https://web.labs.coop/public/legal/general-software-license/10,3.html)
+ * @package 		xalky
+ * @since 			1.111
+ * @author 			Antony Cipher <cipher@labs.coop>
+ * @author 			Simon Roberts <meshy@labs.coop>
+ * @subpackage		stylesheets
+ * @description		Chronolabs XOOPS Module for Chat and Walky Talky Services
+ * 
+ */
+
+@media print {
+
+	#xalky {
+		position:static;
+	}
+	#xalky #copyright {
+		display:none;
+	}
+	#xalky #headlineContainer {
+		display:none;
+	}
+	#xalky #logoutChannelContainer {
+		display:none;
+	}
+	#xalky #statusIconContainer {
+		display:none;
+	}
+	#xalky #xalkyList {
+		position:static;
+		overflow:visible;
+	}
+	#xalky #inputFieldContainer {
+		display:none;
+	}
+	#xalky #submitButtonContainer {
+		display:none;
+	}
+	#xalky #onlineListContainer {
+		display:none;
+	}
+	#xalky #helpContainer {
+		display:none;
+	}
+	#xalky #settingsContainer {
+		display:none;
+	}
+	#xalky #bbCodeContainer {
+		display:none;
+	}
+	#xalky #colorCodesContainer {
+		display:none;
+	}
+	#xalky #emoticonsContainer {
+		display:none;
+	}
+	#xalky #optionsContainer {
+		display:none;
+	}
+	#xalky #xalkyList div {
+		padding-bottom:5px;
+	}
+	#xalky #xalkyList img {
+		vertical-align:middle;
+		margin-bottom:2px;
+	}
+	#xalky #xalkyList cite {
+		margin-right:5px;
+	}
+	#xalky #xalkyList .delete {
+	 display:none;
+	}
+	
+	#xalky #xalkyList {
+		border:none;
+	}
+	
+	#xalky {
+		font-family:'times new roman', times, serif;
+		font-size:1.0em;
+		text-align:justify;
+	}
+	#xalky #xalkyList code {
+		font-size:0.8em;
+	}
+	
+	#xalky {
+		color:#000;
+	}
+	#xalky .guest {
+		color:gray;
+	}
+	#xalky .user {
+		color:#000;
+	}
+	#xalky .moderator {
+		color:#00AA00;
+	}
+	#xalky .admin {
+		color:red;
+	}
+	#xalky .xalkyBot {
+		color:#FF6600;
+	}
+	#xalky #xalkyList .xalkyBotErrorMessage {
+		color:red;
+	}
+	#xalky #xalkyList a {
+		color:#1E90FF;
+	}
+
+}

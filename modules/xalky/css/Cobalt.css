@@ -1,0 +1,152 @@
+/*
+ * Chronolabs XOOPS Chat Module - xALKY
+ * 
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ 
+ * @copyright 		Chronolabs Cooperative http://labs.coop
+ * @license 		General Software Licence (https://web.labs.coop/public/legal/general-software-license/10,3.html)
+ * @package 		xalky
+ * @since 			1.111
+ * @author 			Antony Cipher <cipher@labs.coop>
+ * @author 			Simon Roberts <meshy@labs.coop>
+ * @subpackage		stylesheets
+ * @description		Chronolabs XOOPS Module for Chat and Walky Talky Services
+ * 
+ */
+
+@import url('positions.css');
+@import url('borders.css');
+@import url('fonts.css');
+@import url('misc.css');
+@import url('print.css');
+
+
+@media screen,projection,handheld {
+	
+	#loginContent {
+		background-color:#2A2A2A;
+		color:#D4D4D4;
+	}
+	#loginContent h1 {
+		color:#D4D4D4;
+	}
+	#loginContent a {
+		color:#60A0DC;
+	}
+	#loginContent input, #loginContent select {
+		background-color:#424242;
+		color:#D4D4D4;
+	}
+	#loginContent #loginFormContainer #loginButton {
+		background-color:#424242;
+		color:#D4D4D4;
+	}
+	#loginContent #errorContainer {
+		color:red;
+	}
+	
+	#xalky {
+		background-color:#2A2A2A;
+		color:#D4D4D4;
+	}
+	#xalky h1 {
+		color:#D4D4D4;
+	}
+	#xalky a {
+		color:#60A0DC;
+	}
+	#xalky input, #xalky select, #xalky textarea {
+		background-color:#383838;
+		color:#D4D4D4;
+	}
+	#xalky #xalkyList, #xalky #onlineListContainer, #xalky #helpContainer, #xalky #settingsContainer, #xalky #bbCodeContainer, #xalky #colorCodesContainer, #xalky #emoticonsContainer {
+		border-color:#565656;
+		background-color:#383838;
+	}
+	.statusContainerOn {
+		background-image: url('../images/loading.png');
+	}
+	.statusContainerOff {
+		background-image: url('../images/loading-done.png');
+	}
+	.statusContainerAlert {
+		background-image: url('../images/loading-trouble.png');
+	}
+	#xalky #bbCodeContainer input, #xalky #logoutButton, #xalky #submitButton {
+		background-color:#383838;
+		color:#D4D4D4;
+	}
+	#xalky #colorCodesContainer a {
+		border-color:black;
+	}
+	#xalky #optionsContainer input {
+	 background-color:transparent;
+	}
+	#xalky #optionsContainer #helpButton {
+	 background:url('../images/help.png') no-repeat;
+	}
+	#xalky #optionsContainer #settingsButton {
+	 background:url('../images/settings.png') no-repeat;
+	}
+	#xalky #optionsContainer #onlineListButton {
+	 background:url('../images/users.png') no-repeat;
+	}
+	#xalky #optionsContainer #audioButton {
+	 background:url('../images/audio.png') no-repeat;
+	}
+	#xalky #optionsContainer #audioButton.off {
+	 background:url('../images/audio-off.png') no-repeat;
+	}
+	#xalky #optionsContainer #autoScrollButton {
+	 background:url('../images/autoscroll.png') no-repeat;
+	}
+	#xalky #optionsContainer #autoScrollButton.off {
+	 background:url('../images/autoscroll-off.png') no-repeat;
+	}
+	#xalky .rowEven {
+		background-color:#565656;
+	}
+	#xalky .rowOdd {
+		background-color:#484848;
+	}
+	#xalky .guest {
+		color:gray;
+	}
+	#xalky .user {
+		color:#D4D4D4;
+	}
+	#xalky .moderator {
+		color:#00AA00;
+	}
+	#xalky .admin {
+		color:red;
+	}
+	#xalky .xalkyBot {
+		color:#60A0DC;
+	}
+	#xalky #xalkyList .xalkyBotErrorMessage {
+		color:red;
+	}
+	#xalky #xalkyList a {
+		color:#60A0DC;
+	}
+	#xalky #xalkyList .delete {
+		background:url('../images/delete.png') no-repeat right;
+	}
+	#xalky #xalkyList .deleteSelected {
+		border-color:red;
+	}
+	#xalky #onlineListContainer h3, #xalky #helpContainer h3, #xalky #settingsContainer h3 {
+		background-color:#383838;
+		color:#D4D4D4;
+	}
+	#xalky #settingsContainer #settingsList input.playback {
+	 background:url('../images/playback.png') no-repeat;
+	}
+
+}
