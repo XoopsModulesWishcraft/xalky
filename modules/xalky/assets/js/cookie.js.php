@@ -1,17 +1,49 @@
 <?php
-
 /**
- * Declare header
-*/
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
+
 
 header("content-type: application/x-javascript");
 
 ?>
-
-/*
-* user settings
-*
-*/
+/**
+ * Xalky - User Settings - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
 var userRPM = true;
 var userRWebcam = false;
@@ -22,10 +54,9 @@ var userAvatarsON = true;
 var userMessStyle = false;	
 
 /*
-* create cookie
-*
-*/
-
+ * create cookie
+ *
+ */
 function createCookie(name,value,days)
 {
 	if(days)
@@ -41,10 +72,9 @@ function createCookie(name,value,days)
 createCookie('login','',-1);
 
 /*
-* read cookie
-*
-*/
-
+ * read cookie
+ *
+ */
 function readCookie(name)
 {
 	var nameEQ = name + "=";
@@ -60,10 +90,9 @@ function readCookie(name)
 }
 
 /*
-* get cookie
-*
-*/
-
+ * get cookie
+ *
+ */
 var gotCookie1 = readCookie('myTextStyle');
 var gotCookie2 = readCookie('myOptions');
 
@@ -76,7 +105,7 @@ function getCookie()
 		mBold = gotCookie[0];
 		mItalic = gotCookie[1];
 		mUnderline = gotCookie[2];
-		textColor = gotCookie[3];
+		textColour = gotCookie[3];
 		textSize = gotCookie[4];
 		textFamily = gotCookie[5];
 	}

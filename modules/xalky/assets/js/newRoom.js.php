@@ -1,4 +1,26 @@
 <?php
+/**
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
+
+require_once (dirname(dirname(__DIR__))."/includes/config.php");
 
 /**
  * Declare header
@@ -7,20 +29,39 @@
 header("content-type: application/x-javascript");
 
 ?>
+/**
+ * Xalky - New Room - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
 /*
-* init ajax object
-*
-*/
+ * init ajax object
+ *
+ */
 
 //Define XmlHttpRequest
 var updateUserRooms = getXmlHttpRequestObject();
 
 /*
-* show create room div
-*
-*/
-
+ * show create room div
+ *
+ */
 function newRoom($id)
 {
 	if(groupRooms == 0)
@@ -43,10 +84,9 @@ function newRoom($id)
 }
 
 /*
-* add room
-*
-*/
-
+ * add room
+ *
+ */
 function addRoom()
 {
 	// get new room name
@@ -92,14 +132,14 @@ function addRoom()
 	var param = '?';
 	param += '&addRoom=1';
 	param += '&newRoomName=' + encodeURIComponent(document.getElementById("roomName").value);
-	param += '&newRoomOwner=' + uID;
+	param += '&newRoomOwner=' + userID;
 	param += '&newRoomPass='+ document.getElementById("roomPass").value;
 
 	// if ready to send message to DB
 	if (updateUserRooms.readyState == 4 || updateUserRooms.readyState == 0)
 	{
 
-		updateUserRooms.open("POST", 'includes/sendData.php', true);
+		updateUserRooms.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php', true);
 		updateUserRooms.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		updateUserRooms.onreadystatechange = handleSendBlock;
 		updateUserRooms.send(param);

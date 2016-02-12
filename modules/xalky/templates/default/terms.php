@@ -24,17 +24,17 @@ include("../../lang/".getLang(''));
 	font-family: Verdana, Arial;
 	font-size: 12px;
 	font-style: normal;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 }
 
 .pageheader
 { 
 	padding: 2px 2px 2px 34px; 
-	background-color: #666666;
+	background-colour: #666666;
 	font-weight: bold;
 	font-size: 13px;
 	height: 20px;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 	font-family: Verdana, Arial;
 	font-size: 12px;
 	
@@ -49,7 +49,7 @@ include("../../lang/".getLang(''));
 {
 	margin: 5px 5px 0 5px;
 	padding: 0 0 0 0;	
-	background-color: #999999;	
+	background-colour: #999999;	
 }
 </style>
 
@@ -66,7 +66,7 @@ include("../../lang/".getLang(''));
 
 <!-- do not edit below -->
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo C_LANG128;?>" onclick="parent.closeMdiv('terms');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('terms');">
 </p>
 
 </body>

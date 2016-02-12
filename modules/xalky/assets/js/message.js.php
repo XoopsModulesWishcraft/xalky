@@ -1,10 +1,26 @@
 <?php
-
 /**
- * include files
-*/
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
-include(dirname(dirname(__FILE__))."/includes/config.php");
+require_once(dirname(dirname(__DIR__))."/includes/config.php");
 
 /**
  * Declare header
@@ -13,11 +29,31 @@ include(dirname(dirname(__FILE__))."/includes/config.php");
 header("content-type: application/x-javascript");
 
 ?>
+/**
+ * Xalky - Javascript Messaging - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
 /*
-* add message
-*
-*/
+ * add message
+ *
+ */
 
 var message;
 var isPrivate = '';
@@ -27,25 +63,25 @@ var lastMessageTxt = '';
 
 function addMessage(inputMDiv,displayMDiv)
 {
-	if(eCredits == '1' && displayMDiv.search(/pcontent_/i) != '-1')
+	if(digitalCredits == '1' && displayMDiv.search(/pcontent_/i) != '-1')
 	{
-		var eCreditCount = document.getElementById('eCreditsID').innerHTML;
+		var digitalCreditCount = document.getElementById('digitalCreditsID').innerHTML;
 
-		if(eCreditCount <= 0)
+		if(digitalCreditCount <= 0)
 		{
 			/* create messages */
-			var eCreditMessageA = "You have 0 eCredits left. Please purchase more eCredits to continue this private conversation.";
-			var eCreditMessageB = " has 0 eCredits left.";
+			var digitalCreditMessageA = "You have 0 digitalCredits left. Please purchase more digitalCredits to continue this private conversation.";
+			var digitalCreditMessageB = " has 0 digitalCredits left.";
 		
 			/* show sender 'you have no ecredits' */
-			message = "../images/notice.gif|"+stextColor+"|"+stextSize+"|"+stextFamily+"|"+eCreditMessageA+"|1";
-			createMessageDiv('1',uID,displayMDiv,showMessages+1,message,'beep_high.mp3','','');
+			message = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|"+digitalCreditMessageA+"|1";
+			createMessageDiv('1',userID,displayMDiv,showMessages+1,message,'beep_high.mp3','','');
 			
 			/* show receiver that 'sender has no ecredits' */			
-			message = "../images/notice.gif|"+stextColor+"|"+stextSize+"|"+stextFamily+"|"+eCreditMessageB+"|1";
+			message = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|"+digitalCreditMessageB+"|1";
 			
 			/* send data */
-			sendData(displayMDiv);
+			outbound(displayMDiv);
 
 			/* clear message input field */
 			clrMessageInput(inputMDiv);
@@ -116,11 +152,11 @@ function addMessage(inputMDiv,displayMDiv)
 	}
 
 	// check message length
-	if(message.length > <?php echo $CONFIG['maxChars'];?>)
+	if(message.length > <?php echo $xalkyConfig['maxChars'];?>)
 	{
-		var maxChars  = "Your message contains <span style='color:red;'>"+message.length+"</span> characters, please shorten your message.";
+		var maxChars  = "Your message contains <span style='colour:red;'>"+message.length+"</span> characters, please shorten your message.";
 		    maxChars += "<br><br>";				
-		    maxChars += "Max Allowed Characters: <span style='color:green;'><?php echo $CONFIG['maxChars'];?></span>";
+		    maxChars += "Max Allowed Characters: <span style='colour:green;'><?php echo $xalkyConfig['maxChars'];?></span>";
 		
 		showInfoBox("system","220","300","200","",maxChars);
 		return false;
@@ -298,18 +334,18 @@ function addMessage(inputMDiv,displayMDiv)
 		iRC = '1';
 	}
 	
-	message = userAvatar+"|"+textColor+"|"+textSize+"|"+textFamily+"|"+message+"|"+iRC+"|"+addLineBreaks;
+	message = userAvatar+"|"+textColour+"|"+textSize+"|"+textFamily+"|"+message+"|"+iRC+"|"+addLineBreaks;
 
 	// update users text style (cookie)
-	createCookie('myTextStyle',encodeURI(mBold+"|"+mItalic+"|"+mUnderline+"|"+textColor+"|"+textSize+"|"+textFamily),30);
+	createCookie('myTextStyle',encodeURI(mBold+"|"+mItalic+"|"+mUnderline+"|"+textColour+"|"+textSize+"|"+textFamily),30);
 
 	// send data to database
-	sendData(displayMDiv);
+	outbound(displayMDiv);
 
 	// create message
 	if(autoApprove)
 	{
-		createMessageDiv(mStatus, uID, displayMDiv, showMessages+1, message, sfx, userName, '','');
+		createMessageDiv(mStatus, userID, displayMDiv, showMessages+1, message, sfx, userName, '','');
 	}
 
 	// clear message input field
@@ -319,28 +355,25 @@ function addMessage(inputMDiv,displayMDiv)
 	lastPost = 1;
 	
 	// create bot reponse
-	if(intelliBot == 1 && Number(intellibotRoomID) == Number(roomID) && displayMDiv == 'chatContainer')
+	if(sentryBot == 1 && Number(sentryBotRoomID) == Number(roomID) && displayMDiv == 'chatContainer')
 	{
-		doIntellibot(message,userName);
+		doSentryBot(message,userName);
 	}	
 
 }
 
 /*
-* send message to database
-*
-*/
-
-// define XmlHttpRequest
+ * send message to database
+ *
+ */
 var sendReq = getXmlHttpRequestObject();
-
-function sendData(displayMDiv)
+function outbound(displayMDiv)
 {
 	message = message.replace(/\+/gi,"&#43;");
 
 	var param = '?';
 
-	param += '&uid=' + uID;
+	param += '&userID=' + userID;
 	param += '&umid=' + displayMDiv;
 	param += '&uroom=' + roomID;
 	param += '&uname=' + encodeURI(userName);
@@ -351,7 +384,7 @@ function sendData(displayMDiv)
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", 'includes/sendData.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = handleSendXalky;
 		sendReq.send(param);
@@ -363,10 +396,9 @@ function sendData(displayMDiv)
 }
 
 /*
-* send avatar to database
-*
-*/
-
+ * send avatar to database
+ *
+ */
 function sendAvatarData()
 {
 	var param = '?';
@@ -377,7 +409,7 @@ function sendAvatarData()
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", 'includes/sendData.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = handleSendXalky;
 		sendReq.send(param);
@@ -391,15 +423,11 @@ function handleSendXalky()
 }
 
 /*
-* get message from database
-*
-*/
-
-// define XmlHttpRequest
+ * get message from database
+ *
+ */
 var receiveMesReq = getXmlHttpRequestObject();
 var showHistory = 1;
-
-// gets the messages
 function getMessages() 
 {
 	var singleRoom = '';
@@ -411,7 +439,7 @@ function getMessages()
 
 	if (receiveMesReq.readyState == 4 || receiveMesReq.readyState == 0) 
 	{
-		receiveMesReq.open("GET", 'includes/getData.php?roomID='+roomID+'&history='+showHistory+'&last='+lastMessageID+'&s='+singleRoom+'&rnd='+ Math.random(), true);
+		receiveMesReq.open("GET", '<?php $xalkyConfig['chatroomUrl']; ?>/inbound.php?roomID='+roomID+'&history='+showHistory+'&last='+lastMessageID+'&s='+singleRoom+'&rnd='+ Math.random(), true);
 		receiveMesReq.onreadystatechange = handleMessages; 
 		receiveMesReq.send(null);
 	}
@@ -423,7 +451,7 @@ function getMessages()
 var mTimer = setInterval('getMessages();',refreshRate);
 var xmlError = 0;
 var roomNameStr;
-var eCredits = 0;
+var digitalCredits = 0;
 var moderatedXalky = 0;
 
 function handleMessages() 
@@ -511,15 +539,15 @@ function handleMessages()
 		}
 		
 		// userlist data
-		if(intelliBot == 1)
+		if(sentryBot == 1)
 		{
-			// if single room mode, add intellibot to each room
+			// if single room mode, add sentryBot to each room
 			if(totalRooms == '1')
 			{
-				intellibotRoomID = roomID;
+				sentryBotRoomID = roomID;
 			}
 
-			createUsersDiv('-1', '-1', intelliBotName, intelliBotAvi, '0', intellibotRoomID, intellibotRoomID, '1','','','');	
+			createUsersDiv('-1', '-1', sentryBotName, sentryBotAvi, '0', sentryBotRoomID, sentryBotRoomID, '1','','','');	
 		}
 		
 		for (var i = 0; i < xmldoc.getElementsByTagName("userlist").length;)
@@ -530,7 +558,7 @@ function handleMessages()
 			// split message data
 			var userListArray = userList.split("||");
 	
-			if(uID == userListArray[0])
+			if(userID == userListArray[0])
 			{
 				groupCams = userListArray[15];
 				groupWatch = userListArray[16];
@@ -540,21 +568,21 @@ function handleMessages()
 				groupVideo = userListArray[20];				
 			}
 
-			// enable eCredits
-			eCredits = userListArray[13];
+			// enable digitalCredits
+			digitalCredits = userListArray[13];
 
-			// update eCredits total
-			if(document.getElementById("eCreditsID") && userListArray[0] == uID)
+			// update digitalCredits total
+			if(document.getElementById("digitalCreditsID") && userListArray[0] == userID)
 			{
-				document.getElementById("eCreditsID").innerHTML = userListArray[14];
+				document.getElementById("digitalCreditsID").innerHTML = userListArray[14];
 			}
 
-			if(eCredits == 0)
+			if(digitalCredits == 0)
 			{
-				document.getElementById("iconeCredits").style.visibility = 'hidden';
+				document.getElementById("icondigitalCredits").style.visibility = 'hidden';
 			}
 
-			if(uID == userListArray[0])
+			if(userID == userListArray[0])
 			{
 				admin = Number(userListArray[7]);
 				moderator = Number(userListArray[8]);
@@ -632,10 +660,10 @@ function handleMessages()
 		{
 			createMessageDiv(
 							'0',
-							uID,
+							userID,
 							displayMDiv,
 							-2,
-							'1|'+stextColor+'|'+stextSize+'|'+stextFamily+'|** '+userName+' '+publicEntry,
+							'1|'+stextColour+'|'+stextSize+'|'+stextFamily+'|** '+userName+' '+publicEntry,
 							'beep_high.mp3',
 							'',
 							'',
@@ -650,10 +678,9 @@ function handleMessages()
 }
 
 /*
-* whisper user
-*
-*/
-
+ * whisper user
+ *
+ */
 function whisperUser(touserName)
 {
 	// check if user is whispering to themselves :P
@@ -668,10 +695,9 @@ function whisperUser(touserName)
 }
 
 /*
-* ring bell
-*
-*/
-
+ * ring bell
+ *
+ */
 function ringBell(inputMDiv,displayMDiv)
 {
 	// set message input
@@ -682,10 +708,9 @@ function ringBell(inputMDiv,displayMDiv)
 }
 
 /*
-* clear & focus message input field
-*
-*/
-
+ * clear & focus message input field
+ *
+ */
 function clrMessageInput(displayMDiv)
 {
 	// clear message input
@@ -697,15 +722,13 @@ function clrMessageInput(displayMDiv)
 
 
 /*
-* create message div 
-*
-*/
-
+ * create message div 
+ *
+ */
 var initDoSilence;
 var doTextAdverts = 0;
 var lastMessageText;
 var lastMessageName;
-
 function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser, mTime)
 {
 	message	= decodeURI(message);
@@ -807,7 +830,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 	ppDiv = pDiv.split("_");
 
 	// create private chat window if not exists
-	if(mUID != uID && mDiv != 'chatContainer' && mToUser.toLowerCase() == userName.toLowerCase())
+	if(mUID != userID && mDiv != 'chatContainer' && mToUser.toLowerCase() == userName.toLowerCase())
 	{
 	
 		// if message history is enabled 
@@ -820,17 +843,17 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 		// if div isnt created
 		if(!document.getElementById(mDiv))
 		{
-			if(ppDiv[0] != uID)
+			if(ppDiv[0] != userID)
 			{
 				// this user is receiver, new PM
-				createPXalkyDiv(userName,mUser,uID,mUID);
+				createPXalkyDiv(userName,mUser,userID,mUID);
 			}
 			else
 			{
 				// this user is sender (initilised PM)
 				// eg. this user crashed or lost connection
 				// catches any closed PM that a receiver still has open
-				createPXalkyDiv(userName,mUser,mUID,uID);
+				createPXalkyDiv(userName,mUser,mUID,userID);
 			}
 
 		}
@@ -998,11 +1021,11 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 			
 				if(document.getElementById("userAvatarsON").checked==true && messageArray[0] != '1')
 				{			
-					newMessage = "<img style='vertical-align:middle;' src='avatars/40/"+messageArray[0]+"'>&nbsp;";		
+					newMessage = "<img style='vertical-align:middle;' src='<?php $xalkyConfig['chatroomUrl']; ?>/assets/avatars/40/"+messageArray[0]+"'>&nbsp;";		
 				}
 				
 				newMessage += "<span id='username' style='cursor:pointer;' onclick='whisperUser(\""+mUser+"\")'>"+displayName+"</span>";
-				newMessage += "<span style='color:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>" + messageArray[4] + "</span>";
+				newMessage += "<span style='colour:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>" + messageArray[4] + "</span>";
 
 				// show delete global message icon
 				if( mTime > 0 && ( admin || moderator) )
@@ -1018,11 +1041,11 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 				newdiv.className = 'chatMessageBackground';	
 				
 				var newMessage = "<table style='float:right;margin-right:5px;'><tr>";
-					newMessage += "<td><div class='right_arrow_box' style='height:auto;text-align:left;color:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>"+messageArray[4]+"</div></td>";		
+					newMessage += "<td><div class='right_arrow_box' style='height:auto;text-align:left;colour:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>"+messageArray[4]+"</div></td>";		
 					
 					if(document.getElementById("userAvatarsON").checked==true)
 					{
-						newMessage += "<td style='width:50px;'><img src='avatars/40/"+messageArray[0]+"'></td>";
+						newMessage += "<td style='width:50px;'><img src='<?php $xalkyConfig['chatroomUrl']; ?>/assets/avatars/40/"+messageArray[0]+"'></td>";
 					}
 					
 					newMessage += "</tr></table>";
@@ -1036,10 +1059,10 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 				
 					if(document.getElementById("userAvatarsON").checked==true)
 					{			
-						newMessage += "<td style='width:50px;'><img src='avatars/40/"+messageArray[0]+"'></td>";
+						newMessage += "<td style='width:50px;'><img src='<?php $xalkyConfig['chatroomUrl']; ?>/assets/avatars/40/"+messageArray[0]+"'></td>";
 					}
 					
-					newMessage += "<td style='vertical-align:middle;'><div class='left_arrow_box' style='height:auto;color:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>";
+					newMessage += "<td style='vertical-align:middle;'><div class='left_arrow_box' style='height:auto;colour:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>";
 					
 					// show delete global message icon
 					if( mTime > 0 && ( admin || moderator) )
@@ -1140,10 +1163,9 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 }
 
 /*
-* delete global message
-*
-*/
-
+ * delete global message
+ *
+ */
 function deleteGMessage(deleteGMID)
 {
    // set message input
@@ -1154,23 +1176,21 @@ function deleteGMessage(deleteGMID)
 }
 
 /*
-* show text adverts
-* 
-*/
-
+ * show text adverts
+ * 
+ */
 function showTextAdvertisement()
 {
 	if(advertDesc[0])
 	{
-		createMessageDiv('0', '-1', 'chatContainer', showMessages+1, '../images/notice.gif|'+stextColor+'|'+stextSize+'|'+stextFamily+'|'+advertDesc[Math.floor(Math.random()*advertDesc.length)], 'beep_high.mp3', 'AdBot', '', '');	
+		createMessageDiv('0', '-1', 'chatContainer', showMessages+1, '<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/notice.gif|'+stextColour+'|'+stextSize+'|'+stextFamily+'|'+advertDesc[Math.floor(Math.random()*advertDesc.length)], 'beep_high.mp3', 'AdBot', '', '');	
 	}
 }
 
 /*
-* silence the user
-* 
-*/
-
+ * silence the user
+ * 
+ */
 var s = 0;
 function doSilence()
 {
@@ -1189,20 +1209,18 @@ function doSilence()
 }
 
 /*
-* highlight pm title bar (if pm is minimised)
-* 
-*/
-
+ * highlight pm title bar (if pm is minimised)
+ * 
+ */
 function showAlert(pDiv)
 {
-	document.getElementById("ptitle_"+pDiv).style.backgroundColor = newPMmin;
+	document.getElementById("ptitle_"+pDiv).style.backgroundColour = newPMmin;
 }
 
 /*
-* trim total messages in chat window
-*
-*/
-
+ * trim total messages in chat window
+ *
+ */ 
 function countMessages(pDiv)
 {
 	if(document.getElementById(pDiv))
@@ -1221,10 +1239,9 @@ function countMessages(pDiv)
 }
 
 /*
-* delete message div 
-*
-*/
-
+ * delete message div 
+ *
+ */
 function removeMessageDiv(divID)
 {
 	// if div exists
@@ -1239,10 +1256,9 @@ function removeMessageDiv(divID)
 }
 
 /*
-* use enter key as submit 
-*
-*/
-
+ * use enter key as submit 
+ *
+ */
 function submitenter(myfield,e,inputMDiv,displayMDiv,pXalky)
 {
 	var keycode;

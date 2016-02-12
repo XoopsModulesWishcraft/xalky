@@ -16,6 +16,64 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `xalky_blowfishing`
+--
+
+DROP TABLE IF EXISTS `xalky_blowfishing`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xalky_blowfishing` (
+  `salt-id` varchar(32) NOT NULL,
+  `source-peer-id` varchar(32) NOT NULL DEFAULT '',
+  `remote-peer-id` varchar(32) NOT NULL DEFAULT '',
+  `source-salt` varchar(128) NOT NULL DEFAULT '',
+  `remote-salt` varchar(128) NOT NULL DEFAULT '',
+  `created` int(12) NOT NULL DEFAULT '0',
+  `updated` int(12) NOT NULL DEFAULT '0',
+  `expires` int(12) NOT NULL DEFAULT '0',
+  `date-zone` varchar(64) NOT NULL DEFAULT 'Australia/Sydney',
+  PRIMARY KEY (`salt-id`,`source-peer-id`,`remote-peer-id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `xalky_blowfishing`
+--
+
+LOCK TABLES `xalky_blowfishing` WRITE;
+/*!40000 ALTER TABLE `xalky_blowfishing` DISABLE KEYS */;
+/*!40000 ALTER TABLE `xalky_blowfishing` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `xalky_callbacks`
+--
+
+DROP TABLE IF EXISTS `xalky_callbacks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `xalky_callbacks` (
+  `when` int(12) NOT NULL,
+  `uri` varchar(250) NOT NULL DEFAULT '',
+  `timeout` int(4) NOT NULL DEFAULT '0',
+  `connection` int(4) NOT NULL DEFAULT '0',
+  `data` mediumtext NOT NULL,
+  `queries` mediumtext NOT NULL,
+  `fails` int(3) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`when`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `xalky_callbacks`
+--
+
+LOCK TABLES `xalky_callbacks` WRITE;
+/*!40000 ALTER TABLE `xalky_callbacks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `xalky_callbacks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `xalky_message`
 --
 
@@ -26,6 +84,7 @@ CREATE TABLE `xalky_message` (
   `msg-id` varchar(32) NOT NULL,
   `peer-id` varchar(32) NOT NULL,
   `peering-id` varchar(32) NOT NULL,
+  `room-id` varchar(32) NOT NULL,
   `user-id` varchar(32) NOT NULL,
   `to-user-id` varchar(32) NOT NULL DEFAULT '',
   `to-peer-id` varchar(32) NOT NULL DEFAULT '',
@@ -35,7 +94,7 @@ CREATE TABLE `xalky_message` (
   `sent-peers` enum('Yes','No') NOT NULL DEFAULT 'No',
   `when` int(12) NOT NULL DEFAULT '0',
   `zone` varchar(45) NOT NULL DEFAULT 'Australia/Sydney',
-  PRIMARY KEY (`msg-id`,`peer-id`,`peering-id`,`user-id`)
+  PRIMARY KEY (`msg-id`,`peer-id`,`peering-id`,`room-id`,`user-id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -157,16 +216,22 @@ CREATE TABLE `xalky_peers` (
   `api-uri` varchar(200) NOT NULL,
   `api-uri-callback` varchar(200) NOT NULL,
   `api-uri-profile` varchar(200) NOT NULL,
-  `remote` enum('Yes','No') NOT NULL,
-  `seeder` enum('Yes','No') NOT NULL,
-  `banned` enum('Yes','No') NOT NULL,
-  `priviledged` enum('Yes','No') NOT NULL,
-  `version` varchar(20) NOT NULL,
+  `api-uri-data` varchar(200) NOT NULL,
+  `aes-support` enum('Yes','No') NOT NULL DEFAULT 'Yes',
+  `remote` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `seeder` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `banned` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `priviledged` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `application` varchar(30) NOT NULL DEFAULT 'xalky',
+  `version` varchar(20) NOT NULL DEFAULT '1.0.1',
   `heard` int(12) NOT NULL DEFAULT '0',
   `called` int(12) NOT NULL DEFAULT '0',
   `down` int(12) NOT NULL DEFAULT '0',
   `created` int(12) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`peer-id`,`api-uri`,`api-uri-callback`,`api-uri-profile`,`remote`,`seeder`,`banned`,`priviledged`)
+  `ping` double(22,12) NOT NULL DEFAULT '0.000000000000',
+  `ping-delay` int(8) NOT NULL DEFAULT '360',
+  `ping-next` int(12) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`peer-id`,`api-uri`,`api-uri-callback`,`api-uri-profile`,`remote`,`seeder`,`banned`,`priviledged`,`api-uri-data`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -188,14 +253,14 @@ DROP TABLE IF EXISTS `xalky_profiles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `xalky_profiles` (
   `profile-id` bigint(22) NOT NULL,
-  `peer-uid` int(11) NOT NULL AUTO_INCREMENT,
+  `peer-userID` int(11) NOT NULL AUTO_INCREMENT,
   `peering-id` varchar(32) NOT NULL DEFAULT '',
   `peer-id` varchar(32) NOT NULL DEFAULT '',
   `peer-uname` varchar(64) NOT NULL DEFAULT '',
   `peer-name` varchar(64) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `peer-profile-url` varchar(250) NOT NULL DEFAULT 'http://',
   `peer-avatar-url` varchar(250) NOT NULL DEFAULT 'http://',
-  PRIMARY KEY (`peer-uid`,`profile-id`,`peering-id`,`peer-id`)
+  PRIMARY KEY (`peer-userID`,`profile-id`,`peering-id`,`peer-id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -287,16 +352,19 @@ CREATE TABLE `xalky_users` (
   `user-id` varchar(32) NOT NULL,
   `peering-id` varchar(32) NOT NULL DEFAULT '',
   `peer-id` varchar(32) NOT NULL DEFAULT '',
-  `uid` int(11) NOT NULL DEFAULT '0',
-  `uname` varchar(12) NOT NULL DEFAULT '',
+  `userID` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(128) NOT NULL DEFAULT '',
+  `uname` varchar(64) NOT NULL DEFAULT '',
+  `gender` enum('Male','Female','Couple','Transsexual','Unknown') NOT NULL DEFAULT 'Unknown',
+  `dob` varchar(12) NOT NULL DEFAULT '',
   `ip-id` varchar(32) NOT NULL DEFAULT '',
-  `prevroom` varchar(32) NOT NULL DEFAULT '',
-  `room` varchar(32) NOT NULL DEFAULT '',
+  `previous-room` varchar(32) NOT NULL DEFAULT '',
+  `current-room` varchar(32) NOT NULL DEFAULT '',
   `avatar-url` varchar(250) NOT NULL DEFAULT '',
-  `active` int(13) NOT NULL DEFAULT '0',
-  `last-active` int(13) NOT NULL DEFAULT '0',
-  `kick` enum('Yes','No') NOT NULL DEFAULT 'No',
-  `ban` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `local-active` int(13) NOT NULL DEFAULT '0',
+  `peer-active` int(13) NOT NULL DEFAULT '0',
+  `kicked` enum('Yes','No') NOT NULL DEFAULT 'No',
+  `banned` enum('Yes','No') NOT NULL DEFAULT 'No',
   `online` enum('Yes','No') NOT NULL DEFAULT 'No',
   `status` varchar(255) NOT NULL DEFAULT '',
   `points-active` bigint(22) NOT NULL DEFAULT '0',
@@ -310,7 +378,7 @@ CREATE TABLE `xalky_users` (
   `speaker` enum('Yes','No') NOT NULL DEFAULT 'No',
   `data` varchar(32) NOT NULL DEFAULT '',
   PRIMARY KEY (`user-id`,`peering-id`,`peer-id`),
-  KEY `SEARCH` (`groups`,`enabled`,`guest`,`moderator`,`speaker`,`data`,`admin`,`online`,`ban`,`kick`,`active`,`room`,`uname`,`peer-id`)
+  KEY `SEARCH` (`groups`,`enabled`,`guest`,`moderator`,`speaker`,`data`,`admin`,`online`,`banned`,`kicked`,`local-active`,`current-room`,`uname`,`peer-id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -366,4 +434,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-02-12 15:37:19
+-- Dump completed on 2016-02-12 18:34:12

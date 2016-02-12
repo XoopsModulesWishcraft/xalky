@@ -1,12 +1,27 @@
 <?php
+/**
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
-/*
-* include files
-*
-*/
-
-include(dirname(dirname(__FILE__))."/includes/session.php");
-include(dirname(dirname(__FILE__))."/includes/config.php");
+require_once(dirname(dirname(__DIR__))."/includes/session.php");
+require_once(dirname(dirname(__DIR__))."/includes/config.php");
 
 /**
  * Declare header
@@ -15,12 +30,31 @@ include(dirname(dirname(__FILE__))."/includes/config.php");
 header("content-type: application/x-javascript");
 
 ?>
+/**
+ * Xalky - General Functions - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
 /*
-* init all
-*
-*/
-
+ * init all
+ *
+ */
 function initAll()
 {
 	resizeDivs();
@@ -43,11 +77,11 @@ function initAll()
 		publicWelcome = lang1;
 	}
 
-	var entryWelcome = "../images/notice.gif|"+stextColor+"|"+stextSize+"|"+stextFamily+"|"+publicWelcome+"|1";
-	var entryNotice = "1|"+stextColor+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicEntry;
-	var entryMessages = "../images/notice.gif|"+stextColor+"|"+stextSize+"|"+stextFamily+"|Displaying last messages ...|1";
+	var entryWelcome = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|"+publicWelcome+"|1";
+	var entryNotice = "1|"+stextColour+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicEntry;
+	var entryMessages = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|Displaying last messages ...|1";
 
-	createMessageDiv('1',uID,displayMDiv,1,entryWelcome,'doorbell.mp3','','');
+	createMessageDiv('1',userID,displayMDiv,1,entryWelcome,'doorbell.mp3','','');
 
 	if(invisibleOn == 1 && (admin == 1 && hide == 1))
 	{
@@ -57,7 +91,7 @@ function initAll()
 	{
 		if(dispLastMess > 1)
 		{
-			createMessageDiv('0',uID,displayMDiv,2,entryMessages,'beep_high.mp3','','');
+			createMessageDiv('0',userID,displayMDiv,2,entryMessages,'beep_high.mp3','','');
 		}
 
 		roomlogout();
@@ -69,10 +103,9 @@ function initAll()
 }
 
 /*
-* Array indexOf method (for unsupported browsers)
-* https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf
-*/
-	
+ * Array indexOf method (for unsupported browsers)
+ * https://developer.mozilla.org/en-US/docs/JavaScript/Reference/Global_Objects/Array/indexOf
+ */	
 if (!Array.prototype.indexOf) {
 	Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
 		"use strict";
@@ -107,10 +140,9 @@ if (!Array.prototype.indexOf) {
 }
 
 /*
-* show room headers 
-*
-*/
-
+ * show room headers 
+ *
+ */
 function showRoomHeaders()
 {
 	var i = 1;
@@ -130,49 +162,45 @@ function showRoomHeaders()
 }
 
 /*
-* login message
-*
-*/
-
+ * login message
+ *
+ */
 function roomlogin()
 {
 	roomID = currRoom;
 
-	message = "1|"+stextColor+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicEntry;
+	message = "1|"+stextColour+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicEntry;
 
 	// send login message
-	var login = setTimeout('sendData(displayMDiv);',1000);
+	var login = setTimeout('outbound(displayMDiv);',1000);
 }
 
 /*
-* logout message
-*
-*/
-
+ * logout message
+ *
+ */
 function roomlogout()
 {
 	// remove user from current room
-	removeUsersDiv(uID,roomID);
+	removeUsersDiv(userID,roomID);
 
 	// insert logout message in prev room
 	if(currRoom != prevRoom)
 	{
 		roomID = prevRoom;
 
-		message = "1|"+stextColor+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicExit;
+		message = "1|"+stextColour+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicExit;
 
 		// send logout message
-		sendData(displayMDiv);
+		outbound(displayMDiv);
 	}
 }
 
 /*
-* focus windows 
-*
-*/
-
+ * focus windows 
+ *
+ */
 var zIndex = 100;
-
 function doFocus(divID)
 {
 	// if div exists
@@ -194,10 +222,9 @@ function doFocus(divID)
 }
 
 /*
-* toggle headers 
-*
-*/
-
+ * toggle headers 
+ *
+ */
 function toggleHeader(headerID,subID)
 {
 	if(document.getElementById(headerID).style.height != '24px')
@@ -221,7 +248,7 @@ function toggleHeader(headerID,subID)
 			document.getElementById(headerID).style.height = "300px";
 			document.getElementById(headerID).style.width = "400px";
 
-			document.getElementById("ptitle_"+subID).style.backgroundColor = newPM;
+			document.getElementById("ptitle_"+subID).style.backgroundColour = newPM;
 			document.getElementById("pcontent_"+subID).style.visibility = 'visible';
 			document.getElementById("psendbox_"+subID).style.visibility = 'visible';
 		}
@@ -229,10 +256,9 @@ function toggleHeader(headerID,subID)
 }
 
 /*
-* display adverts container 
-*
-*/
-
+ * display adverts container 
+ *
+ */
 function displayAdverts()
 {
 	if(advertsOn == 0 && document.getElementById("advertContainer"))
@@ -242,20 +268,18 @@ function displayAdverts()
 }
 
 /*
-* change rooms 
-*
-*/
-
+ * change rooms 
+ *
+ */
 function changeRooms(roomID)
 {
 	window.location = '?roomID='+roomID;
 }
 
 /*
-* toggle divs 
-*
-*/
-
+ * toggle divs 
+ *
+ */
 var topLevel = 100;
 function toggleBox(szDivID)
 {
@@ -308,10 +332,9 @@ function toggleBox(szDivID)
 }
 
 /*
-* init avatar menu
-*
-*/
-
+ * init avatar menu
+ *
+ */
 function doAvatars(inputMDiv, displayMDiv, nWin)
 {
 	createMdiv('avatarsWin',nWin);
@@ -326,10 +349,9 @@ function doAvatars(inputMDiv, displayMDiv, nWin)
 }
 
 /*
-* init sfx menu
-*
-*/
-
+ * init sfx menu
+ *
+ */
 function doSFX(inputMDiv,displayMDiv, nWin)
 {
 	createMdiv('sFXWin',nWin);
@@ -344,10 +366,9 @@ function doSFX(inputMDiv,displayMDiv, nWin)
 }
 
 /*
-* init smilie menu
-*
-*/
-
+ * init smilie menu
+ *
+ */
 function doSmilies(inputMDiv, displayMDiv, nWin)
 {
 	createMdiv('smiliesWin',nWin);
@@ -362,15 +383,14 @@ function doSmilies(inputMDiv, displayMDiv, nWin)
 }
 
 /*
-* init style window
-*
-*/
-
+ * init style window
+ *
+ */
 function doStyles(inputMDiv, displayMDiv, nWin)
 {
-	createMdiv('colorsWin',nWin);
-	createMenu(inputMDiv,displayMDiv,'colorsWin',totalColors,loopColors);
-	toggleBox('colorsWin');
+	createMdiv('coloursWin',nWin);
+	createMenu(inputMDiv,displayMDiv,'coloursWin',totalColours,loopColours);
+	toggleBox('coloursWin');
 
 	createMdiv('fontfamilyWin',nWin);
 	createMenu(inputMDiv,displayMDiv,'fontfamilyWin',totalFontFamily,loopFontFamily);
@@ -382,59 +402,58 @@ function doStyles(inputMDiv, displayMDiv, nWin)
 
 	if(displayMDiv != 'chatContainer')
 	{
-		document.getElementById('colorsWin').style.bottom = '66px';
+		document.getElementById('coloursWin').style.bottom = '66px';
 		document.getElementById('fontfamilyWin').style.bottom = '66px';
 		document.getElementById('fontsizeWin').style.bottom = '66px';
 	}
 }
 
 /*
-* options menu
-* to hide icons in private windows,
-* if(ndiv.search("pmenuBar_")){}
-*/
-
+ * options menu
+ * to hide icons in private windows,
+ * if(ndiv.search("pmenuBar_")){}
+ */
 function optionsMenu(ndiv,nBar,nContainer,nWin)
 {
-	<?php if ($CONFIG['smilies']){?>
+	<?php if ($xalkyConfig['smilies']){?>
 	document.getElementById(ndiv).innerHTML  = '<span alt="'+lang52+'" title="'+lang52+'" id="smilies" class="iconSmilies" onmouseover="this.className=\'iconSmiliesOver\'" onmouseout="this.className=\'iconSmilies\'" onclick="doSmilies(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\');"></span>';
 	<?php }?>
 
-	<?php if ($CONFIG['ringBell']){?>	
+	<?php if ($xalkyConfig['ringBell']){?>	
 	document.getElementById(ndiv).innerHTML += '<span alt="'+lang53+'" title="'+lang53+'" id="ringbell" class="iconRingbell" onmouseover="this.className=\'iconRingbellOver\'" onmouseout="this.className=\'iconRingbell\'" onclick="ringBell(\''+nBar+'\',\''+nContainer+'\')"></span>';
 	<?php }?>
 	
-	<?php if ($CONFIG['textStyles']){?>
+	<?php if ($xalkyConfig['textStyles']){?>
 	document.getElementById(ndiv).innerHTML += '<span alt="'+lang54+'" title="'+lang54+'" id="style" class="iconStyle" onmouseover="this.className=\'iconStyleOver\'" onmouseout="this.className=\'iconStyle\'" onclick="doStyles(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\');"></span>';
 	<?php }?>
 	
-	<?php if ($CONFIG['userAvatars']){?>
+	<?php if ($xalkyConfig['userAvatars']){?>
 	document.getElementById(ndiv).innerHTML += '<span alt="'+lang55+'" title="'+lang55+'" id="avatar" class="iconAvatar" onmouseover="this.className=\'iconAvatarOver\'" onmouseout="this.className=\'iconAvatar\'" onclick="doAvatars(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\')"></span>';
 	<?php }?>
 	
 	if(mySFX[0])
 	{
-		<?php if ($CONFIG['playSFX']){?>
+		<?php if ($xalkyConfig['playSFX']){?>
 		document.getElementById(ndiv).innerHTML += '<span alt="'+lang56+'" title="'+lang56+'" id="sounds" class="iconSounds" onmouseover="this.className=\'iconSoundsOver\'" onmouseout="this.className=\'iconSounds\'" onclick="doSFX(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\')"></span>';
 		<?php }?>
 	}
 
 	if(ndiv.search("pmenuBar_"))
 	{
-		<?php if ($CONFIG['clearScreen']){?>
+		<?php if ($xalkyConfig['clearScreen']){?>
 		document.getElementById(ndiv).innerHTML += '<span alt="'+lang57+'" title="'+lang57+'" id="rubber" class="iconRubber" onmouseover="this.className=\'iconRubberOver\'" onmouseout="this.className=\'iconRubber\'" onclick=\'clrScreen();\'></span>';
 		<?php }?>
 		
-		<?php if ($CONFIG['userSettings']){?>
+		<?php if ($xalkyConfig['userSettings']){?>
 		document.getElementById(ndiv).innerHTML += '<span alt="'+lang58+'" title="'+lang58+'" id="edit" class="iconEdit" onmouseover="this.className=\'iconEditOver\'" onmouseout="this.className=\'iconEdit\'" onclick=\'editSettings();\'></span>';
 		<?php }?>
 	}
 	
-	<?php if ($CONFIG['chatHistory']){?>
+	<?php if ($xalkyConfig['chatHistory']){?>
 	document.getElementById(ndiv).innerHTML += '<span alt="'+lang59+'" title="'+lang59+'" id="transcripts" class="iconTranscripts" onmouseover="this.className=\'iconTranscriptsOver\'" onmouseout="this.className=\'iconTranscripts\'" onclick=\'showInfoBox("viewTranscripts","400","600","100","index.php?transcripts=1&roomID="+roomID,"");\'></span>';
 	<?php }?>
 	
-	<?php if ($CONFIG['chatHelp']){?>
+	<?php if ($xalkyConfig['chatHelp']){?>
 	document.getElementById(ndiv).innerHTML += '<span alt="'+lang60+'" title="'+lang60+'" id="help" class="iconHelp" onmouseover="this.className=\'iconHelpOver\'" onmouseout="this.className=\'iconHelp\'" onclick=\'newWin("help/index.php")\'></span>';
 	<?php }?>
 		
@@ -454,9 +473,9 @@ function optionsMenu(ndiv,nBar,nContainer,nWin)
 }
 
 /*
-* create edit div
-*
-*/
+ * create edit div
+ *
+ */
 function editSettings()
 {
 	// if div does not exist
@@ -468,7 +487,7 @@ function editSettings()
 
 		newdiv.setAttribute("id","editDiv");
 		newdiv.className = "editWin";
-		newdiv.innerHTML  = '<div style="text-align:right;" class="roomheader" onclick="toggleBox(\'editDiv\')"><img src="images/close.gif"></div>';		
+		newdiv.innerHTML  = '<div style="text-align:right;" class="roomheader" onclick="toggleBox(\'editDiv\')"><img src="<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/close.gif"></div>';		
 		newdiv.innerHTML += '<div>&nbsp;</div>';
 		newdiv.innerHTML += '<div><input type="checkbox" id="allowPM" onclick="updateUserSettings()"> '+lang46+'&nbsp;</div>';
 		newdiv.innerHTML += '<div><input type="checkbox" id="viewMyCamID" onclick="updateUserSettings()"> '+lang47+'&nbsp;</div>';
@@ -493,10 +512,9 @@ function editSettings()
 }
 
 /*
-* update user settings
-*
-*/
-
+ * update user settings
+ *
+ */
 function updateUserSettings()
 {
 	userRPM = document.getElementById('allowPM').checked;
@@ -511,10 +529,9 @@ function updateUserSettings()
 }
 
 /*
-* switch settings status
-*
-*/
-
+ * switch settings status
+ *
+ */
 function switchSettingsStatus(value,div)
 {
 	if(value == 'false' || value == false)
@@ -530,10 +547,9 @@ function switchSettingsStatus(value,div)
 }
 
 /*
-* create menu div
-*
-*/
-
+ * create menu div
+ *
+ */
 function createMdiv(ndiv,nWin)
 {
 	if(document.getElementById(ndiv))
@@ -549,10 +565,9 @@ function createMdiv(ndiv,nWin)
 }
 
 /*
-* close menu div
-*
-*/
-
+ * close menu div
+ *
+ */
 function closeMdiv(ndiv)
 {
 	if(document.getElementById(ndiv))
@@ -563,12 +578,10 @@ function closeMdiv(ndiv)
 }
 
 /*
-* create menu - (using all js array values)
-* 
-*/
-
+ * create menu - (using all js array values)
+ * 
+ */
 var nClass = '';
-
 function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 {
 	var i=0;
@@ -626,7 +639,7 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 			
 			if(showAvatar)
 			{
-				document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;" onclick="addAvatar(\''+inputMDiv+'\',\''+myAvatars[i]+'\');updateAvatar(\''+uID+'\', \''+myAvatars[i]+'\');sendAvatarData();" /><img src="avatars/'+myAvatars[i]+'"></span>';
+				document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;" onclick="addAvatar(\''+inputMDiv+'\',\''+myAvatars[i]+'\');updateAvatar(\''+userID+'\', \''+myAvatars[i]+'\');sendAvatarData();" /><img src="avatars/'+myAvatars[i]+'"></span>';
 			}
 		}
 
@@ -668,16 +681,16 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 				document.getElementById(ndiv).style.fontStyle="italic";	
 			}
 
-			document.getElementById(ndiv).style.color = textColor;
+			document.getElementById(ndiv).style.colour = textColour;
 
 			document.getElementById(ndiv).innerHTML += '<div class="'+nClass+'" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" style="font-size:'+myFontSize[i]+';" alt="'+myFontSize[i]+'" title="'+myFontSize[i]+'" onclick="addFontSize(\''+myFontSize[i]+'\');changeMessBoxStyle(\''+inputMDiv+'\');" />'+lang2+'</div>';
 
 			nClass = '';
 		}
 
-		if(ndiv == 'colorsWin')
+		if(ndiv == 'coloursWin')
 		{
-			document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;background-color:'+myColor[i]+'" alt="'+myColor[i]+'" title="'+myColor[i]+'" onclick="addColor(\''+myColor[i]+'\');changeMessBoxStyle(\''+inputMDiv+'\');" />&nbsp;</span>';
+			document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;background-colour:'+myColour[i]+'" alt="'+myColour[i]+'" title="'+myColour[i]+'" onclick="addColour(\''+myColour[i]+'\');changeMessBoxStyle(\''+inputMDiv+'\');" />&nbsp;</span>';
 		}
 
 		if(ndiv == 'sFXWin')
@@ -730,13 +743,12 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 }
 
 /*
-* update message box text style
-*
-*/
-
+ * update message box text style
+ *
+ */
 function changeMessBoxStyle(div)
 {
-	document.getElementById(div).style.color = textColor;
+	document.getElementById(div).style.colour = textColour;
 	document.getElementById(div).style.fontFamily = textFamily;
 	document.getElementById(div).style.fontSize = textSize;
 
@@ -763,10 +775,9 @@ function changeMessBoxStyle(div)
 }
 
 /*
-* add smilie to message 
-*
-*/
-
+ * add smilie to message 
+ *
+ */
 function addSmilie(nSmilie)
 {
 	for (i = 0; i <= totalSmilies; i++)
@@ -778,10 +789,9 @@ function addSmilie(nSmilie)
 }
 
 /*
-* add smilie to messagebar 
-*
-*/
-
+ * add smilie to messagebar 
+ *
+ */
 function addsmiley(inputMDiv,code)
 {
 	var pretext = document.getElementById(inputMDiv).value;
@@ -791,10 +801,9 @@ function addsmiley(inputMDiv,code)
 }
 
 /*
-* update users avatar 
-*
-*/
-
+ * update users avatar 
+ *
+ */
 function addAvatar(inputMDiv,nAvatar)
 {
 	// update avatar
@@ -808,10 +817,9 @@ function addAvatar(inputMDiv,nAvatar)
 }
 
 /*
-* play SFX 
-*
-*/
-
+ * play SFX 
+ *
+ */
 function addSFX(inputMDiv,displayMDiv,sfx)
 {
 	// clear message input
@@ -829,24 +837,22 @@ function addSFX(inputMDiv,displayMDiv,sfx)
 }
 
 /*
-* update selected Font Color
-*
-*/
-
-function addColor(nColor)
+ * update selected Font Colour
+ *
+ */
+function addColour(nColour)
 {
 	// update avatar
-	textColor = nColor;
+	textColour = nColour;
 
 	// update text sample window
-	document.getElementById("fontsizeWin").style.color=nColor;
+	document.getElementById("fontsizeWin").style.colour=nColour;
 }
 
 /*
-* update selected Font Family
-*
-*/
-
+ * update selected Font Family
+ *
+ */
 function addFontFamily(nFont)
 {
 	// update font family
@@ -857,10 +863,9 @@ function addFontFamily(nFont)
 }
 
 /*
-* update selected Font Size
-*
-*/
-
+ * update selected Font Size
+ *
+ */
 function addFontSize(nSize)
 {
 	// update font size
@@ -868,10 +873,9 @@ function addFontSize(nSize)
 }
  
 /*
-* update Bold for user text 
-*
-*/
-
+ * update Bold for user text 
+ *
+ */
 function addFontBold()
 {
 	if(mBold == 0)
@@ -892,10 +896,9 @@ function addFontBold()
 }
 
 /*
-* update Underline for user text 
-*
-*/
-
+ * update Underline for user text 
+ *
+ */
 function addFontUnderline()
 {
 	if(mUnderline == 0)
@@ -916,10 +919,9 @@ function addFontUnderline()
 }
 
 /*
-* update Italic for user text 
-*
-*/
-
+ * update Italic for user text 
+ *
+ */
 function addFontItalic()
 {
 	if(mItalic == 0)
@@ -940,43 +942,38 @@ function addFontItalic()
 }
 
 /*
-* flood control
-*
-*/
-
+ * flood control
+ *
+ */
 var lastPost = 1;
-
 function floodControl()
 {
 	lastPost++;	
 }
-
 setInterval('floodControl();','1000');
 
 /*
-* logout user
-*
-*/
-
+ * logout user
+ *
+ */
 function logout(id)
 {
 	<?php 
 	$room = '';
 	
-	if(isset($_SESSION['room']) && $CONFIG['singleRoom'])
+	if(isset($_SESSION['room']) && $xalkyConfig['singleRoom'])
 	{
 		$room = "roomID=".$_SESSION['room']."&";
 	}
 	?>
 	
-	window.location.replace("index.php?<?php echo $room;?>logout");
+	window.location.replace("<?php $xalkyConfig['chatroomUrl']; ?>/index.php?<?php echo $room;?>logout");
 }
 
 /*
-* create status select list
-*
-*/
-
+ * create status select list
+ *
+ */
 function createStatusSelectOptions()
 {
 	var sel = document.getElementById('selectStatusID');
@@ -1015,10 +1012,9 @@ function createStatusSelectOptions()
 }
 
 /*
-* update status
-*
-*/
-
+ * update status
+ *
+ */
 function sendStatus(status)
 {
 	var param = '?';
@@ -1027,7 +1023,7 @@ function sendStatus(status)
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", 'includes/sendData.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = handleSendXalky;
 		sendReq.send(param);
@@ -1036,10 +1032,9 @@ function sendStatus(status)
 }
 
 /*
-* send avatar to database
-*
-*/
-
+ * send avatar to database
+ *
+ */
 function sendAvatarData()
 {
 	var param = '?';
@@ -1048,7 +1043,7 @@ function sendAvatarData()
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", 'includes/sendData.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = handleSendXalky;
 		sendReq.send(param);
@@ -1057,10 +1052,9 @@ function sendAvatarData()
 }
 
 /*
-* block/unblock user
-*
-*/
-
+ * block/unblock user
+ *
+ */
 function blockUsers(i,id)
 {
 	if(i=='block')
@@ -1079,7 +1073,7 @@ function blockUsers(i,id)
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", 'includes/sendData.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = handleSendXalky;
 		sendReq.send(param);
@@ -1087,10 +1081,9 @@ function blockUsers(i,id)
 }
 
 /*
-* show/hide password field
-* used on login page
-*/
-
+ * show/hide password field
+ * used on login page
+ */
 var y = 1;
 function toggleLoginPass()
 {
@@ -1110,32 +1103,29 @@ function toggleLoginPass()
 }
 
 /*
-* open new window
-*
-*/
-
+ * open new window
+ *
+ */
 function newWin(url)
 {
 	window.open(url,'','');
 }
 
 /*
-* clear screen
-*
-*/
-
+ * clear screen
+ *
+ */
 function clrScreen()
 {
 	document.getElementById("chatContainer").innerHTML = '';
 }
 
 /*
-* show info box
-* showInfoBox("div name","height","width","top","url to file","text to display")
-* example: showInfoBox("lost","200","300","200","templates/default/lost.php","");
-* example: showInfoBox("system","200","300","200","","some text goes here");
-*/
-
+ * show info box
+ * showInfoBox("div name","height","width","top","url to file","text to display")
+ * example: showInfoBox("lost","200","300","200","templates/default/lost.php","");
+ * example: showInfoBox("system","200","300","200","","some text goes here");
+ */
 function showInfoBox(info,height,width,top,url,txt)
 {
 	// delete div if exists
@@ -1203,20 +1193,19 @@ function showInfoBox(info,height,width,top,url,txt)
 }
 	
 /*
-* copyright
-*
-*/
-
+ * copyright
+ *
+ */
 function copyRight()
 {
 	var html = '';
 		html += '<div style="text-align:left;padding-left:15px;padding-top:5px;padding-bottom:5px;">';
-		html += 'Software: Text &amp; Audio/Video Xalky Rooms<br>';
+		html += 'Software: Xalky Chat-Rooms<br>';
 		html += 'Version: '+version+'<br>';
-		html += 'Developers: Xalky<br><br>';
-		html += 'Visit: <a href="http://xalky.com" target="_blank">http://xalky.com</a><br>';
-		html += 'Support: <a href="http://support.xalky.com" target="_blank">http://support.xalky.com</a><br><br>';
-		html += '&copy;Copyright 2007-'+new Date().getFullYear()+' All Rights Reserved.';
+		html += 'Developers: Simon Roberts<br><br>';
+		html += 'Visit: <a href="http://labs.coop" target="_blank">http://labs.coop</a><br>';
+		html += 'Support: <a href="https://sourceforge.net/projects/chronolabs" target="_blank">https://sourceforge.net/projects/chronolabs</a><br><br>';
+		html += 'Copyright (&copy;) 2016-'+new Date().getFullYear()+' ~ All Rights Reserved.';
 		html += '</div>';
 
 	return html;

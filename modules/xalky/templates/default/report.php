@@ -30,14 +30,14 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 
 .row
 {
-	background-color: #F5F5F5;
+	background-colour: #F5F5F5;
 }
 
 .sbody
 {
 	margin: 0 0 0 0; 
 	padding: 0 0 0 0;
-	background-color: #CCCCCC;	
+	background-colour: #CCCCCC;	
 	font-family: Verdana, Arial;
 	font-size: 12px;
 	font-style: normal;
@@ -48,8 +48,8 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 	height: 24px;
 	width: 140px;
 	border: 1px solid #333333;
-	background-color: #666666;
-	color: #FFFFFF;
+	background-colour: #666666;
+	colour: #FFFFFF;
 	cursor: pointer;
 	
 	-moz-border-radius: 5px;
@@ -76,7 +76,7 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 
 .sCaptcha
 {
-	color: #000000;
+	colour: #000000;
 	border: 1px solid #666666;
 	padding: 2px;
 	-moz-border-radius: 5px;
@@ -89,7 +89,7 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 <body class="sbody">
 
 <div class="roomheader">
-	<div class="header" style='float:left;'><?php echo C_LANG153;?></div>
+	<div class="header" style='float:left;'><?php echo _MN_XALKY_CONST153;?></div>
 	<div class="header" style='float:right;cursor:pointer;' onclick="parent.closeMdiv('report');"><img src='../../images/close.gif'></div>
 </div>
 
@@ -98,12 +98,12 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 	<form style="padding: 0 0 0 3px;" method="post" name="report" action="report.php">
 		<input type="hidden" name="sCaptcha" value="<?php echo $showCaptcha;?>">
 		<input type="hidden" name="id" value="<?php echo $_REQUEST['id'];?>">
-		<span><?php echo C_LANG154;?>,</span><br><br>
+		<span><?php echo _MN_XALKY_CONST154;?>,</span><br><br>
 		<table class="table">
-		<tr><td><?php echo C_LANG54;?>:</td><td><?php echo $_REQUEST['id'];?></td></tr>
-		<tr><td valign="top"><?php echo C_LANG155;?>:</td><td><textarea class="sInput" name="report" value=""></textarea></td></tr>
-		<tr><td><?php echo C_LANG156;?>:</td><td><input class="sCode" type="text" size="6" name="uCaptcha" value="">&nbsp;<span class="sCaptcha"><?php echo $showCaptcha;?></span></td></tr>
-		<tr><td>&nbsp;</td><td><input class="sbutton" type="submit" name="send" value="<?php echo C_LANG136;?>"></td></tr>
+		<tr><td><?php echo _MN_XALKY_CONST54;?>:</td><td><?php echo $_REQUEST['id'];?></td></tr>
+		<tr><td valign="top"><?php echo _MN_XALKY_CONST155;?>:</td><td><textarea class="sInput" name="report" value=""></textarea></td></tr>
+		<tr><td><?php echo _MN_XALKY_CONST156;?>:</td><td><input class="sCode" type="text" size="6" name="uCaptcha" value="">&nbsp;<span class="sCaptcha"><?php echo $showCaptcha;?></span></td></tr>
+		<tr><td>&nbsp;</td><td><input class="sbutton" type="submit" name="send" value="<?php echo _MN_XALKY_CONST136;?>"></td></tr>
 		</table>
 	</form>
 
@@ -117,7 +117,7 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 
 <!-- do not edit below -->
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo C_LANG128;?>" onclick="parent.closeMdiv('report');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('report');">
 </p>
 
 </body>

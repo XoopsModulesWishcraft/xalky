@@ -3,7 +3,7 @@
 <head> 
 <title><?php echo @copyrightTitle();?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" rel="stylesheet" href="templates/<?php echo $CONFIG['template'];?>/style.css">
+<link type="text/css" rel="stylesheet" href="templates/<?php echo $xalkyConfig['template'];?>/style.css">
 
 <style>
 
@@ -19,7 +19,7 @@
 
 .row
 {
-	background-color: #F5F5F5;
+	background-colour: #F5F5F5;
 }
 
 </style>
@@ -31,7 +31,7 @@
 
 <!-- do not edit below -->
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo C_LANG128;?>" onclick="parent.closeMdiv('viewTranscripts');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('viewTranscripts');">
 </p>
 
 </body>

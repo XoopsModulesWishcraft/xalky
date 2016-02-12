@@ -16,7 +16,7 @@
 		<?php if(file_exists("../plugins/games/index.php")){?>
 			<a class="button" href="?option=games">Games</a>
 		<?php }?>
-		<?php if(!$CONFIG['CMS']){?>
+		<?php if(!$xalkyConfig['CMS']){?>
 			<a class="button" href="?option=email">Email</a>
 		<?php }?>
 		

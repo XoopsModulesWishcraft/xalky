@@ -25,8 +25,8 @@ include("../../lang/".getLang(''));
 	width: 100%;
 	font-family: Verdana, Arial;
 	font-size: 12px;
-	background-color: #333333;	
-	color: #FFFFFF;
+	background-colour: #333333;	
+	colour: #FFFFFF;
 }
 
 .header
@@ -38,24 +38,24 @@ include("../../lang/".getLang(''));
 
 .row
 {
-	background-color: #F5F5F5;
+	background-colour: #F5F5F5;
 }
 
 .obody
 {
 	margin: 5px 5px 0 5px;
 	padding: 0 0 0 0;	
-	background-color: #999999;	
+	background-colour: #999999;	
 }
 
 .pageheader
 { 
 	padding: 2px 2px 2px 34px; 
-	background-color: #666666;
+	background-colour: #666666;
 	font-weight: bold;
 	font-size: 13px;
 	height: 20px;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 	font-family: Verdana, Arial;
 	font-size: 12px;
 	
@@ -71,7 +71,7 @@ include("../../lang/".getLang(''));
 </head>
 <body class="obody">
 
-<div class="pageheader"><?php echo C_LANG138;?></div>
+<div class="pageheader"><?php echo _MN_XALKY_CONST138;?></div>
 
 <hr class="hr">
 
@@ -80,7 +80,7 @@ include("../../lang/".getLang(''));
 <!-- do not edit below -->
 <?php if(!isset($_GET['nobutton'])){?>
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo C_LANG128;?>" onclick="parent.closeMdiv('online');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('online');">
 </p>
 <?php }?>
 

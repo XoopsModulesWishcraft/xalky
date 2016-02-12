@@ -142,7 +142,7 @@ if($_REQUEST['option'] == 'settings')
 		$adminLogin,
 		$avatars,
 		$badwords,
-		$font_color,
+		$font_colour,
 		$font_size,
 		$font_family,
 		$sfx,

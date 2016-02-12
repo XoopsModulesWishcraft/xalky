@@ -26,7 +26,7 @@ function getAdminLogin()
 
 	include("../includes/config.php");
 	
-	if($CONFIG['showAdminResetPasswordLink']){
+	if($xalkyConfig['showAdminResetPasswordLink']){
 		$html .= '<tr><td>&nbsp;</td><td>&#187;&nbsp;<a href="?option=lostPassword">Reset Password?</a></td></tr>';
 	}
 	
@@ -121,21 +121,21 @@ function resetAdminLogin($status)
 	$headers .= "X-Priority: 3\n";
 	$headers .= "X-MSMail-Priority: Normal\n";
 	$headers .= "X-Mailer: php\n";
-	$headers .= "From: \"" . $CONFIG['chatroomName'] . "\" <" . $CONFIG['chatroomEmail'] . ">\n";
+	$headers .= "From: \"" . $xalkyConfig['chatroomName'] . "\" <" . $xalkyConfig['chatroomEmail'] . ">\n";
 
 	// send email
 	if($status == '1')
 	{
-		$email_subject = $CONFIG['chatroomName']." - Admin Area Password";
+		$email_subject = $xalkyConfig['chatroomName']." - Admin Area Password";
 		$email_message  = "Hello Admin,\r\n\r\n";
 		$email_message .= "Please find below your admin area login password,\r\n\r\n";
 		$email_message .= "Password: ".$newPass."\r\n\r\n";
-		$email_message .= "Login Url: ".$CONFIG['chatroomUrl']."admin/\r\n\r\n";
+		$email_message .= "Login Url: ".$xalkyConfig['chatroomUrl']."admin/\r\n\r\n";
 		$email_message .= "Many thanks,\r\n";
-		$email_message .= $CONFIG['chatroomName'];
+		$email_message .= $xalkyConfig['chatroomName'];
 	}
 
-	mail($CONFIG['chatroomEmail'], $email_subject, $email_message, $headers);
+	mail($xalkyConfig['chatroomEmail'], $email_subject, $email_message, $headers);
 }
 
 /*
@@ -160,7 +160,7 @@ function getAdminConfig()
 					$i['adminLogin'],
 					$i['avatars'],
 					urldecode($i['badwords']),
-					$i['font_color'],
+					$i['font_colour'],
 					$i['font_size'],
 					$i['font_family'],
 					$i['sfx'],
@@ -268,7 +268,7 @@ function updateAdminConfig($data)
 			'adminLogin' => md5($data['adminLogin']),	 			
 			'avatars' => $data['avatars'],	 
 			'badwords' => urlencode($data['badwords']),	 
-			'font_color' => $data['font_color'],	 
+			'font_colour' => $data['font_colour'],	 
 			'font_size' => $data['font_size'],	 
 			'font_family' => $data['font_family'],	 
 			'sfx' => $data['sfx'],
@@ -302,7 +302,7 @@ function updateAdminConfig($data)
 					  adminLogin = :adminLogin,
 					  avatars = :avatars,	 
 					  badwords = :badwords,	 
-					  font_color = :font_color,	 
+					  font_colour = :font_colour,	 
 					  font_size = :font_size,	 
 					  font_family = :font_family,	 
 					  sfx = :sfx,
@@ -338,7 +338,7 @@ function updateAdminConfig($data)
 			$params = array(
 			'avatars' => $data['avatars'],	 
 			'badwords' => urlencode($data['badwords']),	 
-			'font_color' => $data['font_color'],	 
+			'font_colour' => $data['font_colour'],	 
 			'font_size' => $data['font_size'],	 
 			'font_family' => $data['font_family'],	 
 			'sfx' => $data['sfx'],
@@ -371,7 +371,7 @@ function updateAdminConfig($data)
 					  SET
 					  avatars = :avatars,	 
 					  badwords = :badwords,	 
-					  font_color = :font_color,	 
+					  font_colour = :font_colour,	 
 					  font_size = :font_size,	 
 					  font_family = :font_family,	 
 					  sfx = :sfx,
@@ -1100,7 +1100,7 @@ function getAdminGroups()
 		// include files
 		include("../includes/config.php");
 
-		$html .= '<tr><td colspan="11"><b>Default Group ID: '.$CONFIG['userGroup'].'</b></td></tr>';
+		$html .= '<tr><td colspan="11"><b>Default Group ID: '.$xalkyConfig['userGroup'].'</b></td></tr>';
 		$html .= '<tr><td colspan="11">This is the Group ID a user is assigned to the first time they login to the chat room.</td></tr>';
 		$html .= '<tr><td colspan="11">You can change the default Group ID value by editing the file "includes/config.php".</td></tr>';
 		$html .= '<tr><td colspan="11">To assign a user to a different user group, click Users > Search Username > Group ID </td></tr>';
@@ -1300,7 +1300,7 @@ function updateAdminGroups($data)
 		{
 			if($id == '1')
 			{
-				return "<span style='color:red;'>Group ID 1 cannot be deleted.</span>";
+				return "<span style='colour:red;'>Group ID 1 cannot be deleted.</span>";
 			}
 		
 			try {
@@ -1323,7 +1323,7 @@ function updateAdminGroups($data)
 			}			
 		}
 		
-		return "<span style='color:green;'>Success! - Group(s) has been deleted.</span>";
+		return "<span style='colour:green;'>Success! - Group(s) has been deleted.</span>";
 	}
 }
 
@@ -1533,8 +1533,8 @@ function getAdminUsers($findUser)
 			$html .= '<td align="center">GroupID</td>';
 			$html .= '<td align="center">RoomID</td>';
 			$html .= '<td align="center">Online</td>';
-			$html .= '<td align="center">eCredits Left</td>';
-			$html .= '<td align="center">eCredits Earned</td>';
+			$html .= '<td align="center">digitalCredits Left</td>';
+			$html .= '<td align="center">digitalCredits Earned</td>';
 			$html .= '<td align="center">Points</td>';
 			$html .= '<td align="center">Enabled</td>';
 			
@@ -1617,8 +1617,8 @@ function getAdminUsers($findUser)
 				$html .= '<td align="center"><input size="3" type="text" name="uGroup" value="'.$i['userGroup'].'"></td>';
 				$html .= '<td align="center">'.$i['room'].'</td>';
 				$html .= '<td align="center">'.$i['online'].'</td>';
-				$html .= '<td align="center"><input size="6" type="text" name="ueCredits" value="'.$i['eCredits'].'"></td>';
-				$html .= '<td align="center"><input size="6" type="text" name="ueCreditsEarned" value="'.$i['eCreditsEarned'].'"></td>';
+				$html .= '<td align="center"><input size="6" type="text" name="udigitalCredits" value="'.$i['digitalCredits'].'"></td>';
+				$html .= '<td align="center"><input size="6" type="text" name="udigitalCreditsEarned" value="'.$i['digitalCreditsEarned'].'"></td>';
 				$html .= '<td align="center"><input size="6" type="text" name="uPoints" value="'.$i['points'].'"></td>';
 				$html .= '<td align="center"><input size="1" type="text" name="uEnabled" value="'.$i['enabled'].'"></td>';
 				$html .= '<td align="center"><input type="checkbox" name="updateUser[]" value="'.$i['id'].'"></td>';
@@ -1640,8 +1640,8 @@ function getAdminUsers($findUser)
 				$html .= '<td align="center">'.$i['userGroup'].'</td>';
 				$html .= '<td align="center">'.$i['room'].'</td>';
 				$html .= '<td align="center">'.$i['online'].'</td>';
-				$html .= '<td align="center">'.$i['eCredits'].'</td>';
-				$html .= '<td align="center">'.$i['eCreditsEarned'].'</td>';
+				$html .= '<td align="center">'.$i['digitalCredits'].'</td>';
+				$html .= '<td align="center">'.$i['digitalCreditsEarned'].'</td>';
 				$html .= '<td align="center">'.$i['points'].'</td>';
 				$html .= '<td align="center">'.$i['enabled'].'</td>';
 				$html .= '<td align="center">&nbsp;</td>';
@@ -1661,10 +1661,10 @@ function getAdminUsers($findUser)
 
 		$html .= '<tr><td class="header"><b>Display Online Users:</b></td></tr>';
 		$html .= '<tr><td>';
-		$html .= 'To show a list of online users in your chat room, copy and paste the code below into your web page. Adjust the width and height values to suit your web page. Replace <font color="red">YOURSITE.com</font> with your own domain name.<br><br>';
+		$html .= 'To show a list of online users in your chat room, copy and paste the code below into your web page. Adjust the width and height values to suit your web page. Replace <font colour="red">YOURSITE.com</font> with your own domain name.<br><br>';
 		$html .= '<b>Code:</b><br><br>';
 		$html .= '<div>';
-		$html .= '&#60;iframe src="http://www.<font color="red">YOURSITE.com</font>/xalky/templates/default/online.php?nobutton" width="200" height="400" border="0">&#60;/iframe>';
+		$html .= '&#60;iframe src="http://www.<font colour="red">YOURSITE.com</font>/xalky/templates/default/online.php?nobutton" width="200" height="400" border="0">&#60;/iframe>';
 		$html .= '</div>';
 		$html .= '<br>';
 		$html .= '</td></tr>';
@@ -1750,8 +1750,8 @@ function updateAdminUsers($data)
 					$params = array(
 					'password' => md5($data['uPass']),							  
 					'email' => $data['uEmail'],
-					'eCredits' => $data['ueCredits'],
-					'eCreditsEarned' => $data['ueCreditsEarned'],
+					'digitalCredits' => $data['udigitalCredits'],
+					'digitalCreditsEarned' => $data['udigitalCreditsEarned'],
 					'points' => $data['uPoints'],
 					'enabled' => $data['uEnabled'],
 					'userGroup' => $data['uGroup'],
@@ -1764,8 +1764,8 @@ function updateAdminUsers($data)
 							  SET 
 							  password = :password,							  
 							  email = :email,
-							  eCredits = :eCredits,
-							  eCreditsEarned = :eCreditsEarned,
+							  digitalCredits = :digitalCredits,
+							  digitalCreditsEarned = :digitalCreditsEarned,
 							  points = :points,
 							  enabled = :enabled,
 							  userGroup = :userGroup,
@@ -1779,8 +1779,8 @@ function updateAdminUsers($data)
 				{
 					$params = array(						  
 					'email' => $data['uEmail'],
-					'eCredits' => $data['ueCredits'],
-					'eCreditsEarned' => $data['ueCreditsEarned'],
+					'digitalCredits' => $data['udigitalCredits'],
+					'digitalCreditsEarned' => $data['udigitalCreditsEarned'],
 					'points' => $data['uPoints'],
 					'enabled' => $data['uEnabled'],
 					'userGroup' => $data['uGroup'],
@@ -1792,8 +1792,8 @@ function updateAdminUsers($data)
 					$query = "UPDATE xalky_users
 							  SET 					  
 							  email = :email,
-							  eCredits = :eCredits,
-							  eCreditsEarned = :eCreditsEarned,
+							  digitalCredits = :digitalCredits,
+							  digitalCreditsEarned = :digitalCreditsEarned,
 							  points = :points,
 							  enabled = :enabled,
 							  userGroup = :userGroup,
@@ -2080,7 +2080,7 @@ function getAdminTranscripts($findUser,$findRoom,$page)
 				$i['message'][4] = str_replace("[[","<",$i['message'][4]);
 				$i['message'][4] = str_replace("]]",">",$i['message'][4]);
 
-				$message = "<span style=\"color:".$i['message'][1].";font-size:".$i['message'][2].";font-family:".$i['message'][3].";\">".html_entity_decode(stripslashes($i['message'][4]))."</span>";
+				$message = "<span style=\"colour:".$i['message'][1].";font-size:".$i['message'][2].";font-family:".$i['message'][3].";\">".html_entity_decode(stripslashes($i['message'][4]))."</span>";
 
 				// add <pre> if required
 				// used for formatting multi-line messages.
@@ -2184,7 +2184,7 @@ function sendAdminGroupEmail($data)
 	$headers .= "X-Priority: 3\n";
 	$headers .= "X-MSMail-Priority: Normal\n";
 	$headers .= "X-Mailer: php\n";
-	$headers .= "From: \"" . $CONFIG['chatroomName'] . "\" <" . $CONFIG['chatroomEmail'] . ">\n";
+	$headers .= "From: \"" . $xalkyConfig['chatroomName'] . "\" <" . $xalkyConfig['chatroomEmail'] . ">\n";
 
 	if(empty($data['totalSend']))
 	{
@@ -2298,7 +2298,7 @@ function getAdminDatabase()
 	if($count)
 	{
 		$disabled = 'disabled';
-		echo "<div style='color:red;'><br />Warning: You have active users in the chat room and/or chat room database is currently updating. Please wait 5 minutes and try again.</div>";
+		echo "<div style='colour:red;'><br />Warning: You have active users in the chat room and/or chat room database is currently updating. Please wait 5 minutes and try again.</div>";
 	}
 
 	// output html
@@ -2940,7 +2940,7 @@ function updateAddUser($data)
 	}	
 	
 	// show result
-	if(registerUser($data['uName'],$data['uPass'],$data['email']) == C_LANG13)
+	if(registerUser($data['uName'],$data['uPass'],$data['email']) == _MN_XALKY_CONST13)
 	{
 		return "Success - New user has been registered";
 	}

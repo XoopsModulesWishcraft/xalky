@@ -1,0 +1,143 @@
+<!-- 
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="includes/lang.js.php"></script>
+<script type="text/javascript" src="js/XmlHttpRequest.js.php"></script>
+<script type="text/javascript" src="includes/settings.js.php"></script>
+<script type="text/javascript" src="js/functions.js.php"></script>
+<link type="text/css" rel="stylesheet" href="templates/<?php echo $xalkyConfig['template']}>/style.css">
+ -->
+
+
+<div id="loginBody" class="loginBody" >
+
+<{if $loginError}>
+	<div class="welcomeMessage" style="position: fixed; top: 0px; z-index: 100; width: 100%;text-align: center;"><{$loginError}></div>	
+<{/if}>
+	
+	<div id="backgroundContainer"  class="backgroundContainer">
+	
+		<div id="loginContainer" class="loginContainer">
+			
+			<div id="logoContainer" class="logoContainer"></div>
+				
+			<div id="adverContainer" class="adverContainer"></div> 	
+	
+			<div id="loginRight" class="loginRight">
+			
+				<div id="loginButton" class="loginButton">
+					<img onclick="hideshow('login')" src="<{$xoops_url}>/modules/xalky/templates/<{$xalkyConfig.template}>/images/loginButton.png" alt="">
+				</div>		
+			
+				<div id="login" style="display:none;">
+					<form style="height:210px;" method="post" action="index.php" name="doLogin">
+						<input type="hidden" name="login" value="1">
+						<table class="loginUserTable">
+							<tr>
+								<td>&nbsp;</td>
+								<td><{if $xalkyConfig.guestMode}>
+									<input class="" type="checkbox" name="isGuest" value="1" onclick="toggleLoginPass()">
+									<{$smarty.const._MN_XALKY_CONST114}><{/if}>
+									&nbsp;
+								</td>
+							</tr>	
+							<tr>
+								<td><{$smarty.const._MN_XALKY_CONST54}></td>
+								<td><input class="loginInput" type="text" name="userName" value="" maxlength="16"></td>
+							</tr>
+							<tr id="pass">
+								<td><{$smarty.const._MN_XALKY_CONST115}></td>
+								<td><input class="loginInput" type="password" name="userPass" value=""></td>
+							</tr>
+							<tr id="lostpass">
+								<td>&nbsp;</td>
+								<td><span class="link"><a href="javascript:void(0);" onclick='showInfoBox("lost","260","400","200","templates/<?php echo $xalkyConfig['template']}>/lost.php","");'><{$smarty.const._MN_XALKY_CONST116}></a></span></td></tr>
+							<tr>
+								<td><{$smarty.const._MN_XALKY_CONST117}></td><td>
+									<select name="roomID" class="loginSelect">
+										<{foreach from=$rooms key=roomid item=room}>
+										<option value="<{$roomid}>"<{if $roomid == $smarty.get.roomID}> selected="selected"<{/if}>><{$room.name}></option>
+										<{/foreach}>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td><{$smarty.const._MN_XALKY_CONST118}></td><td>
+									<select name="langID" class="loginSelect">
+										<{foreach from=$languages item=language}>
+										<option value="<{$language}>"<{if $xoopsConfig.language == $language}> selected="selected"<{/if}>><{$language}></option>
+										<{/foreach}>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td><{$smarty.const._MN_XALKY_CONST119}></td><td>
+									<select name="genderID" class="loginSelect">
+										<{foreach from=$genders key=genderID item=gender}>
+										<option value="<{$genderID}>"><{$gender}></option>
+										<{/foreach}>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>&nbsp;</td>
+								<td>
+									<input type="image" style="height:22px;width:140px;" src="<{$xoops_url}>/modules/xalky/templates/<{$xalkyConfig.template}>/images/login.jpg" name="newLogin" alt="Login">
+								</td>
+							</tr>		
+							<tr>
+								<td colspan="2">&nbsp;</td>
+							</tr>
+						</table>
+					</form>
+				</div>
+				
+				<{if not $xalkyConfig.disableRegistration}>
+				<div id="registerButton" class="registerButton">
+					<img onclick="hideshow('register')" src="<{$xoops_url}>/modules/xalky/templates/<{$xalkyConfig.template}>/images/registerButton.png" alt="">
+				</div>	
+				
+				<div id="register" style="display:none;">			
+					<form method="post" action="index.php" name="doReg">
+					<input type="hidden" name="reg" value="1">
+					<table class="loginUserTable">
+						<tr><td colspan="2">&nbsp;</td></tr>
+						<tr><td><{$smarty.const._MN_XALKY_CONST54}>*</td><td><input class="loginInput" type="text" name="rUsername" value=""></td></tr>
+						<tr><td><{$smarty.const._MN_XALKY_CONST115}>*</td><td><input class="loginInput" type="password" name="rPassword" value=""></td></tr>
+						<tr><td><{$smarty.const._MN_XALKY_CONST121}>*</td><td><input class="loginInput" type="text" name="rEmail" value=""></td></tr>
+						<tr><td>&nbsp;</td><td><input class="" type="checkbox" name="terms" value="1"><span class="link"><a href="javascript:void(0);" onclick='showInfoBox("terms","400","600","100","<{$xoops_url}>/modules/xalky/terms.php","");'><{$smarty.const._MN_XALKY_CONST123}></a></span></td></tr>
+						<tr><td>&nbsp;</td><td><input type="image" style="height:22px;width:140px;" src="<{$xoops_url}>/modules/xalky/templates/<{$xalkyConfig.template}>/images/register.jpg" name="newRegister" alt="Register"></td></tr>
+					</table>
+					</form>
+				</div>
+				<{/if}>
+	
+			</div>
+			<div id="loginLeft" class="loginLeft">
+				<table class="loginUserTable">
+					<tr class="loginUserLatestNews">
+						<td>
+							<{$xalkyLoginNews}><br><br>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="latestMembers">
+		<div id="latestMembers"></div>
+	</div>	
+		
+	<div class='copyright'>
+		<{if $xalkyConfig.usersOnline}>
+			<span class="link" style="float:left"><a href="javascript:void(0);" onclick='showInfoBox("online","300","320","100","<{$xoops_url}>/modules/xalky/online.php","");'><{$smarty.const._MN_XALKY_CONST113}>: <{$xalkyUsersOnline}></a>&nbsp;</span>
+		<{/if}>
+		<span style="float:right;"><{$xalkyCopyrightFooter}></span>
+		<div style="clear:both"></div>
+	</div>	
+	
+	<div id="oInfo" class="oInfo"></div>
+
+</div>

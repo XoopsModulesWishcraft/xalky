@@ -23,14 +23,14 @@
 
 <table class="table">
 <tr><td class="header"><b>Latest News &amp; Updates</b></td></tr>
-<tr><td><iframe scrolling="yes" style="height:140px;width:99%;border:1px solid #84B2DE;overflow-x:hidden;background-color:#FFFFFF;" src="http://xalky.com/pcr_newsfeed.txt">Iframes are not supported.</iframe></td></tr>
+<tr><td><iframe scrolling="yes" style="height:140px;width:99%;border:1px solid #84B2DE;overflow-x:hidden;background-colour:#FFFFFF;" src="http://xalky.com/pcr_newsfeed.txt">Iframes are not supported.</iframe></td></tr>
 </table>
 
 <br>
 
 <table class="table">
 <tr><td class="header"><b>Xalky Room Version</b></td></tr>
-<tr><td>You are currently using version <?php echo $CONFIG['version'];?></td></tr>
+<tr><td>You are currently using version <?php echo $xalkyConfig['version'];?></td></tr>
 <tr><td>&nbsp;</td></tr>
 <tr><td>&#187; [<a href="http://xalky.com/clients.php" target="_blank">Download Updates</a>]</td></tr>
 </table>
