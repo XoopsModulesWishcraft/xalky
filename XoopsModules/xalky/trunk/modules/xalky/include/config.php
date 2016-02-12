@@ -42,6 +42,4 @@ if (is_object($xalkyModule))
 	}
 } else
 	die(_MI_XALKY_ERROR_NOMODULE_OBJECT);
-
-require_once (__DIR__ . DIRECTORY_SEPARATOR . "version.php");
 ?>

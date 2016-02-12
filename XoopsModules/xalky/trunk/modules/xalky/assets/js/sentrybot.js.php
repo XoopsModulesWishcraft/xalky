@@ -153,7 +153,7 @@ function xalkySendSentryBot(div,itoUserName,iMessage)
 	// if ready to send message to DB
 	if (sendBotReq.readyState == 4 || sendBotReq.readyState == 0) 
 	{
-		sendBotReq.open("POST", '<?php echo $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
+		sendBotReq.open("POST", '<?php echo $xalkyConfig['chatroomUrl']; ?>/outbound.xml?rnd='+ Math.random(), true);
 		sendBotReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendBotReq.onreadystatechange = xalkySendChat;
 		sendBotReq.send(param);

@@ -139,7 +139,7 @@ function xalkyAddRoom()
 	if (updateUserRooms.readyState == 4 || updateUserRooms.readyState == 0)
 	{
 
-		updateUserRooms.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php', true);
+		updateUserRooms.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.xml', true);
 		updateUserRooms.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		updateUserRooms.onreadystatechange = xalkySendBlock;
 		updateUserRooms.send(param);

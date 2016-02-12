@@ -1023,7 +1023,7 @@ function xalkySendStatus(status)
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.xml?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
@@ -1043,7 +1043,7 @@ function xalkySendAvatar()
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.xml?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
@@ -1073,7 +1073,7 @@ function xalkyBlockUsers(i,id)
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.xml?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
