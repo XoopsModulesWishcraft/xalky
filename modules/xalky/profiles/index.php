@@ -57,7 +57,7 @@ if(isset($_GET['edit']) && $_GET['edit'] != '1')
 * 
 */ 
 
-if(isset($_REQUEST['edit']) && $_SESSION['myProfileID'] != $_REQUEST['id'] || isset($_REQUEST['edit']) && isset($_SESSION['guest']))
+if(isset($_REQUEST['edit']) && $_SESSION['xalkyProfileID'] != $_REQUEST['id'] || isset($_REQUEST['edit']) && isset($_SESSION['guest']))
 {
 	die("You do not have the correct permissions to edit this profile");
 }
@@ -67,10 +67,10 @@ if(isset($_REQUEST['edit']) && $_SESSION['myProfileID'] != $_REQUEST['id'] || is
 *
 */
 
-if(isset($_POST['edit']) && isset($_SESSION['myProfileID']))
+if(isset($_POST['edit']) && isset($_SESSION['xalkyProfileID']))
 {
 	$profileUpdated = updateProfile(
-						$_SESSION['myProfileID'],
+						$_SESSION['xalkyProfileID'],
 						$_POST['profileRealname'],
 						$_POST['profileAge'],
 						$_POST['profileGender'],

@@ -100,7 +100,7 @@ include("../../lang/".getLang(''));
 <!-- do not edit below -->
 <?php if(!isset($_GET['nobutton'])){?>
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('online');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.xalkyCloseMessage('online');">
 </p>
 <?php }?>
 

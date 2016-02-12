@@ -55,11 +55,11 @@ header("content-type: application/x-javascript");
  *
  */
 var privateXalky = 0;
-function createPXalkyDiv(divPName,divToName,dPID,duserID)
+function xalkyPrivateChat(divPName,divToName,dPID,duserID)
 {
 	if(privateXalky == 1)
 	{
-		showInfoBox("system","220","300","200","",lang30);
+		xalkyShowBox("system","220","300","200","",lang30);
 		return false;
 	}
 
@@ -102,7 +102,7 @@ function createPXalkyDiv(divPName,divToName,dPID,duserID)
 		newdiv.className = "pXalkyWin";
 
 		// title
-		newdiv.innerHTML = "<div id='ptitle_"+divPName+"' class='ptitle' style='cursor:move;' onclick=doFocus(\""+divPName+"\")> <span style='float:left;'>&nbsp;<img style='vertical-align:middle;' src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/avatars/online.gif'>&nbsp;"+decodeURI(pTitle)+"</span> <span style='float:right;'><span style='cursor:pointer;' onclick='minPwin(\""+divPName+"\",\""+divPName+"\")'><img src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/images/min.gif'></span>&nbsp;<span style='cursor:pointer;' onclick='closePWin(\""+divPName+"\");digitalCreditsRequest(\""+divPName+"\",\"off\");privateXalkyCount();'><img src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/images/close.gif'></span>&nbsp;</div>";
+		newdiv.innerHTML = "<div id='ptitle_"+divPName+"' class='ptitle' style='cursor:move;' onclick=xalkyFocus(\""+divPName+"\")> <span style='float:left;'>&nbsp;<img style='vertical-align:middle;' src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/avatars/online.gif'>&nbsp;"+decodeURI(pTitle)+"</span> <span style='float:right;'><span style='cursor:pointer;' onclick='xalkyPrivateChatWindow(\""+divPName+"\",\""+divPName+"\")'><img src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/images/min.gif'></span>&nbsp;<span style='cursor:pointer;' onclick='xalkyClosePrivateChat(\""+divPName+"\");xalkyDigitalCreditsRequest(\""+divPName+"\",\"off\");xalkyPrivateChatCount();'><img src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/images/close.gif'></span>&nbsp;</div>";
 
 		// content
 		newdiv.innerHTML += "<div id='pcontent_"+divPName+"' class='pcontent'></div>";
@@ -111,7 +111,7 @@ function createPXalkyDiv(divPName,divToName,dPID,duserID)
 		newdiv.innerHTML += "<div id='pmenuBar_"+divPName+"' class='pmenuBar'></div>";
 
 		// sendbox
-		newdiv.innerHTML += '<div id=\'psendbox_'+divPName+'\' class=\'psendbox\'><input type=\'text\' id=\'poptionsBar_'+divPName+'\' class="poptionsBar" onKeyPress="return submitenter(this,event,\'poptionsBar_'+divPName+'\',\'pcontent_'+divPName+'\',\''+uUser+'\');" onfocus="changeMessBoxStyle(\'poptionsBar_'+divPName+'\');"></textarea><input id="poptionsSend" class="poptionsSend" type="button" value="'+lang31+'" onclick="sendPMessage(\''+uUser+'\',\'poptionsBar_'+divPName+'\',\'pcontent_'+divPName+'\')"></div>';
+		newdiv.innerHTML += '<div id=\'psendbox_'+divPName+'\' class=\'psendbox\'><input type=\'text\' id=\'poptionsBar_'+divPName+'\' class="poptionsBar" onKeyPress="return xalkySubmit(this,event,\'poptionsBar_'+divPName+'\',\'pcontent_'+divPName+'\',\''+uUser+'\');" onfocus="xalkyChangeMessageStyle(\'poptionsBar_'+divPName+'\');"></textarea><input id="poptionsSend" class="poptionsSend" type="button" value="'+lang31+'" onclick="xalkySendPrivateMessage(\''+uUser+'\',\'poptionsBar_'+divPName+'\',\'pcontent_'+divPName+'\')"></div>';
 
 		// menu win
 		newdiv.innerHTML += "<div id='pmenuWin_"+divPName+"'></div>";
@@ -119,10 +119,10 @@ function createPXalkyDiv(divPName,divToName,dPID,duserID)
 		ni.appendChild(newdiv);
 
 		// add menu
-		optionsMenu('pmenuBar_'+divPName, 'poptionsBar_'+divPName, 'pcontent_'+divPName, 'pmenuWin_'+divPName);
+		xalkyOptionsMenu('pmenuBar_'+divPName, 'poptionsBar_'+divPName, 'pcontent_'+divPName, 'pmenuWin_'+divPName);
 
 		// focus window
-		doFocus(divPName);
+		xalkyFocus(divPName);
 		
 		// drag window
 		$( "#"+divPName ).draggable();
@@ -131,7 +131,7 @@ function createPXalkyDiv(divPName,divToName,dPID,duserID)
 	// if digitalCredits is enabled
 	if(digitalCredits == 1 && Number(duserID) == Number(userID))
 	{
-		digitalCreditsRequest(divPName,'on');
+		xalkyDigitalCreditsRequest(divPName,'on');
 		privateXalky = 1;
 	}
 }
@@ -140,7 +140,7 @@ function createPXalkyDiv(divPName,divToName,dPID,duserID)
  * reset private window count
  *
  */
-function privateXalkyCount()
+function xalkyPrivateChatCount()
 {
 	privateXalky = 0;
 }
@@ -149,27 +149,27 @@ function privateXalkyCount()
  * send private message
  *
  */
-function sendPMessage(uUser,divPName1,divPName2)
+function xalkySendPrivateMessage(uUser,divPName1,divPName2)
 {
 	// send message
 	isPrivate = uUser;
-	addMessage(divPName1,divPName2);
+	xalkyAddMessage(divPName1,divPName2);
 }
 
 /*
  * minimise private div
  *
  */
-function minPwin(divID,userID)
+function xalkyPrivateChatWindow(divID,userID)
 {
-	toggleHeader(divID, userID);
+	xalkyToggleHeader(divID, userID);
 }
 
 /*
  * close private div
  *
  */
-function closePWin(divID)
+function xalkyClosePrivateChat(divID)
 {
 	document.getElementById(divID).style.visibility = 'hidden';
 	document.getElementById('pcontent_'+divID).style.visibility = 'hidden';
@@ -182,7 +182,7 @@ function closePWin(divID)
  * private chat is initiated
  * digitalCredits function
  */
-function digitalCreditsRequest(uuserID,status)
+function xalkyDigitalCreditsRequest(uuserID,status)
 {
 	uuserID = uuserID.replace(userID,'');
 	uuserID = uuserID.replace("_",'');
@@ -196,7 +196,7 @@ function digitalCreditsRequest(uuserID,status)
 	{
 		sendReq.open("POST", '<?php echo $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendReq.onreadystatechange = handleSendXalky;
+		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
 	}
 

@@ -61,7 +61,7 @@ var hideAdmins = 1;
 var autoApprove = 1;
 var lastMessageTxt = '';
 
-function addMessage(inputMDiv,displayMDiv)
+function xalkyAddMessage(inputMDiv,displayMDiv)
 {
 	if(digitalCredits == '1' && displayMDiv.search(/pcontent_/i) != '-1')
 	{
@@ -75,7 +75,7 @@ function addMessage(inputMDiv,displayMDiv)
 		
 			/* show sender 'you have no ecredits' */
 			message = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|"+digitalCreditMessageA+"|1";
-			createMessageDiv('1',userID,displayMDiv,showMessages+1,message,'beep_high.mp3','','');
+			xalkyMessageDIV('1',userID,displayMDiv,showMessages+1,message,'beep_high.mp3','','');
 			
 			/* show receiver that 'sender has no ecredits' */			
 			message = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|"+digitalCreditMessageB+"|1";
@@ -84,26 +84,26 @@ function addMessage(inputMDiv,displayMDiv)
 			outbound(displayMDiv);
 
 			/* clear message input field */
-			clrMessageInput(inputMDiv);
+			xalkyClearInput(inputMDiv);
 			return false;
 		}
 	}
 	
-	if(groupXalky == 0)
+	if(groupChat == 0)
 	{
-		showInfoBox("system","220","300","200","",lang6);
+		xalkyShowBox("system","220","300","200","",lang6);
 		return false;		
 	}
 
-	if(groupPXalky == 0 && document.getElementById('whisperID').value != '')
+	if(groupPrivateChat == 0 && document.getElementById('whisperID').value != '')
 	{
-		showInfoBox("system","220","300","200","",lang6);
+		xalkyShowBox("system","220","300","200","",lang6);
 		return false;		
 	}
 
 	if(isSilenced == 1)
 	{
-		showInfoBox("system","220","300","200","",lang7+" "+silent+" "+lang8);
+		xalkyShowBox("system","220","300","200","",lang7+" "+silent+" "+lang8);
 		return false;
 	}
 
@@ -118,14 +118,14 @@ function addMessage(inputMDiv,displayMDiv)
 
 		if(autoApprove == 0)
 		{
-			showInfoBox("system","220","300","200","",lang9);
+			xalkyShowBox("system","220","300","200","",lang9);
 		}
 	}
 
 	// if user is trying to flood the chat room
 	if(lastPost < floodXalky)
 	{
-		showInfoBox("system","220","300","200","",lang10);
+		xalkyShowBox("system","220","300","200","",lang10);
 		return false;
 	}
 	
@@ -147,7 +147,7 @@ function addMessage(inputMDiv,displayMDiv)
 	// if usergroup cannot post videos
 	if(groupVideo == 0 && message.indexOf("http://youtu.be/") != -1)
 	{
-		showInfoBox("system","220","300","200","",lang6);
+		xalkyShowBox("system","220","300","200","",lang6);
 		return false;		
 	}
 
@@ -158,7 +158,7 @@ function addMessage(inputMDiv,displayMDiv)
 		    maxChars += "<br><br>";				
 		    maxChars += "Max Allowed Characters: <span style='colour:green;'><?php echo $xalkyConfig['maxChars'];?></span>";
 		
-		showInfoBox("system","220","300","200","",maxChars);
+		xalkyShowBox("system","220","300","200","",maxChars);
 		return false;
 	}
 	
@@ -167,7 +167,7 @@ function addMessage(inputMDiv,displayMDiv)
 	{
 		var antiSpam  = "Sorry, your message has been marked as spam and will not be sent. Please do not send the same message repeatedly.";
 			
-		showInfoBox("system","220","300","200","",antiSpam);
+		xalkyShowBox("system","220","300","200","",antiSpam);
 		return false;
 	}	
 
@@ -179,7 +179,7 @@ function addMessage(inputMDiv,displayMDiv)
 	// check whisper contains a message
 	if(message.replace(/\s/g,"") == "")
 	{
-		showInfoBox("system","220","300","200","",lang11);
+		xalkyShowBox("system","220","300","200","",lang11);
 		return false;
 	}	
 
@@ -210,7 +210,7 @@ function addMessage(inputMDiv,displayMDiv)
 		}
 		else
 		{
-			showInfoBox("system","220","300","200","",lang45);
+			xalkyShowBox("system","220","300","200","",lang45);
 			return false;
 		}
 	}
@@ -231,19 +231,19 @@ function addMessage(inputMDiv,displayMDiv)
 		// check /play contains a SFX 
 		if(!ircCommand[1] || ircCommand[1].replace(/\s/g,"") == "")
 		{
-			showInfoBox("system","220","300","200","",lang13);
+			xalkyShowBox("system","220","300","200","",lang13);
 			return false;
 		}
 
 		// check the SFX exists
 		// convert SFX array to string then search string for match
-		if(mySFX.toString().lastIndexOf(ircCommand[1]+".mp3") == -1)
+		if(xalkySFX.toString().lastIndexOf(ircCommand[1]+".mp3") == -1)
 		{
-			showInfoBox("system","200","300","200","",lang14);
+			xalkyShowBox("system","200","300","200","",lang14);
 
 			// display SFX window
 			// now user can choose from list
-			createSFX();toggleBox('sFXWin');
+			createSFX();xalkyToogleBox('sFXWin');
 
 			return false;
 		}
@@ -260,7 +260,7 @@ function addMessage(inputMDiv,displayMDiv)
 		// check /roll contains dice (eg. 2d4) 
 		if(!ircCommand[1] || ircCommand[1].replace(/\s/g,"") == "")
 		{
-			showInfoBox("system","220","300","200","",lang15);
+			xalkyShowBox("system","220","300","200","",lang15);
 			return false;
 		}
 
@@ -337,7 +337,7 @@ function addMessage(inputMDiv,displayMDiv)
 	message = userAvatar+"|"+textColour+"|"+textSize+"|"+textFamily+"|"+message+"|"+iRC+"|"+addLineBreaks;
 
 	// update users text style (cookie)
-	createCookie('myTextStyle',encodeURI(mBold+"|"+mItalic+"|"+mUnderline+"|"+textColour+"|"+textSize+"|"+textFamily),30);
+	xalkyCreateCookie('xalkyTextStyle',encodeURI(mBold+"|"+mItalic+"|"+mUnderline+"|"+textColour+"|"+textSize+"|"+textFamily),30);
 
 	// send data to database
 	outbound(displayMDiv);
@@ -345,11 +345,11 @@ function addMessage(inputMDiv,displayMDiv)
 	// create message
 	if(autoApprove)
 	{
-		createMessageDiv(mStatus, userID, displayMDiv, showMessages+1, message, sfx, userName, '','');
+		xalkyMessageDIV(mStatus, userID, displayMDiv, showMessages+1, message, sfx, userName, '','');
 	}
 
 	// clear message input field
-	clrMessageInput(inputMDiv);
+	xalkyClearInput(inputMDiv);
 
 	// restart flood counter
 	lastPost = 1;
@@ -357,7 +357,7 @@ function addMessage(inputMDiv,displayMDiv)
 	// create bot reponse
 	if(sentryBot == 1 && Number(sentryBotRoomID) == Number(roomID) && displayMDiv == 'chatContainer')
 	{
-		doSentryBot(message,userName);
+		xalkySentryBot(message,userName);
 	}	
 
 }
@@ -386,7 +386,7 @@ function outbound(displayMDiv)
 	{
 		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendReq.onreadystatechange = handleSendXalky;
+		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
 	}
 
@@ -399,7 +399,7 @@ function outbound(displayMDiv)
  * send avatar to database
  *
  */
-function sendAvatarData()
+function xalkySendAvatar()
 {
 	var param = '?';
 
@@ -411,13 +411,13 @@ function sendAvatarData()
 	{
 		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendReq.onreadystatechange = handleSendXalky;
+		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
 	}
 
 }
 
-function handleSendXalky()
+function xalkySendChat()
 {
 	// empty
 }
@@ -428,7 +428,7 @@ function handleSendXalky()
  */
 var receiveMesReq = getXmlHttpRequestObject();
 var showHistory = 1;
-function getMessages() 
+function xalkyGetMessages() 
 {
 	var singleRoom = '';
 
@@ -440,7 +440,7 @@ function getMessages()
 	if (receiveMesReq.readyState == 4 || receiveMesReq.readyState == 0) 
 	{
 		receiveMesReq.open("GET", '<?php $xalkyConfig['chatroomUrl']; ?>/inbound.php?roomID='+roomID+'&history='+showHistory+'&last='+lastMessageID+'&s='+singleRoom+'&rnd='+ Math.random(), true);
-		receiveMesReq.onreadystatechange = handleMessages; 
+		receiveMesReq.onreadystatechange = xalkyMessages; 
 		receiveMesReq.send(null);
 	}
 			
@@ -448,13 +448,13 @@ function getMessages()
 
 // function for handling the messages
 
-var mTimer = setInterval('getMessages();',refreshRate);
+var mTimer = setInterval('xalkyGetMessages();',refreshRate);
 var xmlError = 0;
 var roomNameStr;
 var digitalCredits = 0;
 var moderatedXalky = 0;
 
-function handleMessages() 
+function xalkyMessages() 
 {
 	if (receiveMesReq.readyState == 4) 
 	{
@@ -467,14 +467,14 @@ function handleMessages()
 				if(xmlError == 2)
 				{
 					// if error, alert user and try to reconnect to database
-					showInfoBox("system","200","300","200","",lang16);
+					xalkyShowBox("system","200","300","200","",lang16);
 				}
 
 				// update the error count
 				xmlError += 1;
 
 				// lets try and get the data again
-				getMessages();
+				xalkyGetMessages();
 				return false;
 			}
 			else
@@ -484,7 +484,7 @@ function handleMessages()
 				// a) incorrect data file name
 				// b) database not responding
 				// c) server under too much load to respond in time
-				showInfoBox("system","220","300","200","",lang17);
+				xalkyShowBox("system","220","300","200","",lang17);
 				return false;
 			}
 		}		
@@ -503,13 +503,13 @@ function handleMessages()
 			// moderated chat
 			moderatedXalky = userRoomsArray[6];
 
-			createSelectRoomdiv(
+			xalkyCreateSelectRoomDIV(
 						userRoomsArray[2], 
 						userRoomsArray[1],
 						userRoomsArray[5]
 					);
 
-			createRoomsdiv(
+			xalkyCreateRoomDIV(
 						userRoomsArray[2], 
 						userRoomsArray[1],
 						userRoomsArray[5]
@@ -521,9 +521,9 @@ function handleMessages()
 			// if room is deleted, remove from userlist and select box
 			if(userRoomsArray[5] == Number(1))
 			{
-				deleteDiv("select_"+userRoomsArray[1],'roomSelect')
+				xalkyDropDIV("select_"+userRoomsArray[1],'roomSelect')
 
-				removeRoomsDiv("room_"+userRoomsArray[1]);
+				xalkyDropRoomDIV("room_"+userRoomsArray[1]);
 
 				roomNameStr = roomNameStr.replace("|" + userRoomsArray[2].toLowerCase() + "|","");
 			}
@@ -547,7 +547,7 @@ function handleMessages()
 				sentryBotRoomID = roomID;
 			}
 
-			createUsersDiv('-1', '-1', sentryBotName, sentryBotAvi, '0', sentryBotRoomID, sentryBotRoomID, '1','','','');	
+			xalkyUsersDIV('-1', '-1', sentryBotName, sentryBotAvi, '0', sentryBotRoomID, sentryBotRoomID, '1','','','');	
 		}
 		
 		for (var i = 0; i < xmldoc.getElementsByTagName("userlist").length;)
@@ -562,8 +562,8 @@ function handleMessages()
 			{
 				groupCams = userListArray[15];
 				groupWatch = userListArray[16];
-				groupXalky = userListArray[17];
-				groupPXalky = userListArray[18];
+				groupChat = userListArray[17];
+				groupPrivateChat = userListArray[18];
 				groupRooms = userListArray[19];
 				groupVideo = userListArray[20];				
 			}
@@ -590,7 +590,7 @@ function handleMessages()
 			}			
 			
 			// all users
-			createUsersDiv(
+			xalkyUsersDIV(
 						userListArray[0],
 						userListArray[1],
 						userListArray[2],
@@ -638,7 +638,7 @@ function handleMessages()
 			var userMessageArray = userMessage.split("}{");
 			
 			// create message 
-			createMessageDiv(
+			xalkyMessageDIV(
 						'0', 
 						userMessageArray[1], 
 						userMessageArray[2], 
@@ -658,7 +658,7 @@ function handleMessages()
 			
 		if(showHistory == 1)
 		{
-			createMessageDiv(
+			xalkyMessageDIV(
 							'0',
 							userID,
 							displayMDiv,
@@ -681,12 +681,12 @@ function handleMessages()
  * whisper user
  *
  */
-function whisperUser(touserName)
+function xalkyWhispherUser(touserName)
 {
 	// check if user is whispering to themselves :P
 	if(touserName.toLowerCase() == decodeURI(userName.toLowerCase()))
 	{
-		showInfoBox("system","220","300","200","",lang18);
+		xalkyShowBox("system","220","300","200","",lang18);
 		return false;
 	}
 
@@ -698,20 +698,20 @@ function whisperUser(touserName)
  * ring bell
  *
  */
-function ringBell(inputMDiv,displayMDiv)
+function xalkyRingBell(inputMDiv,displayMDiv)
 {
 	// set message input
 	document.getElementById(inputMDiv).value = "/ringbell";
 
 	// send message
-	addMessage(inputMDiv,displayMDiv);
+	xalkyAddMessage(inputMDiv,displayMDiv);
 }
 
 /*
  * clear & focus message input field
  *
  */
-function clrMessageInput(displayMDiv)
+function xalkyClearInput(displayMDiv)
 {
 	// clear message input
 	document.getElementById(displayMDiv).value = '';
@@ -729,7 +729,7 @@ var initDoSilence;
 var doTextAdverts = 0;
 var lastMessageText;
 var lastMessageName;
-function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser, mTime)
+function xalkyMessageDIV(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser, mTime)
 {
 	message	= decodeURI(message);
 
@@ -760,7 +760,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
       // remove any spaces from message      
          deleteMessage[4] = deleteMessage[4].replace(/ /gi, "");   
          
-      removeMessageDiv(deleteMessage[4]);
+      xalkyDropMessages(deleteMessage[4]);
       return false;
    }	
 	
@@ -782,8 +782,8 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 	if(message == 'SILENCE' && mToUser.toLowerCase() == userName.toLowerCase())
 	{
 		isSilenced = 1;
-		showInfoBox("system","220","300","200","",lang7+" "+silent+" "+lang8);
-		initDoSilence = setInterval('doSilence()',1000);
+		xalkyShowBox("system","220","300","200","",lang7+" "+silent+" "+lang8);
+		initDoSilence = setInterval('xalkySilence()',1000);
 		return false;
 	}
 
@@ -794,7 +794,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 
 	if(message == 'KICK' && mToUser.toLowerCase() == userName.toLowerCase())
 	{
-		logout('kick');
+		xalkyLogout('kick');
 		return false;
 	}
 
@@ -805,7 +805,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 
 	if(message == 'BAN' && mToUser.toLowerCase() == userName.toLowerCase())
 	{
-		logout('ban');
+		xalkyLogout('ban');
 		return false;
 	}
 
@@ -846,14 +846,14 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 			if(ppDiv[0] != userID)
 			{
 				// this user is receiver, new PM
-				createPXalkyDiv(userName,mUser,userID,mUID);
+				xalkyPrivateChat(userName,mUser,userID,mUID);
 			}
 			else
 			{
 				// this user is sender (initilised PM)
 				// eg. this user crashed or lost connection
 				// catches any closed PM that a receiver still has open
-				createPXalkyDiv(userName,mUser,mUID,userID);
+				xalkyPrivateChat(userName,mUser,mUID,userID);
 			}
 
 		}
@@ -902,7 +902,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 		}
 
 		// format smilies in message
-		messageArray[4] = addSmilie(messageArray[4]);
+		messageArray[4] = xalkyAddSmilie(messageArray[4]);
 		
 		// show broadcast message
 		var broadcast = messageArray[4];
@@ -916,7 +916,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 
 		if(broadcast[0] == 'BROADCAST')
 		{
-			showInfoBox("system","220","300","200","",decodeURI(messageArray[4].replace("BROADCAST","")));
+			xalkyShowBox("system","220","300","200","",decodeURI(messageArray[4].replace("BROADCAST","")));
 			return false;
 		}
 
@@ -933,7 +933,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 		var showYouTube = 0;
 		if ( messageArray[4].search(/youtube.com\/watch/gi) > -1 )	
 		{
-			showInfoBox("system","320","400","200","","To post a Youtube video, please use the Youtube share url.<p><img src='images/youtube_share_url.jpg'></p>");
+			xalkyShowBox("system","320","400","200","","To post a Youtube video, please use the Youtube share url.<p><img src='images/youtube_share_url.jpg'></p>");
 			return false;			
 		}		
 		
@@ -972,7 +972,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 		if(messageArray[4] == 'WEBCAM_REQUEST' && mToUser.toLowerCase() == userName.toLowerCase())
 		{
 			displayName = "";
-			messageArray[4] = decodeURI(mUser) + "&nbsp;"+lang19+" <span style='cursor:pointer' onclick='acceptViewWebcam(\""+encodeURI(mUser)+"\");showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang20+" "+mUser+" "+lang21+"\");'>"+lang22+"</span> "+lang23+" <span style='cursor:pointer' onclick='showInfoBox(\"system\",\"200\",\"300\",\"200\",\"\",\""+lang24+" "+mUser+" "+lang21+"\");'>"+lang25+"</span> "+lang26;
+			messageArray[4] = decodeURI(mUser) + "&nbsp;"+lang19+" <span style='cursor:pointer' onclick='acceptViewWebcam(\""+encodeURI(mUser)+"\");xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang20+" "+mUser+" "+lang21+"\");'>"+lang22+"</span> "+lang23+" <span style='cursor:pointer' onclick='xalkyShowBox(\"system\",\"200\",\"300\",\"200\",\"\",\""+lang24+" "+mUser+" "+lang21+"\");'>"+lang25+"</span> "+lang26;
 		}
 
 		// entry/exit message
@@ -1024,13 +1024,13 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 					newMessage = "<img style='vertical-align:middle;' src='<?php $xalkyConfig['chatroomUrl']; ?>/assets/avatars/40/"+messageArray[0]+"'>&nbsp;";		
 				}
 				
-				newMessage += "<span id='username' style='cursor:pointer;' onclick='whisperUser(\""+mUser+"\")'>"+displayName+"</span>";
+				newMessage += "<span id='username' style='cursor:pointer;' onclick='xalkyWhispherUser(\""+mUser+"\")'>"+displayName+"</span>";
 				newMessage += "<span style='colour:" + messageArray[1] + ";font-size:" + messageArray[2] + ";font-family:" + messageArray[3] + ";'>" + messageArray[4] + "</span>";
 
 				// show delete global message icon
 				if( mTime > 0 && ( admin || moderator) )
 				{
-					newMessage += "<span class='deleteMessage' title='Remove This Message' onclick='deleteGMessage(\""+mTime+"\")'></span>";
+					newMessage += "<span class='deleteMessage' title='Remove This Message' onclick='xalkyDropGM(\""+mTime+"\")'></span>";
 				}
 		}
 		else
@@ -1067,10 +1067,10 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 					// show delete global message icon
 					if( mTime > 0 && ( admin || moderator) )
 					{
-						newMessage += "<span class='deleteMessage' title='Remove This Message' onclick='deleteGMessage(\""+mTime+"\")'></span>";
+						newMessage += "<span class='deleteMessage' title='Remove This Message' onclick='xalkyDropGM(\""+mTime+"\")'></span>";
 					}					
 					
-					newMessage += "<span id='username' style='cursor:pointer;' onclick='whisperUser(\""+mUser+"\")'>"+displayName+"</span><br>"+messageArray[4]+"</div></td>";			
+					newMessage += "<span id='username' style='cursor:pointer;' onclick='xalkyWhispherUser(\""+mUser+"\")'>"+displayName+"</span><br>"+messageArray[4]+"</div></td>";			
 					newMessage += "</tr></table>";
 					newMessage += "<div style='clear:both;'>";
 			}
@@ -1096,7 +1096,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 	}	
 
 	// trim messages
-	countMessages(mDiv);
+	xalkyCountMessages(mDiv);
 	
 	// control the auto scroll
 	if(document.getElementById(mDiv) && document.getElementById('autoScrollID').checked==true)
@@ -1112,7 +1112,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 		{
 			if(mUser.toLowerCase() != userName.toLowerCase() && document.getElementById("psendbox_"+pDiv).style.visibility != 'visible')
 			{
-				showAlert(pDiv);			
+				xalkyAlert(pDiv);			
 			}
 		}
 		
@@ -1134,7 +1134,7 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 		{
 			doTextAdverts = 0;
 
-			var sta = setTimeout('showTextAdvertisement();',2000)
+			var sta = setTimeout('xalkyTextAdverts();',2000)
 		}
 		else
 		{
@@ -1147,17 +1147,17 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
 
 	if(document.getElementById('soundsID').checked==true && sfx == 'beep_high.mp3')
 	{
-		doSound(sfx);
+		xalkySound(sfx);
 	}
 
 	if(document.getElementById('entryExitID').checked==true && (sfx == 'doorbell.mp3' || sfx == 'door_close.mp3'))
 	{
-		doSound(sfx);
+		xalkySound(sfx);
 	}
 
-	if(document.getElementById('sfxID').checked==true && mySFX.toString().lastIndexOf(sfx) == -1 && (sfx != 'doorbell.mp3' && sfx != 'door_close.mp3' && sfx != 'beep_high.mp3'))
+	if(document.getElementById('sfxID').checked==true && xalkySFX.toString().lastIndexOf(sfx) == -1 && (sfx != 'doorbell.mp3' && sfx != 'door_close.mp3' && sfx != 'beep_high.mp3'))
 	{
-		doSound(sfx);
+		xalkySound(sfx);
 	}
 
 }
@@ -1166,24 +1166,24 @@ function createMessageDiv(mStatus, mUID, mDiv, mID, message, sfx, mUser, mToUser
  * delete global message
  *
  */
-function deleteGMessage(deleteGMID)
+function xalkyDropGM(deleteGMID)
 {
    // set message input
    document.getElementById('optionsBar').value = "DELETEMESSAGE_"+deleteGMID;
 
    // send message
-   addMessage('optionsBar','chatContainer');
+   xalkyAddMessage('optionsBar','chatContainer');
 }
 
 /*
  * show text adverts
  * 
  */
-function showTextAdvertisement()
+function xalkyTextAdverts()
 {
 	if(advertDesc[0])
 	{
-		createMessageDiv('0', '-1', 'chatContainer', showMessages+1, '<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/notice.gif|'+stextColour+'|'+stextSize+'|'+stextFamily+'|'+advertDesc[Math.floor(Math.random()*advertDesc.length)], 'beep_high.mp3', 'AdBot', '', '');	
+		xalkyMessageDIV('0', '-1', 'chatContainer', showMessages+1, '<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/notice.gif|'+stextColour+'|'+stextSize+'|'+stextFamily+'|'+advertDesc[Math.floor(Math.random()*advertDesc.length)], 'beep_high.mp3', 'AdBot', '', '');	
 	}
 }
 
@@ -1192,13 +1192,13 @@ function showTextAdvertisement()
  * 
  */
 var s = 0;
-function doSilence()
+function xalkySilence()
 {
 	s += 1;
 
 	if(s > (silent*60))
 	{
-		showInfoBox("system","220","300","200","",lang27);
+		xalkyShowBox("system","220","300","200","",lang27);
 
 		clearInterval(initDoSilence);
 
@@ -1212,7 +1212,7 @@ function doSilence()
  * highlight pm title bar (if pm is minimised)
  * 
  */
-function showAlert(pDiv)
+function xalkyAlert(pDiv)
 {
 	document.getElementById("ptitle_"+pDiv).style.backgroundColour = newPMmin;
 }
@@ -1221,7 +1221,7 @@ function showAlert(pDiv)
  * trim total messages in chat window
  *
  */ 
-function countMessages(pDiv)
+function xalkyCountMessages(pDiv)
 {
 	if(document.getElementById(pDiv))
 	{
@@ -1242,7 +1242,7 @@ function countMessages(pDiv)
  * delete message div 
  *
  */
-function removeMessageDiv(divID)
+function xalkyDropMessages(divID)
 {
 	// if div exists
 	if(document.getElementById(divID))
@@ -1259,7 +1259,7 @@ function removeMessageDiv(divID)
  * use enter key as submit 
  *
  */
-function submitenter(myfield,e,inputMDiv,displayMDiv,pXalky)
+function xalkySubmit(xalkyfield,e,inputMDiv,displayMDiv,pXalky)
 {
 	var keycode;
 	if (window.event) keycode = window.event.keyCode;
@@ -1270,7 +1270,7 @@ function submitenter(myfield,e,inputMDiv,displayMDiv,pXalky)
 	{
 		// send message
 		isPrivate = pXalky;
-		addMessage(inputMDiv,displayMDiv);
+		xalkyAddMessage(inputMDiv,displayMDiv);
 		return false;
 	}
 	else return true;

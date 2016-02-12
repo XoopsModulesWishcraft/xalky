@@ -57,7 +57,7 @@ var userMessStyle = false;
  * create cookie
  *
  */
-function createCookie(name,value,days)
+function xalkyCreateCookie(name,value,days)
 {
 	if(days)
 	{
@@ -69,13 +69,13 @@ function createCookie(name,value,days)
 	document.cookie = name+"="+value+expires+"; path=/";
 }
 
-createCookie('login','',-1);
+xalkyCreateCookie('login','',-1);
 
 /*
  * read cookie
  *
  */
-function readCookie(name)
+function xalkyReadCookie(name)
 {
 	var nameEQ = name + "=";
 	var ca = document.cookie.split(';');
@@ -93,10 +93,10 @@ function readCookie(name)
  * get cookie
  *
  */
-var gotCookie1 = readCookie('myTextStyle');
-var gotCookie2 = readCookie('myOptions');
+var gotCookie1 = xalkyReadCookie('xalkyTextStyle');
+var gotCookie2 = xalkyReadCookie('xalkyOptions');
 
-function getCookie()
+function xalkyGetCookie()
 {
 	if(gotCookie1)
 	{

@@ -21,17 +21,17 @@
 
 function launchXalky() 
 { 
-	createCookie('login','login',1);
+	xalkyCreateCookie('login','login',1);
 	
 	var xOffSet = (screen.width - 225) / 2;
 	var yOffSet = (screen.height - 500) / 2;
 	var features = 'width=900,height=700,toolbar=0,directories=0,menubar=0,status=0,location=0,scrollbars=0,resizable=1';
 	var winName = 'xalky';
 	var chatUrl = '//'+location.hostname+'/modules/xalky/index.php?userID='+userID+'&uname='+userName+'&room='+roomID;
-	myWin = window.open(chatUrl,winName,features);
+	xalkyWin = window.open(chatUrl,winName,features);
 }
 
-function createCookie(name,value,days) 
+function xalkyCreateCookie(name,value,days) 
 {
 	if (days) {
 		var date = new Date();

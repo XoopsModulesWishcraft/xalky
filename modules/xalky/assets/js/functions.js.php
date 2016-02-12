@@ -55,22 +55,22 @@ header("content-type: application/x-javascript");
  * init all
  *
  */
-function initAll()
+function xalkyIntialise()
 {
-	resizeDivs();
-	displayAdverts();
-	getCookie();
-	editSettings();
+	xalkyResizeDivs();
+	xalkyDisplayAdverts();
+	xalkyGetCookie();
+	xalkyEditSettings();
 
-	switchSettingsStatus(userRPM,"allowPM");
-	switchSettingsStatus(userRWebcam,"viewMyCamID");
-	switchSettingsStatus(userEntryExitSFX,"entryExitID");
-	switchSettingsStatus(userNewMessageSFX,"soundsID");
-	switchSettingsStatus(userSFX,"sfxID");
-	switchSettingsStatus(userAvatarsON,"userAvatarsON");
-	switchSettingsStatus(userMessStyle,"userMessStyle");	
+	xalkySwitchStatus(userRPM,"allowPM");
+	xalkySwitchStatus(userRWebcam,"viewMyCamID");
+	xalkySwitchStatus(userEntryExitSFX,"entryExitID");
+	xalkySwitchStatus(userNewMessageSFX,"soundsID");
+	xalkySwitchStatus(userSFX,"sfxID");
+	xalkySwitchStatus(userAvatarsON,"userAvatarsON");
+	xalkySwitchStatus(userMessStyle,"userMessStyle");	
 
-	optionsMenu('optionsIcons','optionsBar','chatContainer','menuWin');
+	xalkyOptionsMenu('optionsIcons','optionsBar','chatContainer','menuWin');
 
 	if(publicWelcome == "")
 	{
@@ -81,7 +81,7 @@ function initAll()
 	var entryNotice = "1|"+stextColour+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicEntry;
 	var entryMessages = "../images/notice.gif|"+stextColour+"|"+stextSize+"|"+stextFamily+"|Displaying last messages ...|1";
 
-	createMessageDiv('1',userID,displayMDiv,1,entryWelcome,'doorbell.mp3','','');
+	xalkyMessageDIV('1',userID,displayMDiv,1,entryWelcome,'doorbell.mp3','','');
 
 	if(invisibleOn == 1 && (admin == 1 && hide == 1))
 	{
@@ -91,15 +91,15 @@ function initAll()
 	{
 		if(dispLastMess > 1)
 		{
-			createMessageDiv('0',userID,displayMDiv,2,entryMessages,'beep_high.mp3','','');
+			xalkyMessageDIV('0',userID,displayMDiv,2,entryMessages,'beep_high.mp3','','');
 		}
 
-		roomlogout();
-		roomlogin();
+		xalkyRoomLogout();
+		xalkyRoomLogin();
 	}
 
-	getMessages();
-	showRoomHeaders();
+	xalkyGetMessages();
+	xalkyRoomHeaders();
 }
 
 /*
@@ -143,7 +143,7 @@ if (!Array.prototype.indexOf) {
  * show room headers 
  *
  */
-function showRoomHeaders()
+function xalkyRoomHeaders()
 {
 	var i = 1;
 
@@ -153,7 +153,7 @@ function showRoomHeaders()
 		{
 			if(document.getElementById("room_"+i))
 			{
-				toggleHeader('room_'+i);
+				xalkyToggleHeader('room_'+i);
 			}
 		}
 
@@ -165,7 +165,7 @@ function showRoomHeaders()
  * login message
  *
  */
-function roomlogin()
+function xalkyRoomLogin()
 {
 	roomID = currRoom;
 
@@ -176,22 +176,22 @@ function roomlogin()
 }
 
 /*
- * logout message
+ * xalkyLogout message
  *
  */
-function roomlogout()
+function xalkyRoomLogout()
 {
 	// remove user from current room
-	removeUsersDiv(userID,roomID);
+	xalkyDropUsersDIV(userID,roomID);
 
-	// insert logout message in prev room
+	// insert xalkyLogout message in prev room
 	if(currRoom != prevRoom)
 	{
 		roomID = prevRoom;
 
 		message = "1|"+stextColour+"|"+stextSize+"|"+stextFamily+"|** "+userName+" "+publicExit;
 
-		// send logout message
+		// send xalkyLogout message
 		outbound(displayMDiv);
 	}
 }
@@ -201,7 +201,7 @@ function roomlogout()
  *
  */
 var zIndex = 100;
-function doFocus(divID)
+function xalkyFocus(divID)
 {
 	// if div exists
 	if(document.getElementById(divID))
@@ -225,7 +225,7 @@ function doFocus(divID)
  * toggle headers 
  *
  */
-function toggleHeader(headerID,subID)
+function xalkyToggleHeader(headerID,subID)
 {
 	if(document.getElementById(headerID).style.height != '24px')
 	{
@@ -259,7 +259,7 @@ function toggleHeader(headerID,subID)
  * display adverts container 
  *
  */
-function displayAdverts()
+function xalkyDisplayAdverts()
 {
 	if(advertsOn == 0 && document.getElementById("advertContainer"))
 	{
@@ -271,7 +271,7 @@ function displayAdverts()
  * change rooms 
  *
  */
-function changeRooms(roomID)
+function xalkyChangeRooms(roomID)
 {
 	window.location = '?roomID='+roomID;
 }
@@ -281,7 +281,7 @@ function changeRooms(roomID)
  *
  */
 var topLevel = 100;
-function toggleBox(szDivID)
+function xalkyToogleBox(szDivID)
 {
 	if(document.layers)	   //NN4+
 	{
@@ -335,70 +335,70 @@ function toggleBox(szDivID)
  * init avatar menu
  *
  */
-function doAvatars(inputMDiv, displayMDiv, nWin)
+function xalkyAvatars(inputMDiv, displayMDiv, nWin)
 {
-	createMdiv('avatarsWin',nWin);
+	xalkyCreateMessage('avatarsWin',nWin);
 
 	if(displayMDiv != 'chatContainer')
 	{
 		document.getElementById('avatarsWin').style.bottom = '66px';
 	}
 
-	createMenu(inputMDiv,displayMDiv,'avatarsWin',totalAvatars,loopAvatars);
-	toggleBox('avatarsWin');
+	xalkyCreateMenu(inputMDiv,displayMDiv,'avatarsWin',totalAvatars,loopAvatars);
+	xalkyToogleBox('avatarsWin');
 }
 
 /*
  * init sfx menu
  *
  */
-function doSFX(inputMDiv,displayMDiv, nWin)
+function xalkySFX(inputMDiv,displayMDiv, nWin)
 {
-	createMdiv('sFXWin',nWin);
+	xalkyCreateMessage('sFXWin',nWin);
 
 	if(displayMDiv != 'chatContainer')
 	{
 		document.getElementById('sFXWin').style.bottom = '66px';
 	}
 
-	createMenu(inputMDiv,displayMDiv,'sFXWin',totalSFX,'1');
-	toggleBox('sFXWin');
+	xalkyCreateMenu(inputMDiv,displayMDiv,'sFXWin',totalSFX,'1');
+	xalkyToogleBox('sFXWin');
 }
 
 /*
  * init smilie menu
  *
  */
-function doSmilies(inputMDiv, displayMDiv, nWin)
+function xalkySmilies(inputMDiv, displayMDiv, nWin)
 {
-	createMdiv('smiliesWin',nWin);
+	xalkyCreateMessage('smiliesWin',nWin);
 
 	if(displayMDiv != 'chatContainer')
 	{
 		document.getElementById('smiliesWin').style.bottom = '66px';
 	}
 
-	createMenu(inputMDiv,displayMDiv,'smiliesWin',totalSmilies,loopSmilies);
-	toggleBox('smiliesWin');	
+	xalkyCreateMenu(inputMDiv,displayMDiv,'smiliesWin',totalSmilies,loopSmilies);
+	xalkyToogleBox('smiliesWin');	
 }
 
 /*
  * init style window
  *
  */
-function doStyles(inputMDiv, displayMDiv, nWin)
+function xalkyStyles(inputMDiv, displayMDiv, nWin)
 {
-	createMdiv('coloursWin',nWin);
-	createMenu(inputMDiv,displayMDiv,'coloursWin',totalColours,loopColours);
-	toggleBox('coloursWin');
+	xalkyCreateMessage('coloursWin',nWin);
+	xalkyCreateMenu(inputMDiv,displayMDiv,'coloursWin',totalColours,loopColours);
+	xalkyToogleBox('coloursWin');
 
-	createMdiv('fontfamilyWin',nWin);
-	createMenu(inputMDiv,displayMDiv,'fontfamilyWin',totalFontFamily,loopFontFamily);
-	toggleBox('fontfamilyWin');
+	xalkyCreateMessage('fontfamilyWin',nWin);
+	xalkyCreateMenu(inputMDiv,displayMDiv,'fontfamilyWin',totalFontFamily,loopFontFamily);
+	xalkyToogleBox('fontfamilyWin');
 
-	createMdiv('fontsizeWin',nWin);
-	createMenu(inputMDiv,displayMDiv,'fontsizeWin',totalFontSize,loopFontSize);
-	toggleBox('fontsizeWin');
+	xalkyCreateMessage('fontsizeWin',nWin);
+	xalkyCreateMenu(inputMDiv,displayMDiv,'fontsizeWin',totalFontSize,loopFontSize);
+	xalkyToogleBox('fontsizeWin');
 
 	if(displayMDiv != 'chatContainer')
 	{
@@ -413,62 +413,62 @@ function doStyles(inputMDiv, displayMDiv, nWin)
  * to hide icons in private windows,
  * if(ndiv.search("pmenuBar_")){}
  */
-function optionsMenu(ndiv,nBar,nContainer,nWin)
+function xalkyOptionsMenu(ndiv,nBar,nContainer,nWin)
 {
 	<?php if ($xalkyConfig['smilies']){?>
-	document.getElementById(ndiv).innerHTML  = '<span alt="'+lang52+'" title="'+lang52+'" id="smilies" class="iconSmilies" onmouseover="this.className=\'iconSmiliesOver\'" onmouseout="this.className=\'iconSmilies\'" onclick="doSmilies(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\');"></span>';
+	document.getElementById(ndiv).innerHTML  = '<span alt="'+lang52+'" title="'+lang52+'" id="smilies" class="iconSmilies" onmouseover="this.className=\'iconSmiliesOver\'" onmouseout="this.className=\'iconSmilies\'" onclick="xalkySmilies(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\');"></span>';
 	<?php }?>
 
-	<?php if ($xalkyConfig['ringBell']){?>	
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang53+'" title="'+lang53+'" id="ringbell" class="iconRingbell" onmouseover="this.className=\'iconRingbellOver\'" onmouseout="this.className=\'iconRingbell\'" onclick="ringBell(\''+nBar+'\',\''+nContainer+'\')"></span>';
+	<?php if ($xalkyConfig['xalkyRingBell']){?>	
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang53+'" title="'+lang53+'" id="ringbell" class="iconRingbell" onmouseover="this.className=\'iconRingbellOver\'" onmouseout="this.className=\'iconRingbell\'" onclick="xalkyRingBell(\''+nBar+'\',\''+nContainer+'\')"></span>';
 	<?php }?>
 	
 	<?php if ($xalkyConfig['textStyles']){?>
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang54+'" title="'+lang54+'" id="style" class="iconStyle" onmouseover="this.className=\'iconStyleOver\'" onmouseout="this.className=\'iconStyle\'" onclick="doStyles(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\');"></span>';
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang54+'" title="'+lang54+'" id="style" class="iconStyle" onmouseover="this.className=\'iconStyleOver\'" onmouseout="this.className=\'iconStyle\'" onclick="xalkyStyles(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\');"></span>';
 	<?php }?>
 	
 	<?php if ($xalkyConfig['userAvatars']){?>
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang55+'" title="'+lang55+'" id="avatar" class="iconAvatar" onmouseover="this.className=\'iconAvatarOver\'" onmouseout="this.className=\'iconAvatar\'" onclick="doAvatars(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\')"></span>';
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang55+'" title="'+lang55+'" id="avatar" class="iconAvatar" onmouseover="this.className=\'iconAvatarOver\'" onmouseout="this.className=\'iconAvatar\'" onclick="xalkyAvatars(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\')"></span>';
 	<?php }?>
 	
-	if(mySFX[0])
+	if(xalkySFX[0])
 	{
 		<?php if ($xalkyConfig['playSFX']){?>
-		document.getElementById(ndiv).innerHTML += '<span alt="'+lang56+'" title="'+lang56+'" id="sounds" class="iconSounds" onmouseover="this.className=\'iconSoundsOver\'" onmouseout="this.className=\'iconSounds\'" onclick="doSFX(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\')"></span>';
+		document.getElementById(ndiv).innerHTML += '<span alt="'+lang56+'" title="'+lang56+'" id="sounds" class="iconSounds" onmouseover="this.className=\'iconSoundsOver\'" onmouseout="this.className=\'iconSounds\'" onclick="xalkySFX(\''+nBar+'\',\''+nContainer+'\',\''+nWin+'\')"></span>';
 		<?php }?>
 	}
 
 	if(ndiv.search("pmenuBar_"))
 	{
 		<?php if ($xalkyConfig['clearScreen']){?>
-		document.getElementById(ndiv).innerHTML += '<span alt="'+lang57+'" title="'+lang57+'" id="rubber" class="iconRubber" onmouseover="this.className=\'iconRubberOver\'" onmouseout="this.className=\'iconRubber\'" onclick=\'clrScreen();\'></span>';
+		document.getElementById(ndiv).innerHTML += '<span alt="'+lang57+'" title="'+lang57+'" id="rubber" class="iconRubber" onmouseover="this.className=\'iconRubberOver\'" onmouseout="this.className=\'iconRubber\'" onclick=\'xalkyClearScreen();\'></span>';
 		<?php }?>
 		
 		<?php if ($xalkyConfig['userSettings']){?>
-		document.getElementById(ndiv).innerHTML += '<span alt="'+lang58+'" title="'+lang58+'" id="edit" class="iconEdit" onmouseover="this.className=\'iconEditOver\'" onmouseout="this.className=\'iconEdit\'" onclick=\'editSettings();\'></span>';
+		document.getElementById(ndiv).innerHTML += '<span alt="'+lang58+'" title="'+lang58+'" id="edit" class="iconEdit" onmouseover="this.className=\'iconEditOver\'" onmouseout="this.className=\'iconEdit\'" onclick=\'xalkyEditSettings();\'></span>';
 		<?php }?>
 	}
 	
 	<?php if ($xalkyConfig['chatHistory']){?>
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang59+'" title="'+lang59+'" id="transcripts" class="iconTranscripts" onmouseover="this.className=\'iconTranscriptsOver\'" onmouseout="this.className=\'iconTranscripts\'" onclick=\'showInfoBox("viewTranscripts","400","600","100","index.php?transcripts=1&roomID="+roomID,"");\'></span>';
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang59+'" title="'+lang59+'" id="transcripts" class="iconTranscripts" onmouseover="this.className=\'iconTranscriptsOver\'" onmouseout="this.className=\'iconTranscripts\'" onclick=\'xalkyShowBox("viewTranscripts","400","600","100","index.php?transcripts=1&roomID="+roomID,"");\'></span>';
 	<?php }?>
 	
 	<?php if ($xalkyConfig['chatHelp']){?>
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang60+'" title="'+lang60+'" id="help" class="iconHelp" onmouseover="this.className=\'iconHelpOver\'" onmouseout="this.className=\'iconHelp\'" onclick=\'newWin("help/index.php")\'></span>';
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang60+'" title="'+lang60+'" id="help" class="iconHelp" onmouseover="this.className=\'iconHelpOver\'" onmouseout="this.className=\'iconHelp\'" onclick=\'xalkyNewWindow("help/index.php")\'></span>';
 	<?php }?>
 		
 	<?php if(file_exists("../plugins/share/index.php")){ ?>
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang62+'" title="'+lang62+'" id="share" class="iconShare" onmouseover="this.className=\'iconShareOver\'" onmouseout="this.className=\'iconShare\'" onclick=\'showInfoBox("shareFiles","280","300","260","plugins/share/","");\'></span>';
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang62+'" title="'+lang62+'" id="share" class="iconShare" onmouseover="this.className=\'iconShareOver\'" onmouseout="this.className=\'iconShare\'" onclick=\'xalkyShowBox("shareFiles","280","300","260","plugins/share/","");\'></span>';
 	<?php }?>
 	
 	<?php if(file_exists("../plugins/games/index.php")){ ?>
-	document.getElementById(ndiv).innerHTML += '<span alt="'+lang61+'" title="'+lang61+'" id="playGames" class="iconGames" onmouseover="this.className=\'iconGamesOver\'" onmouseout="this.className=\'iconGames\'" onclick=\'showInfoBox("games","370","418","260","plugins/games/","");\'></span>';	
+	document.getElementById(ndiv).innerHTML += '<span alt="'+lang61+'" title="'+lang61+'" id="playGames" class="iconGames" onmouseover="this.className=\'iconGamesOver\'" onmouseout="this.className=\'iconGames\'" onclick=\'xalkyShowBox("games","370","418","260","plugins/games/","");\'></span>';	
 	<?php }?>
 	
 	/* do not edit */
 	if(showCopyright)
 	{
-		document.getElementById(ndiv).innerHTML += '<span alt="'+lang63+'" title="'+lang63+'" id="copyright" class="iconCopyright" onmouseover="this.className=\'iconCopyrightOver\'" onmouseout="this.className=\'iconCopyright\'" onclick=\'showInfoBox("copyRight","220","300","200","",copyRight());\'></span>';
+		document.getElementById(ndiv).innerHTML += '<span alt="'+lang63+'" title="'+lang63+'" id="copyright" class="iconCopyright" onmouseover="this.className=\'iconCopyrightOver\'" onmouseout="this.className=\'iconCopyright\'" onclick=\'xalkyShowBox("xalkyCopyright","220","300","200","",xalkyCopyright());\'></span>';
 	}
 }
 
@@ -476,7 +476,7 @@ function optionsMenu(ndiv,nBar,nContainer,nWin)
  * create edit div
  *
  */
-function editSettings()
+function xalkyEditSettings()
 {
 	// if div does not exist
 	if(!document.getElementById("editDiv"))
@@ -487,18 +487,18 @@ function editSettings()
 
 		newdiv.setAttribute("id","editDiv");
 		newdiv.className = "editWin";
-		newdiv.innerHTML  = '<div style="text-align:right;" class="roomheader" onclick="toggleBox(\'editDiv\')"><img src="<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/close.gif"></div>';		
+		newdiv.innerHTML  = '<div style="text-align:right;" class="roomheader" onclick="xalkyToogleBox(\'editDiv\')"><img src="<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/close.gif"></div>';		
 		newdiv.innerHTML += '<div>&nbsp;</div>';
-		newdiv.innerHTML += '<div><input type="checkbox" id="allowPM" onclick="updateUserSettings()"> '+lang46+'&nbsp;</div>';
-		newdiv.innerHTML += '<div><input type="checkbox" id="viewMyCamID" onclick="updateUserSettings()"> '+lang47+'&nbsp;</div>';
-		newdiv.innerHTML += '<div><input type="checkbox" id="entryExitID" onclick="updateUserSettings()"> '+lang48+'&nbsp;</div>';
-		newdiv.innerHTML += '<div><input type="checkbox" id="soundsID" onclick="updateUserSettings()"> '+lang49+'&nbsp;</div>';
-		newdiv.innerHTML += '<div><input type="checkbox" id="sfxID" onclick="updateUserSettings()"> '+lang50+'&nbsp;</div>';
-		newdiv.innerHTML += '<div><input type="checkbox" id="userAvatarsON" onclick="updateUserSettings()"> Display User Avatars&nbsp;</div>';			
-		newdiv.innerHTML += '<div><input type="checkbox" id="userMessStyle" onclick="updateUserSettings()"> Modern Message Style&nbsp;</div>';	
+		newdiv.innerHTML += '<div><input type="checkbox" id="allowPM" onclick="xalkyUpdateSettings()"> '+lang46+'&nbsp;</div>';
+		newdiv.innerHTML += '<div><input type="checkbox" id="viewMyCamID" onclick="xalkyUpdateSettings()"> '+lang47+'&nbsp;</div>';
+		newdiv.innerHTML += '<div><input type="checkbox" id="entryExitID" onclick="xalkyUpdateSettings()"> '+lang48+'&nbsp;</div>';
+		newdiv.innerHTML += '<div><input type="checkbox" id="soundsID" onclick="xalkyUpdateSettings()"> '+lang49+'&nbsp;</div>';
+		newdiv.innerHTML += '<div><input type="checkbox" id="sfxID" onclick="xalkyUpdateSettings()"> '+lang50+'&nbsp;</div>';
+		newdiv.innerHTML += '<div><input type="checkbox" id="userAvatarsON" onclick="xalkyUpdateSettings()"> Display User Avatars&nbsp;</div>';			
+		newdiv.innerHTML += '<div><input type="checkbox" id="userMessStyle" onclick="xalkyUpdateSettings()"> Modern Message Style&nbsp;</div>';	
 		newdiv.innerHTML += '<div>&nbsp;</div>';
 		newdiv.innerHTML += '<div>&nbsp;</div>';
-		newdiv.innerHTML += '<div>&nbsp;'+lang51+': <select id="selectStatusID" onchange="sendStatus(this.value);"></select></div>';
+		newdiv.innerHTML += '<div>&nbsp;'+lang51+': <select id="selectStatusID" onchange="xalkySendStatus(this.value);"></select></div>';
 		newdiv.innerHTML += '<div>&nbsp;</div>';
 
 		ni.appendChild(newdiv);
@@ -508,14 +508,14 @@ function editSettings()
 		document.getElementById("editDiv").style.visibility = 'visible';
 	}
 
-	createStatusSelectOptions();
+	xalkyStatusSelectOptions();
 }
 
 /*
  * update user settings
  *
  */
-function updateUserSettings()
+function xalkyUpdateSettings()
 {
 	userRPM = document.getElementById('allowPM').checked;
 	userRWebcam = document.getElementById('viewMyCamID').checked;
@@ -525,14 +525,14 @@ function updateUserSettings()
 	userAvatarsON = document.getElementById('userAvatarsON').checked;
 	userMessStyle = document.getElementById('userMessStyle').checked;	
 
-	createCookie('myOptions',encodeURI(userRPM+"|"+userRWebcam+"|"+userEntryExitSFX+"|"+userNewMessageSFX+"|"+userSFX+"|"+userAvatarsON+"|"+userMessStyle),30);
+	xalkyCreateCookie('xalkyOptions',encodeURI(userRPM+"|"+userRWebcam+"|"+userEntryExitSFX+"|"+userNewMessageSFX+"|"+userSFX+"|"+userAvatarsON+"|"+userMessStyle),30);
 }
 
 /*
  * switch settings status
  *
  */
-function switchSettingsStatus(value,div)
+function xalkySwitchStatus(value,div)
 {
 	if(value == 'false' || value == false)
 	{
@@ -550,7 +550,7 @@ function switchSettingsStatus(value,div)
  * create menu div
  *
  */
-function createMdiv(ndiv,nWin)
+function xalkyCreateMessage(ndiv,nWin)
 {
 	if(document.getElementById(ndiv))
 	{
@@ -568,7 +568,7 @@ function createMdiv(ndiv,nWin)
  * close menu div
  *
  */
-function closeMdiv(ndiv)
+function xalkyCloseMessage(ndiv)
 {
 	if(document.getElementById(ndiv))
 	{
@@ -582,14 +582,14 @@ function closeMdiv(ndiv)
  * 
  */
 var nClass = '';
-function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
+function xalkyCreateMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 {
 	var i=0;
 	var iLoop = 1;
 
 	document.getElementById(ndiv).innerHTML = '';
 
-	document.getElementById(ndiv).innerHTML = '<div style="text-align:right;" class="roomheader" onclick=closeMdiv("'+ndiv+'")><img src="images/close.gif"></div>';
+	document.getElementById(ndiv).innerHTML = '<div style="text-align:right;" class="roomheader" onclick=xalkyCloseMessage("'+ndiv+'")><img src="images/close.gif"></div>';
 
 	if(ndiv == 'avatarsWin')
 	{
@@ -598,7 +598,7 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 		
 		var ni = document.getElementById(ndiv);
 		var newdiv = document.createElement('iframe');
-			newdiv.setAttribute("id","myAvatarUpload");
+			newdiv.setAttribute("id","xalkyAvatarUpload");
 			newdiv.src = "avatars/upload.php";
 			newdiv.height="140";
 			newdiv.width="310";
@@ -613,33 +613,33 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 	
 	for (i = 0; i <= ntotal; i++)
 	{
-		if(ndiv == 'smiliesWin' && mySmilies[i])
+		if(ndiv == 'smiliesWin' && xalkySmilies[i])
 		{
-			document.getElementById(ndiv).innerHTML += '<span onclick=addsmiley("'+inputMDiv+'","'+mySmilies[i]+'");toggleBox("'+ndiv+'"); title="'+mySmilies[i]+'" alt="'+mySmilies[i]+'"/>'+mySmiliesImg[i]+'</span>';
+			document.getElementById(ndiv).innerHTML += '<span onclick=xalkyAddSmiley("'+inputMDiv+'","'+xalkySmilies[i]+'");xalkyToogleBox("'+ndiv+'"); title="'+xalkySmilies[i]+'" alt="'+xalkySmilies[i]+'"/>'+xalkySmiliesImg[i]+'</span>';
 		}
 
 		if(ndiv == 'avatarsWin')
 		{
 			var showAvatar = 1;
 		
-			if(myAvatars[i] == 'pc.gif')
+			if(xalkyAvatars[i] == 'pc.gif')
 			{
 				var showAvatar = 0;
 			}
 			
-			if(myAvatars[i] == 'phone.gif')
+			if(xalkyAvatars[i] == 'phone.gif')
 			{
 				var showAvatar = 0;
 			}
 			
-			if(myAvatars[i] == '')
+			if(xalkyAvatars[i] == '')
 			{
 				var showAvatar = 0;
 			}			
 			
 			if(showAvatar)
 			{
-				document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;" onclick="addAvatar(\''+inputMDiv+'\',\''+myAvatars[i]+'\');updateAvatar(\''+userID+'\', \''+myAvatars[i]+'\');sendAvatarData();" /><img src="avatars/'+myAvatars[i]+'"></span>';
+				document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;" onclick="xalkyAddAvatar(\''+inputMDiv+'\',\''+xalkyAvatars[i]+'\');xalkyUpdateAvatar(\''+userID+'\', \''+xalkyAvatars[i]+'\');xalkySendAvatar();" /><img src="avatars/'+xalkyAvatars[i]+'"></span>';
 			}
 		}
 
@@ -647,12 +647,12 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 		{
 			nClass = 'highliteOff';
 
-			if(myFontFamily[i] == textFamily)
+			if(xalkyFontFamily[i] == textFamily)
 			{
 				nClass = 'highliteOn';
 			}
 
-			document.getElementById(ndiv).innerHTML += '<div class="'+nClass+'" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" style="font-family:'+myFontFamily[i]+'" alt="'+myFontFamily[i]+'" title="'+myFontFamily[i]+'" onclick="addFontFamily(\''+myFontFamily[i]+'\');changeMessBoxStyle(\''+inputMDiv+'\');" />'+myFontFamily[i]+'</div>';
+			document.getElementById(ndiv).innerHTML += '<div class="'+nClass+'" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" style="font-family:'+xalkyFontFamily[i]+'" alt="'+xalkyFontFamily[i]+'" title="'+xalkyFontFamily[i]+'" onclick="xalkyAddFontFamily(\''+xalkyFontFamily[i]+'\');xalkyChangeMessageStyle(\''+inputMDiv+'\');" />'+xalkyFontFamily[i]+'</div>';
 
 			nClass = '';
 		}
@@ -661,7 +661,7 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 		{
 			nClass = 'highliteOff';
 
-			if(myFontSize[i].toLowerCase() == textSize.toLowerCase())
+			if(xalkyFontSize[i].toLowerCase() == textSize.toLowerCase())
 			{
 				nClass = 'highliteOn';
 			}
@@ -683,19 +683,19 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 
 			document.getElementById(ndiv).style.colour = textColour;
 
-			document.getElementById(ndiv).innerHTML += '<div class="'+nClass+'" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" style="font-size:'+myFontSize[i]+';" alt="'+myFontSize[i]+'" title="'+myFontSize[i]+'" onclick="addFontSize(\''+myFontSize[i]+'\');changeMessBoxStyle(\''+inputMDiv+'\');" />'+lang2+'</div>';
+			document.getElementById(ndiv).innerHTML += '<div class="'+nClass+'" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" style="font-size:'+xalkyFontSize[i]+';" alt="'+xalkyFontSize[i]+'" title="'+xalkyFontSize[i]+'" onclick="xalkyAddFontSize(\''+xalkyFontSize[i]+'\');xalkyChangeMessageStyle(\''+inputMDiv+'\');" />'+lang2+'</div>';
 
 			nClass = '';
 		}
 
 		if(ndiv == 'coloursWin')
 		{
-			document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;background-colour:'+myColour[i]+'" alt="'+myColour[i]+'" title="'+myColour[i]+'" onclick="addColour(\''+myColour[i]+'\');changeMessBoxStyle(\''+inputMDiv+'\');" />&nbsp;</span>';
+			document.getElementById(ndiv).innerHTML += '<span style="padding: 2px 2px 2px 2px;background-colour:'+xalkyColour[i]+'" alt="'+xalkyColour[i]+'" title="'+xalkyColour[i]+'" onclick="xalkyAddColour(\''+xalkyColour[i]+'\');xalkyChangeMessageStyle(\''+inputMDiv+'\');" />&nbsp;</span>';
 		}
 
 		if(ndiv == 'sFXWin')
 		{
-			document.getElementById(ndiv).innerHTML += '<div class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'"><img src="sounds/sfx/speaker.gif" onclick="doSound(\'sfx/'+mySFX[i]+'\');" alt="'+lang3+'" title="'+lang3+'">&nbsp;<span style="padding: 2px 2px 2px 2px;" onclick="addSFX(\''+inputMDiv+'\',\''+displayMDiv+'\',\''+mySFX[i].replace(/.mp3/i,"")+'\');"/>'+mySFX[i].replace(/.mp3/i,"")+'</span></div>';
+			document.getElementById(ndiv).innerHTML += '<div class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'"><img src="sounds/sfx/speaker.gif" onclick="xalkySound(\'sfx/'+xalkySFX[i]+'\');" alt="'+lang3+'" title="'+lang3+'">&nbsp;<span style="padding: 2px 2px 2px 2px;" onclick="xalkyAddSFX(\''+inputMDiv+'\',\''+displayMDiv+'\',\''+xalkySFX[i].replace(/.mp3/i,"")+'\');"/>'+xalkySFX[i].replace(/.mp3/i,"")+'</span></div>';
 		}
 
 		if(iLoop >= nloop)
@@ -723,21 +723,21 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
 			isBoldChecked = 'checked';
 		}
 
-		document.getElementById(ndiv).innerHTML += '<span class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" /><input type="checkbox" id="bold" onclick="addFontBold();changeMessBoxStyle(\''+inputMDiv+'\');" '+isBoldChecked+'><b>B</b></span>';
+		document.getElementById(ndiv).innerHTML += '<span class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" /><input type="checkbox" id="bold" onclick="xalkyAddFontBold();xalkyChangeMessageStyle(\''+inputMDiv+'\');" '+isBoldChecked+'><b>B</b></span>';
 
 		if(mUnderline == 1)
 		{
 			isUnderlineChecked = 'checked';	
 		}
 
-		document.getElementById(ndiv).innerHTML += '<span class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" /><input type="checkbox" id="underline" onclick="addFontUnderline();changeMessBoxStyle(\''+inputMDiv+'\');" '+isUnderlineChecked+'><u>U</u></span>';
+		document.getElementById(ndiv).innerHTML += '<span class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" /><input type="checkbox" id="underline" onclick="xalkyAddFontUnderline();xalkyChangeMessageStyle(\''+inputMDiv+'\');" '+isUnderlineChecked+'><u>U</u></span>';
 
 		if(mItalic == 1)
 		{
 			isItalicChecked = 'checked';	
 		}
 
-		document.getElementById(ndiv).innerHTML += '<span class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" /><input type="checkbox" id="italic" onclick="addFontItalic();changeMessBoxStyle(\''+inputMDiv+'\');" '+isItalicChecked+'><i>I</i></span>';
+		document.getElementById(ndiv).innerHTML += '<span class="highliteOff" onmouseover="this.className=\'highliteOn\'" onmouseout="this.className=\'highliteOff\'" /><input type="checkbox" id="italic" onclick="xalkyAddFontItalic();xalkyChangeMessageStyle(\''+inputMDiv+'\');" '+isItalicChecked+'><i>I</i></span>';
 	}
 
 }
@@ -746,7 +746,7 @@ function createMenu(inputMDiv,displayMDiv,ndiv,ntotal,nloop)
  * update message box text style
  *
  */
-function changeMessBoxStyle(div)
+function xalkyChangeMessageStyle(div)
 {
 	document.getElementById(div).style.colour = textColour;
 	document.getElementById(div).style.fontFamily = textFamily;
@@ -778,11 +778,11 @@ function changeMessBoxStyle(div)
  * add smilie to message 
  *
  */
-function addSmilie(nSmilie)
+function xalkyAddSmilie(nSmilie)
 {
 	for (i = 0; i <= totalSmilies; i++)
 	{
-		nSmilie = nSmilie.split(mySmilies[i]).join(mySmiliesImg[i]);
+		nSmilie = nSmilie.split(xalkySmilies[i]).join(xalkySmiliesImg[i]);
 	}
 
 	return nSmilie;
@@ -792,7 +792,7 @@ function addSmilie(nSmilie)
  * add smilie to messagebar 
  *
  */
-function addsmiley(inputMDiv,code)
+function xalkyAddSmiley(inputMDiv,code)
 {
 	var pretext = document.getElementById(inputMDiv).value;
 	this.code = code;
@@ -804,13 +804,13 @@ function addsmiley(inputMDiv,code)
  * update users avatar 
  *
  */
-function addAvatar(inputMDiv,nAvatar)
+function xalkyAddAvatar(inputMDiv,nAvatar)
 {
 	// update avatar
 	userAvatar = nAvatar;
 
 	// close avatar window
-	toggleBox("avatarsWin");
+	xalkyToogleBox("avatarsWin");
 
 	// focus message input
 	document.getElementById(inputMDiv).focus();
@@ -820,7 +820,7 @@ function addAvatar(inputMDiv,nAvatar)
  * play SFX 
  *
  */
-function addSFX(inputMDiv,displayMDiv,sfx)
+function xalkyAddSFX(inputMDiv,displayMDiv,sfx)
 {
 	// clear message input
 	document.getElementById(inputMDiv).value = '';
@@ -829,10 +829,10 @@ function addSFX(inputMDiv,displayMDiv,sfx)
 	document.getElementById(inputMDiv).value = '/play '+sfx;
 
 	// send message
-	addMessage(inputMDiv,displayMDiv);
+	xalkyAddMessage(inputMDiv,displayMDiv);
 
 	// close SFX window
-	toggleBox('sFXWin');
+	xalkyToogleBox('sFXWin');
 		
 }
 
@@ -840,7 +840,7 @@ function addSFX(inputMDiv,displayMDiv,sfx)
  * update selected Font Colour
  *
  */
-function addColour(nColour)
+function xalkyAddColour(nColour)
 {
 	// update avatar
 	textColour = nColour;
@@ -853,7 +853,7 @@ function addColour(nColour)
  * update selected Font Family
  *
  */
-function addFontFamily(nFont)
+function xalkyAddFontFamily(nFont)
 {
 	// update font family
 	textFamily = nFont;
@@ -866,7 +866,7 @@ function addFontFamily(nFont)
  * update selected Font Size
  *
  */
-function addFontSize(nSize)
+function xalkyAddFontSize(nSize)
 {
 	// update font size
 	textSize = nSize;
@@ -876,7 +876,7 @@ function addFontSize(nSize)
  * update Bold for user text 
  *
  */
-function addFontBold()
+function xalkyAddFontBold()
 {
 	if(mBold == 0)
 	{
@@ -899,7 +899,7 @@ function addFontBold()
  * update Underline for user text 
  *
  */
-function addFontUnderline()
+function xalkyAddFontUnderline()
 {
 	if(mUnderline == 0)
 	{
@@ -922,7 +922,7 @@ function addFontUnderline()
  * update Italic for user text 
  *
  */
-function addFontItalic()
+function xalkyAddFontItalic()
 {
 	if(mItalic == 0)
 	{
@@ -946,17 +946,17 @@ function addFontItalic()
  *
  */
 var lastPost = 1;
-function floodControl()
+function xalkyFlooding()
 {
 	lastPost++;	
 }
-setInterval('floodControl();','1000');
+setInterval('xalkyFlooding();','1000');
 
 /*
- * logout user
+ * xalkyLogout user
  *
  */
-function logout(id)
+function xalkyLogout(id)
 {
 	<?php 
 	$room = '';
@@ -967,14 +967,14 @@ function logout(id)
 	}
 	?>
 	
-	window.location.replace("<?php $xalkyConfig['chatroomUrl']; ?>/index.php?<?php echo $room;?>logout");
+	window.location.replace("<?php $xalkyConfig['chatroomUrl']; ?>/index.php?<?php echo $room;?>xalkyLogout");
 }
 
 /*
  * create status select list
  *
  */
-function createStatusSelectOptions()
+function xalkyStatusSelectOptions()
 {
 	var sel = document.getElementById('selectStatusID');
 
@@ -1015,7 +1015,7 @@ function createStatusSelectOptions()
  * update status
  *
  */
-function sendStatus(status)
+function xalkySendStatus(status)
 {
 	var param = '?';
 	param += '&status=' + encodeURI(status);	
@@ -1025,7 +1025,7 @@ function sendStatus(status)
 	{
 		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendReq.onreadystatechange = handleSendXalky;
+		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
 	}
 
@@ -1035,7 +1035,7 @@ function sendStatus(status)
  * send avatar to database
  *
  */
-function sendAvatarData()
+function xalkySendAvatar()
 {
 	var param = '?';
 	param += '&uavatar=' + encodeURI(userAvatar);	
@@ -1045,7 +1045,7 @@ function sendAvatarData()
 	{
 		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendReq.onreadystatechange = handleSendXalky;
+		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
 	}
 
@@ -1055,7 +1055,7 @@ function sendAvatarData()
  * block/unblock user
  *
  */
-function blockUsers(i,id)
+function xalkyBlockUsers(i,id)
 {
 	if(i=='block')
 	{
@@ -1068,14 +1068,14 @@ function blockUsers(i,id)
 	}
 
 	var param = '?';
-	param += '&myBlockList=' + encodeURI(blockedList);	
+	param += '&xalkyBlockList=' + encodeURI(blockedList);	
 
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
 		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendReq.onreadystatechange = handleSendXalky;
+		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
 	}
 }
@@ -1085,7 +1085,7 @@ function blockUsers(i,id)
  * used on login page
  */
 var y = 1;
-function toggleLoginPass()
+function xalkyLoginPassword()
 {
 	if(y)
 	{
@@ -1106,7 +1106,7 @@ function toggleLoginPass()
  * open new window
  *
  */
-function newWin(url)
+function xalkyNewWindow(url)
 {
 	window.open(url,'','');
 }
@@ -1115,23 +1115,23 @@ function newWin(url)
  * clear screen
  *
  */
-function clrScreen()
+function xalkyClearScreen()
 {
 	document.getElementById("chatContainer").innerHTML = '';
 }
 
 /*
  * show info box
- * showInfoBox("div name","height","width","top","url to file","text to display")
- * example: showInfoBox("lost","200","300","200","templates/default/lost.php","");
- * example: showInfoBox("system","200","300","200","","some text goes here");
+ * xalkyShowBox("div name","height","width","top","url to file","text to display")
+ * example: xalkyShowBox("lost","200","300","200","templates/default/lost.php","");
+ * example: xalkyShowBox("system","200","300","200","","some text goes here");
  */
-function showInfoBox(info,height,width,top,url,txt)
+function xalkyShowBox(info,height,width,top,url,txt)
 {
 	// delete div if exists
 	if(document.getElementById('oInfo'))
 	{
-		closeMdiv(info);
+		xalkyCloseMessage(info);
 	}
 
 	// create div
@@ -1147,30 +1147,30 @@ function showInfoBox(info,height,width,top,url,txt)
 	if(info == 'games')
 	{
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"cursor:move;\"><b>"+lang61+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='closeMdiv(\""+info+"\");'></span></div>";
+		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"cursor:move;\"><b>"+lang61+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='xalkyCloseMessage(\""+info+"\");'></span></div>";
 		newdiv.innerHTML += "<div><iframe style='border:0;' src='"+url+"' width='"+(width)+"' height='"+(height-40)+"'></div>";	
 	}
 	
 	if(info == 'shareFiles')
 	{
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"cursor:move;\"><b>"+lang62+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='closeMdiv(\""+info+"\");'></span></div>";
+		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"cursor:move;\"><b>"+lang62+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='xalkyCloseMessage(\""+info+"\");'></span></div>";
 		newdiv.innerHTML += "<div><iframe style='border:0;' src='"+url+"' width='"+(width)+"' height='"+(height-36)+"'></div>";	
 	}
 
 	if(info == 'viewTranscripts')
 	{
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"cursor:move;\"><b>"+lang59+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='closeMdiv(\""+info+"\");'></span></div>";
+		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"cursor:move;\"><b>"+lang59+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='xalkyCloseMessage(\""+info+"\");'></span></div>";
 		newdiv.innerHTML += "<div><iframe style='border:0;' src='"+url+"' width='"+(width)+"' height='"+(height-36)+"'></div>";	
 	}	
 
 	if(txt)
 	{
 		var newdiv = document.createElement('div');
-		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"padding-top:3px;cursor:move;\"><b>"+lang4+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='closeMdiv(\""+info+"\");'></span></div>";
+		newdiv.innerHTML  = "<div class=\"userInfoTitle\" style=\"padding-top:3px;cursor:move;\"><b>"+lang4+"</b><span style='float:right;cursor:pointer;'><img src='images/close.gif' onclick='xalkyCloseMessage(\""+info+"\");'></span></div>";
 		newdiv.innerHTML += "<div style=\"min-height:135px;padding-top:10px;\">"+txt+"</div>";
-		newdiv.innerHTML += "<div><input class=\"button\" type=\"button\" name=\"close\" value=\"Close Window\" onclick='closeMdiv(\""+info+"\");'></div>";
+		newdiv.innerHTML += "<div><input class=\"button\" type=\"button\" name=\"close\" value=\"Close Window\" onclick='xalkyCloseMessage(\""+info+"\");'></div>";
 	}
 
 	newdiv.setAttribute("id",info);
@@ -1196,7 +1196,7 @@ function showInfoBox(info,height,width,top,url,txt)
  * copyright
  *
  */
-function copyRight()
+function xalkyCopyright()
 {
 	var html = '';
 		html += '<div style="text-align:left;padding-left:15px;padding-top:5px;padding-bottom:5px;">';

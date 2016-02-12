@@ -1,0 +1,31 @@
+
+<div class="sbody">
+	
+	<div class="roomheader">
+		<div class="header" style='float:left;'><{$smarty.const._MN_XALKY_CONST153}></div>
+		<div class="header" style='float:right;cursor:pointer;' onclick="parent.xalkyCloseMessage('report');"><img src='<{$xalkyConfig.chatroomUrl}>/assets/images/close.gif'></div>
+	</div>
+	
+	<{if !$_POST}>
+		<form style="padding: 0 0 0 3px;" method="post" name="report" action="<{$xalkyConfig.chatroomUrl}>/report.php">
+			<input type="hidden" name="sCaptcha" value="<{$showCaptcha}>">
+			<input type="hidden" name="id" value="<{$smarty.request.id}>">
+			<span><{$smarty.const._MN_XALKY_CONST154}>,</span><br><br>
+			<table class="table">
+			<tr><td><{$smarty.const._MN_XALKY_CONST54}>:</td><td><{$smarty.request.id}></td></tr>
+			<tr><td valign="top"><{$smarty.const._MN_XALKY_CONST155}>:</td><td><textarea class="sInput" name="report" value=""></textarea></td></tr>
+			<tr><td><{$smarty.const._MN_XALKY_CONST156}>:</td><td><input class="sCode" type="text" size="6" name="uCaptcha" value="">&nbsp;<span class="sCaptcha"><{$showCaptcha}></span></td></tr>
+			<tr><td>&nbsp;</td><td><input class="sbutton" type="submit" name="send" value="<{$smarty.const._MN_XALKY_CONST136}>"></td></tr>
+			</table>
+		</form>
+	<{else}>
+		<p><{$result}></p>
+		<p>&nbsp;</p>
+	<{/if}>
+	
+	<!-- do not edit below -->
+	<p style="text-align:center;">
+		<input class="button" type="button" name="close" value="<{$smarty.const._MN_XALKY_CONST128}>" onclick="parent.xalkyCloseMessage('report');">
+	</p>
+
+</div>

@@ -47,7 +47,7 @@
 <script type="text/javascript" src="js/functions.js.php"></script>
 <script type="text/javascript" src="js/private.js.php"></script>
 <script type="text/javascript" src="js/userlist.js.php"></script>
-<script type="text/javascript" src="js/newRoom.js.php"></script>
+<script type="text/javascript" src="js/xalkyNewRoom.js.php"></script>
 <script type="text/javascript" src="js/swfobject.js"></script>
 <script type="text/javascript" src="js/playSnd.js"></script>
 
@@ -94,18 +94,18 @@ var lastMessageID = <?php echo $lastMessageID;?>;
 
 	<div id="chatContainer" class="chatContainer" style="background-image:url('images/<?php echo $roomBg;?>');"></div>
 
-	<img id="roomIcon" class="roomIcon" src="templates/<?php echo $xalkyConfig['template'];?>/images/rooms.png" alt="" onclick="newRoom('<?php if($_GET['sID']){?>0<?php }else{?>1<?php }?>');">
+	<img id="roomIcon" class="roomIcon" src="templates/<?php echo $xalkyConfig['template'];?>/images/rooms.png" alt="" onclick="xalkyNewRoom('<?php if($_GET['sID']){?>0<?php }else{?>1<?php }?>');">
 
 	<div id="roomCreate" class="roomCreate">
 
 		<span><?php echo _MN_XALKY_CONST129;?><input class="roomInput" type="text" id="roomName" name="roomName" value=""></span>
 		<span><?php echo _MN_XALKY_CONST130;?><input class="roomInput" type="text" id="roomPass" name="roomPass" value=""></span>
 		<br><br>
-		<span><input class="roomButtons" type="button" name="roombutton" value="<?php echo _MN_XALKY_CONST131;?>" onclick="addRoom();">&nbsp;<input class="roomButtons" type="button" name="" value="<?php echo _MN_XALKY_CONST132;?>" onclick="newRoom('0');"></span>
+		<span><input class="roomButtons" type="button" name="roombutton" value="<?php echo _MN_XALKY_CONST131;?>" onclick="xalkyAddRoom();">&nbsp;<input class="roomButtons" type="button" name="" value="<?php echo _MN_XALKY_CONST132;?>" onclick="xalkyNewRoom('0');"></span>
 
 	</div>
 
-	<select id="roomSelect" class="roomSelect" onchange="changeRooms(this.value);"></select>
+	<select id="roomSelect" class="roomSelect" onchange="xalkyChangeRooms(this.value);"></select>
 
 	<div id="userContainer" class="userContainer"></div>
 
@@ -113,20 +113,20 @@ var lastMessageID = <?php echo $lastMessageID;?>;
 
 		<div class="optionsIcons" id="optionsIcons"></div>
 
-		<textarea class="optionsBar" id="optionsBar" rows="10" cols="5" onKeyPress="return submitenter(this,event,'optionsBar','chatContainer','');" onfocus="changeMessBoxStyle('optionsBar');"></textarea>
+		<textarea class="optionsBar" id="optionsBar" rows="10" cols="5" onKeyPress="return xalkySubmit(this,event,'optionsBar','chatContainer','');" onfocus="xalkyChangeMessageStyle('optionsBar');"></textarea>
 
 		<span class="optionsSelectStatus">
 			<span id="uwhisperID">
 				<?php echo _MN_XALKY_CONST160;?>: <input class="whisper" type="text" id="whisperID">&nbsp;
 			</span>	
 			<input type="checkbox" id="autoScrollID" checked><?php echo _MN_XALKY_CONST135;?>&nbsp;
-			<span id="icondigitalCredits" class="icondigitalCredits" style="cursor:pointer;" onclick='showInfoBox("ecredits","550","600","25","templates/<?php echo $xalkyConfig['template'];?>/ecredits.php","");'><?php echo _MN_XALKY_CONST109;?>: <span id="digitalCreditsID"></span></span>
+			<span id="icondigitalCredits" class="icondigitalCredits" style="cursor:pointer;" onclick='xalkyShowBox("ecredits","550","600","25","templates/<?php echo $xalkyConfig['template'];?>/ecredits.php","");'><?php echo _MN_XALKY_CONST109;?>: <span id="digitalCreditsID"></span></span>
 		</span>
 
-		<input class="optionsSend" id="optionsSend" type="button" value="<?php echo _MN_XALKY_CONST136;?>" onclick="addMessage('optionsBar','chatContainer')">
+		<input class="optionsSend" id="optionsSend" type="button" value="<?php echo _MN_XALKY_CONST136;?>" onclick="xalkyAddMessage('optionsBar','chatContainer')">
 
 		<?php if(!$_GET['sID']){?>
-			<input class="optionsLogout" id="optionsLogout" type="button" value="<?php echo _MN_XALKY_CONST137;?>" onclick="logout('0');">
+			<input class="optionsLogout" id="optionsLogout" type="button" value="<?php echo _MN_XALKY_CONST137;?>" onclick="xalkyLogout('0');">
 		<?php }?>
 
 	</div>

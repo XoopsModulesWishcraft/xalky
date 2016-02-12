@@ -1,0 +1,67 @@
+@CHARSET "UTF-8";
+
+
+.table
+{
+	border: 0px;
+}
+
+.header
+{
+	font-weight: bold;
+}
+
+.row
+{
+	background-colour: #F5F5F5;
+}
+
+.sbody
+{
+	margin: 0 0 0 0; 
+	padding: 0 0 0 0;
+	background-colour: #CCCCCC;	
+	font-family: Verdana, Arial;
+	font-size: 12px;
+	font-style: normal;
+}
+
+.sbutton
+{
+	height: 24px;
+	width: 140px;
+	border: 1px solid #333333;
+	background-colour: #666666;
+	colour: #FFFFFF;
+	cursor: pointer;
+	
+	-moz-border-radius: 5px;
+	border-radius: 5px;		
+}
+
+.sInput
+{
+	height: 60px;
+	width: 200px;
+	border: 1px solid #666666; 
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+}
+
+.sCode
+{
+	border: 1px solid #666666; 
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	
+}
+
+.sCaptcha
+{
+	colour: #000000;
+	border: 1px solid #666666;
+	padding: 2px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}

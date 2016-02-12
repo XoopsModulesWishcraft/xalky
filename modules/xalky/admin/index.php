@@ -32,11 +32,11 @@ include("../includes/functions.php");
 include("includes/functions.php");
 
 /*
-* do logout
+* do xalkyLogout
 *
 */
 
-if($_REQUEST['option'] == 'logout')
+if($_REQUEST['option'] == 'xalkyLogout')
 {
 	unset($_SESSION['adminUser']);
 

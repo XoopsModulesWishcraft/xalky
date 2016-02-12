@@ -1,0 +1,27 @@
+<div class="obody">
+
+	<div class="pageheader"><{$smarty.const._MN_XALKY_CONST116}></div>
+	
+	<p class="text">
+		<{$smarty.const._MN_XALKY_CONST126}>
+	
+		<{if $result}><br><br>Result: <{$result}><{/if}>
+	</p>
+	
+	<p>
+		<form method="post" name="newpass" action="lost.php" style="text-align:center;">
+			<input type="hidden" name="sCaptcha" value="<{$smarty.const.$showCaptcha}>">
+			<table>
+			<tr><td class="text" align="left"><{$smarty.const._MN_XALKY_CONST121}>:&nbsp;<input class="sinput" type="text" name="userEmail" value=""></td></tr>
+			<tr><td class="text" align="left"><{$smarty.const._MN_XALKY_CONST156}>:&nbsp;<input class="sCode" type="text" size="6" name="uCaptcha" value="">&nbsp;<span class="sCaptcha">&nbsp;<{$smarty.const.$showCaptcha}>&nbsp;</span></td></tr>		
+			<tr><td align="right"><input class="sbutton" type="submit" name="sendPass" value="<{$smarty.const._MN_XALKY_CONST127}>"></td></tr>
+			</table>
+		</form>
+	</p>
+	
+	<!-- do not edit below -->
+	<p style="text-align:center;">
+		<input class="button" type="button" name="close" value="<{$smarty.const._MN_XALKY_CONST128}>" onclick="parent.xalkyCloseMessage('lost');">
+	</p>
+
+</div>

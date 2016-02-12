@@ -110,7 +110,7 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 
 <div class="roomheader">
 	<div class="header" style='float:left;'><?php echo _MN_XALKY_CONST153;?></div>
-	<div class="header" style='float:right;cursor:pointer;' onclick="parent.closeMdiv('report');"><img src='../../images/close.gif'></div>
+	<div class="header" style='float:right;cursor:pointer;' onclick="parent.xalkyCloseMessage('report');"><img src='../../images/close.gif'></div>
 </div>
 
 <?php if(!$_POST){?>
@@ -137,7 +137,7 @@ if($_POST){$result = sendAdminEmail('1',$_POST['id'],$_POST['report']);}
 
 <!-- do not edit below -->
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('report');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.xalkyCloseMessage('report');">
 </p>
 
 </body>

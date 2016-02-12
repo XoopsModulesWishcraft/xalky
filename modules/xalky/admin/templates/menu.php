@@ -25,7 +25,7 @@
 		<?php }?>
 		
 		<a class="button" href="?option=database">Database</a>
-		<a class="button" href="?option=logout">Logout</a>
+		<a class="button" href="?option=xalkyLogout">Logout</a>
 	</span>
 </div>
 

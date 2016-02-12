@@ -1,18 +1,18 @@
 
 /*
-* show myplugin
+* show xalkyplugin
 * 
 */
 
-function myplugin()
+function xalkyplugin()
 {
-	var myPluginTitle = 'My Plugin';
-	var myPluginUrl = 'plugins/example/index.php';
-	var myPluginImage = 'plugins/example/images/image.gif';
-	var myPluginHeight = '100';
-	var myPluginDiv = 'myPluginDiv';
-	var myPluginShowContent = 'showMyPluginContent';
-	var myPluginContent = 'myPluginContent';
+	var xalkyPluginTitle = 'My Plugin';
+	var xalkyPluginUrl = 'plugins/example/index.php';
+	var xalkyPluginImage = 'plugins/example/images/image.gif';
+	var xalkyPluginHeight = '100';
+	var xalkyPluginDiv = 'xalkyPluginDiv';
+	var xalkyPluginShowContent = 'showMyPluginContent';
+	var xalkyPluginContent = 'xalkyPluginContent';
 
 	/**
 
@@ -21,31 +21,31 @@ function myplugin()
 	**/
 
 	// if div does not exist
-	if(!document.getElementById(myPluginDiv))
+	if(!document.getElementById(xalkyPluginDiv))
 	{
 		// create div
 		var ni = document.getElementById('userContainer');
 		var newdiv = document.createElement('div');
 
-		newdiv.setAttribute("id",myPluginDiv);
+		newdiv.setAttribute("id",xalkyPluginDiv);
 		newdiv.className = "";
-		newdiv.innerHTML = '<div class="roomheader" onclick="toggleHeader(\''+myPluginDiv+'\');"><img style="vertical-align:middle;" src="'+myPluginImage+'">&nbsp;'+myPluginTitle+'</div>';
-		newdiv.innerHTML += '<div id="'+myPluginShowContent+'"></div>';
+		newdiv.innerHTML = '<div class="roomheader" onclick="xalkyToggleHeader(\''+xalkyPluginDiv+'\');"><img style="vertical-align:middle;" src="'+xalkyPluginImage+'">&nbsp;'+xalkyPluginTitle+'</div>';
+		newdiv.innerHTML += '<div id="'+xalkyPluginShowContent+'"></div>';
 
 		ni.appendChild(newdiv);
 	}
 
 	// if div does not exist
-	if(!document.getElementById(myPluginContent))
+	if(!document.getElementById(xalkyPluginContent))
 	{
 		// create div
 
-		var ni = document.getElementById(myPluginShowContent);
+		var ni = document.getElementById(xalkyPluginShowContent);
 		var newdiv = document.createElement('iframe');
 
-		newdiv.setAttribute("id",myPluginContent);
-		newdiv.src = myPluginUrl;
-		newdiv.height = myPluginHeight;
+		newdiv.setAttribute("id",xalkyPluginContent);
+		newdiv.src = xalkyPluginUrl;
+		newdiv.height = xalkyPluginHeight;
 		newdiv.width = "220";
 		newdiv.frameBorder = "0";
 

@@ -137,7 +137,7 @@ if (!class_exists("ip2location")) {
 		 * @return array
 		 */
 		private function getResult($host, $name) {
-			if ($host==='myself') {
+			if ($host==='xalkyself') {
 				$ip = $this->getIP(true);
 			} else
 				$ip = @gethostbyname($host);

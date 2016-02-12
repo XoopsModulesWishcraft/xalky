@@ -84,7 +84,7 @@
 
 		<?php echo urldecode($username);?> 
 
-		<?php if(!$_REQUEST['edit'] && $_SESSION['myProfileID'] == $_REQUEST['id']){?>
+		<?php if(!$_REQUEST['edit'] && $_SESSION['xalkyProfileID'] == $_REQUEST['id']){?>
 			&nbsp;<span class="linka">[<a href="index.php?id=<?php echo $_REQUEST['id'];?>&edit=1" <?php if(isset($_SESSION['guest'])){?>onclick="javascript:alert('Please register to edit your profile!');return false;"<?php }?> ><?php echo _MN_XALKY_CONST142;?></a>]</span>
 		<?php }?>
 

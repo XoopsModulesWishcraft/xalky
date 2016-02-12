@@ -55,11 +55,10 @@ header("content-type: application/x-javascript");
 var share = 0;
 
 /*
-* create users div 
-*
-*/
-
-function createUsersDiv(uuserID, userID, uUser, uAvatar, uWebcam, uPrevRoom, uRoom, uActivity, uStatus, uWatch, uAdmin, uModerator, uSpeaker, uActive, uLastActive, uIP)
+ * create users div 
+ *
+ */
+function xalkyUsersDIV(uuserID, userID, uUser, uAvatar, uWebcam, uPrevRoom, uRoom, uActivity, uStatus, uWatch, uAdmin, uModerator, uSpeaker, uActive, uLastActive, uIP)
 {	
 	// sender has closed webcam window
 	if(document.getElementById("cam_"+uuserID) && uWebcam == 0)
@@ -119,11 +118,11 @@ function createUsersDiv(uuserID, userID, uUser, uAvatar, uWebcam, uPrevRoom, uRo
 			// show username
 			if(webcamsOn)
 			{
-				newdiv.innerHTML = "<div><span style='float:left;'><img id='avatar_"+uuserID+"' style='vertical-align:middle;' src='avatars/"+uAvatar+"'>&nbsp;<span onclick='userPanel(\""+userName+"\",\""+uUser+"\",\""+uuserID+"\",\""+uRoom+"\",\""+userID+"\",\""+uAvatar+"\",\""+uBlock+"\",\""+uIP+"\")'>"+decodeURI(uUser)+showAdminID+showModeratorID+showSpeakerID+"</span><span id='ustatusID_"+uuserID+"'></span></span><span style='float:right;'><img id='watch_"+uuserID+"' style='vertical-align:middle;' src='images/inv.gif'><img id='webcam_"+uuserID+"' style='vertical-align:middle;' src='images/inv.gif'></span></div>";
+				newdiv.innerHTML = "<div><span style='float:left;'><img id='avatar_"+uuserID+"' style='vertical-align:middle;' src='avatars/"+uAvatar+"'>&nbsp;<span onclick='xalkyUserPanel(\""+userName+"\",\""+uUser+"\",\""+uuserID+"\",\""+uRoom+"\",\""+userID+"\",\""+uAvatar+"\",\""+uBlock+"\",\""+uIP+"\")'>"+decodeURI(uUser)+showAdminID+showModeratorID+showSpeakerID+"</span><span id='ustatusID_"+uuserID+"'></span></span><span style='float:right;'><img id='watch_"+uuserID+"' style='vertical-align:middle;' src='images/inv.gif'><img id='webcam_"+uuserID+"' style='vertical-align:middle;' src='images/inv.gif'></span></div>";
 			}
 			else
 			{
-				newdiv.innerHTML = "<div><span style='float:left;'><img id='avatar_"+uuserID+"' style='vertical-align:middle;' src='avatars/"+uAvatar+"'>&nbsp;<span onclick='userPanel(\""+userName+"\",\""+uUser+"\",\""+uuserID+"\",\""+uRoom+"\",\""+userID+"\",\""+uAvatar+"\",\""+uBlock+"\",\""+uIP+"\")'>"+decodeURI(uUser)+showAdminID+showModeratorID+showSpeakerID+"</span><span id='ustatusID_"+uuserID+"'></span></span></div>";
+				newdiv.innerHTML = "<div><span style='float:left;'><img id='avatar_"+uuserID+"' style='vertical-align:middle;' src='avatars/"+uAvatar+"'>&nbsp;<span onclick='xalkyUserPanel(\""+userName+"\",\""+uUser+"\",\""+uuserID+"\",\""+uRoom+"\",\""+userID+"\",\""+uAvatar+"\",\""+uBlock+"\",\""+uIP+"\")'>"+decodeURI(uUser)+showAdminID+showModeratorID+showSpeakerID+"</span><span id='ustatusID_"+uuserID+"'></span></span></div>";
 			}
 
 			ni.appendChild(newdiv);
@@ -133,19 +132,19 @@ function createUsersDiv(uuserID, userID, uUser, uAvatar, uWebcam, uPrevRoom, uRo
 		if(uPrevRoom != uRoom && document.getElementById("userlist_"+uuserID+uPrevRoom))
 		{
 			// remove user from userlist
-			deleteDiv("userlist_"+uuserID+uPrevRoom,"room_"+uPrevRoom);
+			xalkyDropDIV("userlist_"+uuserID+uPrevRoom,"room_"+uPrevRoom);
 		}
 
 		// update user room count
-		updateUserRoomCount(uRoom, '1');
+		xalkyUpdateUserRoomCount(uRoom, '1');
 
 		// update users avatar
-		updateAvatar(uuserID, uAvatar, uRoom);
+		xalkyUpdateAvatar(uuserID, uAvatar, uRoom);
 
 		// show blocked user icon
 		if(uUser && blockedList.indexOf("|"+uuserID+"|") != '-1')
 		{
-			updateAvatar(uuserID, 'block.gif', uRoom);
+			xalkyUpdateAvatar(uuserID, 'block.gif', uRoom);
 		}
 
 		// show watching webcam icon
@@ -153,33 +152,33 @@ function createUsersDiv(uuserID, userID, uUser, uAvatar, uWebcam, uPrevRoom, uRo
 		{
 			if(uWatch && uWatch.indexOf(","+userID+",") != '-1')
 			{
-				updateWatchingWebcamStatus(uuserID, '1');
+				xalkyUpdateWatchingStatus(uuserID, '1');
 			}
 			else
 			{
-				updateWatchingWebcamStatus(uuserID, '0');
+				xalkyUpdateWatchingStatus(uuserID, '0');
 			}
 		}
 
 		// update webcam status
 		if(webcamsOn)
 		{
-			updateWebcamStatus(uuserID,uWebcam);
+			xalkyUpdateWebcamStatus(uuserID,uWebcam);
 		}
 
 		// update user status message
-		updateUserStatusMes(uuserID,uStatus);	
+		xalkyUpdateUserStatus(uuserID,uStatus);	
 
 	}
 	else
 	{
 		// remove user from userlist
-		deleteDiv("userlist_"+uuserID+uRoom,"room_"+uRoom);
+		xalkyDropDIV("userlist_"+uuserID+uRoom,"room_"+uRoom);
 
-		// logout user
+		// xalkyLogout user
 		if(Number(userID) == Number(uuserID))
 		{
-			logout();
+			xalkyLogout();
 		}
 	}
 
@@ -190,44 +189,42 @@ function createUsersDiv(uuserID, userID, uUser, uAvatar, uWebcam, uPrevRoom, uRo
 		document.getElementById("ustatusID_"+uuserID).innerHTML = " [Idle]";
 	}
 
-	// if user exceeds inactive auto logout value
+	// if user exceeds inactive auto xalkyLogout value
 	if((Number(uActive) - Number(uLastActive)) > Number(idleLogoutTimeout))
 	{
 		// remove user from userlist
-		deleteDiv("userlist_"+uuserID+uRoom,"room_"+uRoom);
+		xalkyDropDIV("userlist_"+uuserID+uRoom,"room_"+uRoom);
 
-		// logout user
+		// xalkyLogout user
 		if(Number(userID) == Number(uuserID))
 		{
-			logout();
+			xalkyLogout();
 		}
 	}
 
 }
 
 /*
-* update watching webcam status
-*
-*/ 
-
-function updateWatchingWebcamStatus(id,status)
+ * update watching webcam status
+ *
+ */ 
+function xalkyUpdateWatchingStatus(id,status)
 {
 	if(status == '1')
 	{
-		document.getElementById("watch_"+id).src = 'plugins/webcams/images/eyes.gif';
+		document.getElementById("watch_"+id).src = '<?php $xalkyConfig['chatroomUrl']; ?>/plugins/webcams/images/eyes.gif';
 	}
 	else
 	{
-		document.getElementById("watch_"+id).src = 'images/inv.gif';
+		document.getElementById("watch_"+id).src = '<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/inv.gif';
 	}
 }
 
 /*
-* update user status
-*
-*/ 
-
-function updateUserStatusMes(id,status)
+ * update user status
+ *
+ */ 
+function xalkyUpdateUserStatus(id,status)
 {
 	var showStatus = '';
 
@@ -240,28 +237,26 @@ function updateUserStatusMes(id,status)
 }
 
 /*
-* update webcam status
-*
-*/ 
-
-function updateWebcamStatus(id,status)
+ * update webcam status
+ *
+ */ 
+function xalkyUpdateWebcamStatus(id,status)
 {
 	if(status == '1')
 	{
-		document.getElementById("webcam_"+id).src = 'plugins/webcams/images/mini.gif';
+		document.getElementById("webcam_"+id).src = '<?php $xalkyConfig['chatroomUrl']; ?>/plugins/webcams/images/mini.gif';
 	}
 	else
 	{
-		document.getElementById("webcam_"+id).src = 'images/inv.gif';
+		document.getElementById("webcam_"+id).src = '<?php $xalkyConfig['chatroomUrl']; ?>/assets/images/inv.gif';
 	}
 }
 
 /*
-* update user room count
-*
-*/
-
-function updateUserRoomCount(uRoom, value)
+ * update user room count
+ *
+ */
+function xalkyUpdateUserRoomCount(uRoom, value)
 {
 	var newCount = document.getElementById("room_"+uRoom).children.length - 1;
 	
@@ -269,11 +264,10 @@ function updateUserRoomCount(uRoom, value)
 }
 
 /*
-* update avatar
-*
-*/
-
-function updateAvatar(userID, uAvatar, uRoom)
+ * update avatar
+ *
+ */
+function xalkyUpdateAvatar(userID, uAvatar, uRoom)
 {
 	// get path to current avatar
 	// split path into array
@@ -288,7 +282,7 @@ function updateAvatar(userID, uAvatar, uRoom)
 	// if avatar has changed, update avatar
 	if(avatarFilePath[avatarFileName] != uAvatar)
 	{
-		document.getElementById("avatar_"+userID).src = "avatars/"+uAvatar;
+		document.getElementById("avatar_"+userID).src = "<?php $xalkyConfig['chatroomUrl']; ?>/avatars/"+uAvatar;
 	}
 }
 
@@ -297,7 +291,7 @@ function updateAvatar(userID, uAvatar, uRoom)
 *
 */
 
-function removeUsersDiv(userID, uRoom)
+function xalkyDropUsersDIV(userID, uRoom)
 {
 	// if div exists
 	if(document.getElementById("userlist_"+userID))
@@ -315,7 +309,7 @@ function removeUsersDiv(userID, uRoom)
 *
 */
 
-function createSelectRoomdiv(room, roomid, roomdel)
+function xalkyCreateSelectRoomDIV(room, roomid, roomdel)
 {
 	var sel = document.getElementById('roomSelect');
 
@@ -351,7 +345,7 @@ function createSelectRoomdiv(room, roomid, roomdel)
 *
 */
 
-function createRoomsdiv(room,roomid,roomdel)
+function xalkyCreateRoomDIV(room,roomid,roomdel)
 {
 	// if div does not exist
 	if(!document.getElementById("room_"+roomid))
@@ -362,7 +356,7 @@ function createRoomsdiv(room,roomid,roomdel)
 
 		newdiv.setAttribute("id","room_"+roomid);
 		newdiv.className = "";
-		newdiv.innerHTML = '<div class="roomheader" onclick=toggleHeader("room_'+roomid+'");> <span style="float:left;"><img style="vertical-align:middle;" src="templates/<?php echo $xalkyConfig['template'];?>/images/rooms.png">&nbsp;'+decodeURI(room.replace(/\+/g," "))+'&nbsp;</span> <span style="float:right;" class="usercount">[<span id="userCount_'+roomid+'">0</span>]</span> </div>';
+		newdiv.innerHTML = '<div class="roomheader" onclick=xalkyToggleHeader("room_'+roomid+'");> <span style="float:left;"><img style="vertical-align:middle;" src="templates/<?php echo $xalkyConfig['template'];?>/images/rooms.png">&nbsp;'+decodeURI(room.replace(/\+/g," "))+'&nbsp;</span> <span style="float:right;" class="usercount">[<span id="userCount_'+roomid+'">0</span>]</span> </div>';
 
 		ni.appendChild(newdiv);
 
@@ -379,7 +373,7 @@ function createRoomsdiv(room,roomid,roomdel)
 *
 */
 
-function removeRoomsDiv(divID)
+function xalkyDropRoomDIV(divID)
 {
 	// if div exists
 	if(document.getElementById(divID))
@@ -396,7 +390,7 @@ function removeRoomsDiv(divID)
 * appears when you click a username
 */
 
-function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
+function xalkyUserPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 {
 	// if user is Intelli-bot, disable options
 	if(uUser.toLowerCase() == sentryBotName.toLowerCase())
@@ -414,7 +408,7 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 		newdiv.className = "userInfo";
 
 		// header
-		newdiv.innerHTML = "<div class='userInfoTitle'><span style='float:left;'><img style='vertical-align:middle;' src='avatars/"+uAvatar+"'>&nbsp;"+decodeURI(uUser)+"</span><span style='float:right;' onclick='deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")'><img src='images/close.gif'>&nbsp;</span></div>";
+		newdiv.innerHTML = "<div class='userInfoTitle'><span style='float:left;'><img style='vertical-align:middle;' src='avatars/"+uAvatar+"'>&nbsp;"+decodeURI(uUser)+"</span><span style='float:right;' onclick='xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")'><img src='images/close.gif'>&nbsp;</span></div>";
 
 		// used for style formatting only
 		newdiv.innerHTML += "<div style='height:2px;'>&nbsp;</div>";
@@ -426,17 +420,17 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 			// disable option to send PM requests
 			if(digitalCredits == 1 && document.getElementById("digitalCreditsID").innerHTML == '0')
 			{
-				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang32+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:11px;'>"+lang33+"</span></div>";
+				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang32+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:11px;'>"+lang33+"</span></div>";
 			}
 			else
 			{
-				if(groupPXalky == 0)
+				if(groupPrivateChat == 0)
 				{
-					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang6+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:11px;'>"+lang33+"</span></div>";
+					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang6+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:11px;'>"+lang33+"</span></div>";
 				}
 				else
 				{
-					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='clearWhisper();deleteDiv(\""+userID+"_"+uuserID+"\",\"pWin\");createPXalkyDiv(\""+userName+"\",\""+uUser+"\",\""+uuserID+"\",\""+userID+"\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:11px;'>"+lang33+"</span></div>";
+					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyClearWhisper();xalkyDropDIV(\""+userID+"_"+uuserID+"\",\"pWin\");xalkyPrivateChat(\""+userName+"\",\""+uUser+"\",\""+uuserID+"\",\""+userID+"\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:11px;'>"+lang33+"</span></div>";
 				}
 			}
 		}
@@ -448,17 +442,17 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 			// disable option to send webcam requests
 			if(digitalCredits == 1 && document.getElementById("digitalCreditsID").innerHTML == '0')
 			{
-				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang32+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:10px;'>"+lang34+"</span></div>";
+				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang32+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:10px;'>"+lang34+"</span></div>";
 			}
 			else
 			{
-				if(groupPXalky == 0)
+				if(groupPrivateChat == 0)
 				{
-					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang6+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:10px;'>"+lang34+"</span></div>";
+					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang6+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:10px;'>"+lang34+"</span></div>";
 				}
 				else
 				{
-					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='whisperUser(\""+uUser+"\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:10px;'>"+lang34+"</span></div>";
+					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyWhispherUser(\""+uUser+"\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/private.png'><span style='padding-left:10px;'>"+lang34+"</span></div>";
 				}
 
 			}
@@ -473,17 +467,17 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 			// disable option to send webcam requests
 			if(digitalCredits == 1 && document.getElementById("digitalCreditsID").innerHTML == '0')
 			{
-				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang32+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/webcams/images/webcam.png'><span style='padding-left:6px;'>"+lang35+"</span></div>";
+				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang32+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/webcams/images/webcam.png'><span style='padding-left:6px;'>"+lang35+"</span></div>";
 			}
 			else
 			{
 				if(groupWatch == 0)
 				{
-					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang6+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/webcams/images/webcam.png'><span style='padding-left:6px;'>"+lang35+"</span></div>";
+					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\""+lang6+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/webcams/images/webcam.png'><span style='padding-left:6px;'>"+lang35+"</span></div>";
 				}
 				else
 				{
-					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='requestViewWebcam(\""+uUser+"\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/webcams/images/webcam.png'><span style='padding-left:6px;'>"+lang35+"</span></div>";
+					newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='requestViewWebcam(\""+uUser+"\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/webcams/images/webcam.png'><span style='padding-left:6px;'>"+lang35+"</span></div>";
 				}
 
 			}
@@ -502,38 +496,38 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 
 		if(profileOn)
 		{
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='viewProfile(\""+profileID+"\",\""+uUser+"\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/profile.png'><span style='padding-left:10px;'>"+lang36+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyViewProfile(\""+profileID+"\",\""+uUser+"\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/profile.png'><span style='padding-left:10px;'>"+lang36+"</span></div>";
 		}
 
 		if(userID != uuserID && share)
 		{
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"shareFiles\",\"280\",\"300\",\"200\",\"plugins/share/?shareWithUser="+uUser+"\",\"\");' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/share.png'><span style='padding-left:7px;'>Share Files</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"shareFiles\",\"280\",\"300\",\"200\",\"plugins/share/?shareWithUser="+uUser+"\",\"\");' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/share.png'><span style='padding-left:7px;'>Share Files</span></div>";
 		}
 
 		if(userID != uuserID && uBlock == 1)
 		{
 			// block user
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='blockUsers(\"block\",\""+uuserID+"\");showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\"You have blocked "+decodeURI(uUser)+"\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/block.png'><span style='padding-left:10px;'>"+lang37+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyBlockUsers(\"block\",\""+uuserID+"\");xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\"You have blocked "+decodeURI(uUser)+"\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/block.png'><span style='padding-left:10px;'>"+lang37+"</span></div>";
 
 			// unblock user
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='blockUsers(\"unblock\",\""+uuserID+"\");showInfoBox(\"system\",\"220\",\"300\",\"200\",\"\",\"You have unblocked "+decodeURI(uUser)+"\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/unblock.png'><span style='padding-left:10px;'>"+lang38+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyBlockUsers(\"unblock\",\""+uuserID+"\");xalkyShowBox(\"system\",\"220\",\"300\",\"200\",\"\",\"You have unblocked "+decodeURI(uUser)+"\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/unblock.png'><span style='padding-left:10px;'>"+lang38+"</span></div>";
 
 			// report abuse
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"report\",\"280\",\"360\",\"200\",\"templates/"+styleFolder+"/report.php?id="+uUser+"\",\"\");;deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/report.png'><span style='padding-left:7px;'>"+lang39+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"report\",\"280\",\"360\",\"200\",\"templates/"+styleFolder+"/report.php?id="+uUser+"\",\"\");;xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/report.png'><span style='padding-left:7px;'>"+lang39+"</span></div>";
 		}
 
 		if(admin && userID != uuserID || moderator && userID != uuserID || roomOwner && userID != uuserID)
 		{
 			// silence
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='adminControls(\""+uUser+"\",\"SILENCE\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>"+lang40+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyAdminControls(\""+uUser+"\",\"SILENCE\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>"+lang40+"</span></div>";
 
 			// kick
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='adminControls(\""+uUser+"\",\"KICK\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>"+lang41+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyAdminControls(\""+uUser+"\",\"KICK\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>"+lang41+"</span></div>";
 
 			if(admin && userID != uuserID || moderator && userID != uuserID)
 			{
 				// ban
-				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='adminControls(\""+uUser+"\",\"BAN\");deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>"+lang42+"</span></div>";
+				newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyAdminControls(\""+uUser+"\",\"BAN\");xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>"+lang42+"</span></div>";
 			}
 			
 		}
@@ -541,18 +535,18 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 		if(admin && userID != uuserID || moderator && userID != uuserID)
 		{		
 			// show IP
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick=newWin('http://www.infosniper.net/index.php?ip_address="+uIP+"') class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>IP: "+uIP+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick=xalkyNewWindow('http://www.infosniper.net/index.php?ip_address="+uIP+"') class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>IP: "+uIP+"</span></div>";
 		}
 
 		if(admin && userID == uuserID)
 		{
 			// admin area
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick=newWin('admin/') class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>Admin Area</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick=xalkyNewWindow('admin/') class='highliteOff'><img style='vertical-align:middle;' src='templates/<?php echo $xalkyConfig['template'];?>/images/tool.png'><span style='padding-left:10px;'>Admin Area</span></div>";
 		}
 
 		if(moderatedXalky == '1' && admin && userID == uuserID || moderatedXalky == '1' && moderator && userID == uuserID)
 		{
-			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='showInfoBox(\"mc\",\"400\",\"600\",\"100\",\"plugins/moderated_chat/index.php\",\"\");;deleteDiv(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/moderated_chat/images/moderatedchat.gif'><span style='padding-left:10px;'>"+lang43+"</span></div>";
+			newdiv.innerHTML += "<div onmouseover=\"this.className='highliteOn'\" onmouseout=\"this.className='highliteOff'\" onclick='xalkyShowBox(\"mc\",\"400\",\"600\",\"100\",\"plugins/moderated_chat/index.php\",\"\");;xalkyDropDIV(\"userpanel_"+uuserID+uRoom+"\",\"userlist_"+uuserID+uRoom+"\")' class='highliteOff'><img style='vertical-align:middle;' src='plugins/moderated_chat/images/moderatedchat.gif'><span style='padding-left:10px;'>"+lang43+"</span></div>";
 		}
 
 		ni.appendChild(newdiv);
@@ -566,7 +560,7 @@ function userPanel(userName,uUser,uuserID,uRoom,userID,uAvatar,uBlock,uIP)
 *
 */
 
-function clearWhisper()
+function xalkyClearWhisper()
 {
    document.getElementById("whisperID").value = "";
 }
@@ -576,7 +570,7 @@ function clearWhisper()
 *
 */
 
-function adminControls(tUser,doAction)
+function xalkyAdminControls(tUser,doAction)
 {
 	var param = '?';
 	param += '&userID=' + escape(userID);
@@ -594,12 +588,12 @@ function adminControls(tUser,doAction)
 		{
 			sendReq.open("POST", 'includes/outbound.php?rnd='+ Math.random(), true);
 			sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-			sendReq.onreadystatechange = handleSendXalky;
+			sendReq.onreadystatechange = xalkySendChat;
 			sendReq.send(param);
 		}
 		else
 		{
-			showInfoBox("system","220","300","200","",lang44);
+			xalkyShowBox("system","220","300","200","",lang44);
 		}
 
 	}
@@ -611,7 +605,7 @@ function adminControls(tUser,doAction)
 *
 */
 
-function viewProfile(userID,uUser)
+function xalkyViewProfile(userID,uUser)
 {
 	var win = window.open(profileUrl+userID,'','');
 }
@@ -621,7 +615,7 @@ function viewProfile(userID,uUser)
 * 
 */
 
-function deleteDiv(divID,divContainer)
+function xalkyDropDIV(divID,divContainer)
 {
 	// if div exists
 	if(document.getElementById(divID))

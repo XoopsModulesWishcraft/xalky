@@ -58,7 +58,7 @@ var sentryBotRoomID = '<?php echo $xalkyConfig['sentryBotRoomID'];?>';
 
 var iWarning = 0;
 
-function doSentryBot(ursMessage, itoUserName)
+function xalkySentryBot(ursMessage, itoUserName)
 {
 	var iResponse = '';
 
@@ -121,15 +121,15 @@ function doSentryBot(ursMessage, itoUserName)
 
 		if(iWarning == 2)
 		{
-			createMessageDiv('0', '-1', 'chatContainer', showMessages+1, 'SILENCE', 'beep_high.mp3', sentryBotName, itoUserName, '');
+			xalkyMessageDIV('0', '-1', 'chatContainer', showMessages+1, 'SILENCE', 'beep_high.mp3', sentryBotName, itoUserName, '');
 		}
 
 		if(iWarning >= 3)
 		{
-			createMessageDiv('0', '-1', 'chatContainer', showMessages+1, 'KICK', 'beep_high.mp3', sentryBotName, itoUserName, '');
+			xalkyMessageDIV('0', '-1', 'chatContainer', showMessages+1, 'KICK', 'beep_high.mp3', sentryBotName, itoUserName, '');
 		}
 
-		sendSentryBotMessage('chatContainer','',iMessage);
+		xalkySendSentryBot('chatContainer','',iMessage);
 	}
 
 }
@@ -139,7 +139,7 @@ function doSentryBot(ursMessage, itoUserName)
  *
  */
 var sendBotReq = getXmlHttpRequestObject();
-function sendSentryBotMessage(div,itoUserName,iMessage)
+function xalkySendSentryBot(div,itoUserName,iMessage)
 {
 	var param = '?';
 
@@ -155,7 +155,7 @@ function sendSentryBotMessage(div,itoUserName,iMessage)
 	{
 		sendBotReq.open("POST", '<?php echo $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendBotReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
-		sendBotReq.onreadystatechange = handleSendXalky;
+		sendBotReq.onreadystatechange = xalkySendChat;
 		sendBotReq.send(param);
 	}
 }

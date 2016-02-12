@@ -32,138 +32,131 @@ require_once(dirname(dirname(__DIR__))."/includes/functions.php");
 
 header("content-type: application/x-javascript");
 
+echo "/**
+ * Xalky - Settings for Xalky Chatrooms - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
+\n\n";
 
-/*
-* get settings from db
-*
-*/
+// profileOn
+$profileOn = $xalkyConfig['profileOn'];
 
-try {
-	$dbh = db_connect();
-	$params = array('');
-	$query = "SELECT *   
-			  FROM xalky_config
-			  LIMIT 1
-			  ";							
-	$action = $dbh->prepare($query);
-	$action->execute($params);
-				
-	foreach ($action as $i) 
-	{	
-		// profileOn
-		$profileOn = $i['profileOn'];
+// profileUrl
+$profileUrl = $xalkyConfig['profileUrl'];
 
-		// profileUrl
-		$profileUrl = $i['profileUrl'];
+// profileRef
+$profileRef = $xalkyConfig['profileRef'];
 
-		// profileRef
-		$profileRef = $i['profileRef'];
+// privateOn
+$privateOn = $xalkyConfig['privateOn'];
 
-		// privateOn
-		$privateOn = $i['privateOn'];
+// whisperOn
+$whisperOn = $xalkyConfig['whisperOn'];
 
-		// whisperOn
-		$whisperOn = $i['whisperOn'];
+// advertsOn
+$advertsOn = $xalkyConfig['advertsOn'];
 
-		// advertsOn
-		$advertsOn = $i['advertsOn'];
+// webcamsOn
+$webcamsOn = $xalkyConfig['webcamsOn'];
 
-		// webcamsOn
-		$webcamsOn = $i['webcamsOn'];
+// enableUrl
+$enableUrl = $xalkyConfig['enableUrl'];
 
-		// enableUrl
-		$enableUrl = $i['enableUrl'];
+// enableEmail
+$enableEmail = $xalkyConfig['enableEmail'];
 
-		// enableEmail
-		$enableEmail = $i['enableEmail'];
+// enableShoutFilter
+$enableShoutFilter = $xalkyConfig['enableShoutFilter'];
 
-		// enableShoutFilter
-		$enableShoutFilter = $i['enableShoutFilter'];
+// floodXalky
+$floodXalky = $xalkyConfig['floodXalky'];
 
-		// floodXalky
-		$floodXalky = $i['floodXalky'];
+// defaultSFX
+$defaultSFX = $xalkyConfig['defaultSFX'];
 
-		// defaultSFX
-		$defaultSFX = $i['defaultSFX'];
+// newPm
+$newPm = $xalkyConfig['newPm'];
 
-		// newPm
-		$newPm = $i['newPm'];
+// newPmMin
+$newPmMin = $xalkyConfig['newPmMin'];
 
-		// newPmMin
-		$newPmMin = $i['newPmMin'];
+// refreshRate
+$refreshRate = $xalkyConfig['refreshRate'];
 
-		// refreshRate
-		$refreshRate = $i['refreshRate'];
+// displayMDiv
+$displayMDiv = $xalkyConfig['displayMDiv'];
 
-		// displayMDiv
-		$displayMDiv = $i['displayMDiv'];
+// totalMessages
+$totalMessages = $xalkyConfig['totalMessages'];
 
-		// totalMessages
-		$totalMessages = $i['totalMessages'];
+// showMessages
+$showMessages = $xalkyConfig['showMessages'];
 
-		// showMessages
-		$showMessages = $i['showMessages'];
+// avatars
+$avatars = explode(",", $xalkyConfig['avatars']);
+$avatars_count = count($avatars)-1;
 
-		// avatars
-		$avatars = explode(",", $i['avatars']);
-		$avatars_count = count($avatars)-1;
+// badwords
+$badwords = explode(",", urldecode($xalkyConfig['badwords']));
+$badwords_count = count($badwords)-1;
 
-		// badwords
-		$badwords = explode(",", urldecode($i['badwords']));
-		$badwords_count = count($badwords)-1;
+// font colour
+$font_colour = explode(",", $xalkyConfig['font_colour']);
+$font_colour_count = count($font_colour)-1;
 
-		// font colour
-		$font_colour = explode(",", $i['font_colour']);
-		$font_colour_count = count($font_colour)-1;
+// font size
+$font_size = explode(",", $xalkyConfig['font_size']);
+$font_size_count = count($font_size)-1;
 
-		// font size
-		$font_size = explode(",", $i['font_size']);
-		$font_size_count = count($font_size)-1;
+// font size
+$font_family = explode(",", $xalkyConfig['font_family']);
+$font_family_count = count($font_family)-1;
 
-		// font size
-		$font_family = explode(",", $i['font_family']);
-		$font_family_count = count($font_family)-1;
+// sfx
+$sfx = explode(",", $xalkyConfig['sfx']);
+$sfx_count = count($sfx)-1;
 
-		// sfx
-		$sfx = explode(",", $i['sfx']);
-		$sfx_count = count($sfx)-1;
+// smilies text
+$smilies_text = explode(",", $xalkyConfig['smilies_text']);
+$smilies_text_count = count($smilies_text)-1;
 
-		// smilies text
-		$smilies_text = explode(",", $i['smilies_text']);
-		$smilies_text_count = count($smilies_text)-1;
+// sfx
+$smilies_images = explode(",", $xalkyConfig['smilies_images']);
+$smilies_images_count = count($smilies_images)-1;
 
-		// sfx
-		$smilies_images = explode(",", $i['smilies_images']);
-		$smilies_images_count = count($smilies_images)-1;
+// adverts
+$textAdverts = $xalkyConfig['textAdverts'];
+$advertsDesc = $xalkyConfig['textAdvertsDesc'];
+$textAdvertsRate = $xalkyConfig['textAdvertsRate'];
 
-		// adverts
-		$textAdverts = $i['textAdverts'];
-		$advertsDesc = $i['textAdvertsDesc'];
-		$textAdvertsRate = $i['textAdvertsRate'];
+// user status messages
+$userStatusMes = $xalkyConfig['userStatusMes'];
 
-		// user status messages
-		$userStatusMes = urldecode($i['userStatusMes']);
+// show time stamp (messages)
+$showTimeStamp = $xalkyConfig['showTimeStamp'];
 
-		// show time stamp (messages)
-		$showTimeStamp = $i['showTimeStamp'];
+// integrated with CMS
+$integrated = $xalkyConfig['integrated'];
 
-		// integrated with CMS
-		$integrated = $i['integrated'];
+// digitalCredits
+$digitalCredits = $xalkyConfig['digitalCredits'];
 
-		// digitalCredits
-		$digitalCredits = $i['digitalCredits'];
-	}
-	
-	$dbh = null;
-}
-catch(PDOException $e) 
-{
-	$error  = "Function: ".__FUNCTION__."\n";
-	$error .= "File: ".basename(__FILE__)."\n";	
-	$error .= 'PDOException: '.$e->getCode(). '-'. $e->getMessage()."\n\n";
-
-	debugError($error);
-}	
 /*
 * declare content header
 *
@@ -293,11 +286,11 @@ echo "var showMessages = ".$showMessages."; ";
 
 echo "var totalAvatars = ".$avatars_count."; ";
 echo "var loopAvatars = 6; ";
-echo "var myAvatars=new Array(); ";
+echo "var xalkyAvatars=new Array(); ";
 
 for ($i = 0; $i <= $avatars_count; $i++)
 {
-	echo 'myAvatars['.$i.']="'.$avatars[$i].'"; ';
+	echo 'xalkyAvatars['.$i.']="'.$avatars[$i].'"; ';
 }
 
 /*
@@ -327,11 +320,11 @@ echo "return nBadword; } ";
 
 echo "var totalColours = ".$font_colour_count."; ";
 echo "var loopColours = 12; ";
-echo "var myColour=new Array(); ";
+echo "var xalkyColour=new Array(); ";
 
 for ($i = 0; $i <= $font_colour_count; $i++)
 {
-	echo 'myColour['.$i.']="'.$font_colour[$i].'"; ';
+	echo 'xalkyColour['.$i.']="'.$font_colour[$i].'"; ';
 }
 
 /*
@@ -341,11 +334,11 @@ for ($i = 0; $i <= $font_colour_count; $i++)
 
 echo "var totalFontSize = ".$font_size_count."; ";
 echo "var loopFontSize = 1; ";
-echo "var myFontSize=new Array(); ";
+echo "var xalkyFontSize=new Array(); ";
 
 for ($i = 0; $i <= $font_size_count; $i++)
 {
-	echo 'myFontSize['.$i.']="'.$font_size[$i].'"; ';
+	echo 'xalkyFontSize['.$i.']="'.$font_size[$i].'"; ';
 }
 
 /*
@@ -355,11 +348,11 @@ for ($i = 0; $i <= $font_size_count; $i++)
 
 echo "var totalFontFamily = ".$font_family_count."; ";
 echo "var loopFontFamily = 1; ";
-echo "var myFontFamily=new Array(); ";
+echo "var xalkyFontFamily=new Array(); ";
 
 for ($i = 0; $i <= $font_family_count; $i++)
 {
-	echo 'myFontFamily['.$i.']="'.$font_family[$i].'"; ';
+	echo 'xalkyFontFamily['.$i.']="'.$font_family[$i].'"; ';
 }
 
 /*
@@ -368,11 +361,11 @@ for ($i = 0; $i <= $font_family_count; $i++)
 */
 
 echo "var totalSFX = ".$sfx_count."; ";
-echo "var mySFX=new Array(); ";
+echo "var xalkySFX=new Array(); ";
 
 for ($i = 0; $i <= $sfx_count; $i++)
 {
-	echo 'mySFX['.$i.']="'.$sfx[$i].'"; ';
+	echo 'xalkySFX['.$i.']="'.$sfx[$i].'"; ';
 }
 
 /*
@@ -382,11 +375,11 @@ for ($i = 0; $i <= $sfx_count; $i++)
 
 echo "var totalSmilies = ".$smilies_text_count."; ";
 echo "var loopSmilies = 5; ";
-echo "var mySmilies=new Array(); ";
+echo "var xalkySmilies=new Array(); ";
 
 for ($i = 0; $i <= $smilies_text_count-1; $i++)
 {
-	echo 'mySmilies['.$i.']="'.addslashes($smilies_text[$i]).'"; ';
+	echo 'xalkySmilies['.$i.']="'.addslashes($smilies_text[$i]).'"; ';
 }
 
 /*
@@ -394,11 +387,11 @@ for ($i = 0; $i <= $smilies_text_count-1; $i++)
 *
 */
 
-echo "var mySmiliesImg=new Array(); ";
+echo "var xalkySmiliesImg=new Array(); ";
 
 for ($i = 0; $i <= $smilies_images_count-1; $i++)
 {
-	echo 'mySmiliesImg['.$i.']="<img style=\'vertical-align:middle;\' src=\'smilies/'.$smilies_images[$i].'\'>"; ';
+	echo 'xalkySmiliesImg['.$i.']="<img style=\'vertical-align:middle;\' src=\'smilies/'.$smilies_images[$i].'\'>"; ';
 }
 
 /*
@@ -505,19 +498,19 @@ echo "var stextFamily = '".$xalkyConfig['text']['family']."'; ";
 *
 */
 
-echo "var groupXalky = ".$_SESSION['groupXalky']."; ";
-echo "var groupPXalky = ".$_SESSION['groupPXalky']."; ";
+echo "var groupChat = ".$_SESSION['groupChat']."; ";
+echo "var groupPrivateChat = ".$_SESSION['groupPrivateChat']."; ";
 echo "var groupCams = ".$_SESSION['groupCams']."; ";
 echo "var groupWatch = ".$_SESSION['groupWatch']."; ";
 echo "var groupRooms = ".$_SESSION['groupRooms']."; ";
 echo "var groupVideo = ".$_SESSION['groupVideo']."; ";
 
-if(!isset($_SESSION['groupXalky']))
+if(!isset($_SESSION['groupChat']))
 {
 	echo "var groupCams = 0; ";
 	echo "var groupWatch = 0; ";
-	echo "var groupXalky = 0; ";
-	echo "var groupPXalky = 0; ";
+	echo "var groupChat = 0; ";
+	echo "var groupPrivateChat = 0; ";
 	echo "var groupRooms = 0; ";
 	echo "var groupVideo = 0; ";	
 }
@@ -547,7 +540,7 @@ echo "var isSilenced = 0; ";
 if($_SESSION['silenceStart'] > date("U")-($xalkyConfig['silent']*60))
 {
 	echo "isSilenced = 1; ";
-	echo "initDoSilence = setInterval('doSilence()',1000); ";
+	echo "initDoSilence = setInterval('xalkySilence()',1000); ";
 }
 
 /* 
@@ -566,7 +559,7 @@ echo "var hide = 0; ";
 echo "var idleTimeout = ".$xalkyConfig['idleTimeout']."; ";
 
 /* 
-* idle logout timeout
+* idle xalkyLogout timeout
 *
 */
 
@@ -577,7 +570,7 @@ echo "var idleLogoutTimeout = ".$xalkyConfig['idleLogoutTimeout']."; ";
 *
 */
 
-echo "var showCopyright = ".remBrand()."; ";
+echo "var showCopyright = ".xalkyRemBrand()."; ";
 
 /* 
 * software version 
