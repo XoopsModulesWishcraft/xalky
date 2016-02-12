@@ -586,7 +586,7 @@ function xalkyAdminControls(tUser,doAction)
 	{
 		if(admin && userName != tUser || moderator && userName != tUser || roomOwner && userName != tUser)
 		{
-			sendReq.open("POST", 'include/outbound.php?rnd='+ Math.random(), true);
+			sendReq.open("POST", 'include/outbound.xml?rnd='+ Math.random(), true);
 			sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 			sendReq.onreadystatechange = xalkySendChat;
 			sendReq.send(param);

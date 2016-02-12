@@ -384,7 +384,7 @@ function outbound(displayMDiv)
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.xml?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
@@ -409,7 +409,7 @@ function xalkySendAvatar()
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php $xalkyConfig['chatroomUrl']; ?>/outbound.xml?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = xalkySendChat;
 		sendReq.send(param);
@@ -439,7 +439,7 @@ function xalkyGetMessages()
 
 	if (receiveMesReq.readyState == 4 || receiveMesReq.readyState == 0) 
 	{
-		receiveMesReq.open("GET", '<?php $xalkyConfig['chatroomUrl']; ?>/inbound.php?roomID='+roomID+'&history='+showHistory+'&last='+lastMessageID+'&s='+singleRoom+'&rnd='+ Math.random(), true);
+		receiveMesReq.open("GET", '<?php $xalkyConfig['chatroomUrl']; ?>/inbound.xml?roomID='+roomID+'&history='+showHistory+'&last='+lastMessageID+'&s='+singleRoom+'&rnd='+ Math.random(), true);
 		receiveMesReq.onreadystatechange = xalkyMessages; 
 		receiveMesReq.send(null);
 	}

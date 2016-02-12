@@ -1676,7 +1676,7 @@ function xalkyadminPermissions()
 /*
 * toUser permissions
 * this function xalkyis called when we send a message to a user
-* outbound.php		
+* outbound.xml		
 */
 
 function xalkytoUserPermissions($id)

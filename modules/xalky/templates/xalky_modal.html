@@ -1,16 +1,9 @@
-<{php}>
-	global $xoTheme;
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/xalky/assets/css/normalize.min.css');
-	$xoTheme->addStylesheet(XOOPS_URL . '/modules/xalky/assets/css/animate.min.css');
-	$xoTheme->addScript(XOOPS_URL . '/modules/xalky/assets/js/animatedModal.js');
-<{/php}>
-
 <div id="xalkyModal" style="display: none;">
     <div id="btn-close-modal" class="close-xalkyModal"> 
         Close Chat
     </div>
     <div class="modal-content">
-        <{$content}>
+        <{$modal_content}>
     </div>
 </div>
 

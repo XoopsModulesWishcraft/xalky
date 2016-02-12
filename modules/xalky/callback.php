@@ -1,6 +1,6 @@
 <?php
 /**
- * Chronolabs Entitiesing Repository Services REST API API
+ * Xalky - Callbacks API - XOOPS Chat Rooms
  *
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -9,15 +9,15 @@
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
- * @copyright       Chronolabs Cooperative http://labs.coop
- * @license         General Public License version 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
- * @package         entities
- * @since           2.1.9
- * @author          Simon Roberts <wishcraft@users.sourceforge.net>
- * @subpackage		api
- * @description		Entitiesing Repository Services REST API
- * @link			http://sourceforge.net/projects/chronolabsapis
- * @link			http://cipher.labs.coop
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
  */
 
 

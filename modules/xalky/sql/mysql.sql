@@ -102,7 +102,7 @@ CREATE TABLE `xalky_peering` (
 CREATE TABLE `xalky_peers` (
   `peer-id` varchar(32) NOT NULL,
   `peer-sitename` varchar(200) NOT NULL,
-  `peer-slogon` varchar(200) NOT NULL,
+  `peer-slogan` varchar(200) NOT NULL,
   `peer-description` tinytext,
   `peer-email` varchar(200) NOT NULL,
   `api-uri` varchar(200) NOT NULL,

@@ -37,7 +37,7 @@ class XalkyPeers extends XoopsObject
         $this->XoopsObject();
    		$this->initVar('peer-id', XOBJ_DTYPE_TXTBOX, md5(null), false);
    		$this->initVar('peer-sitename', XOBJ_DTYPE_TXTBOX, '', false, 200);
-   		$this->initVar('peer-slogon', XOBJ_DTYPE_TXTBOX, '', false, 200);
+   		$this->initVar('peer-slogan', XOBJ_DTYPE_TXTBOX, '', false, 200);
    		$this->initVar('peer-description', XOBJ_DTYPE_OTHER, '', false, 34999);
    		$this->initVar('peer-email', XOBJ_DTYPE_TXTBOX, '', false, 200);
         $this->initVar('api-uri', XOBJ_DTYPE_TXTBOX, '', false, 200);
