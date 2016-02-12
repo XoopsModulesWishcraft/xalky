@@ -1,0 +1,14 @@
+<div class="bodyPrivate" style="text-align: center;">
+	<div style="height: 100px">&nbsp;</div>
+	<div id="privateLogin" class="privateLogin">
+		<form method="post" action="<{$xalkyConfig.chatroomUrl}>/index.php?roomID=<{$smarty.request.roomID}>" name="privateRoom">
+			<table class="privateloginUserTable">
+				<tr><td class="privateloginUserTableHeader" colspan="2"><{$smarty.const._MN_XALKY_CONST139}></td></tr>
+				<tr><td><{$smarty.const._MN_XALKY_CONST115}></td><td><input class="privateloginInput" type="text" name="roomPass" value=""></td></tr>
+				<tr><td>&nbsp;</td><td><input class="privateloginSubmit" type="submit" name="plogin" value="<{$smarty.const._MN_XALKY_CONST122}>"></td></tr>
+				<tr><td colspan="2">&nbsp;</td></tr>
+				<tr><td colspan="2" align="right"><span class="linka"><a href="<{$xalkyConfig.chatroomUrl}>/index.php?roomID=<{$xalkyConfig.defaultRoom}>"><{$smarty.const._MN_XALKY_CONST140}></a></span></td></tr>
+			</table>
+		</form>
+	</div>
+</div>

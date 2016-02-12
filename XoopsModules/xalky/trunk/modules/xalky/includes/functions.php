@@ -37,10 +37,10 @@ function xalkydb_connect()
 	  # $dbh = new PDO("sybase:host=$host;dbname=$dbname, $user, $pass");
 
 	  # MySQL with PDO_MYSQL
-	  $dbh = new PDO("mysql:host=$host;dbname=$dbname", $user, $pass);
+	  $dbh = new PDO("xalkysql:host=$host;dbname=$dbname", $user, $pass);
 
 	  # SQLite Database
-	  # $dbh = new PDO("sqlite:my/database/path/database.db");
+	  # $dbh = new PDO("sqlite:xalky/database/path/database.db");
 
 	  # set error reporting
 	  $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);	  
@@ -624,8 +624,8 @@ function xalkygetUser($prevRoom,$roomID)
 			$guest = $i['guest'];
 
 			$_SESSION['userGroup'] = $i['userGroup'];
-			$_SESSION['myProfileID'] = $id;
-			$_SESSION['myStreamID'] = streamID();			
+			$_SESSION['xalkyProfileID'] = $id;
+			$_SESSION['xalkyStreamID'] = streamID();			
 		}
 		
 		$dbh = null;
@@ -774,8 +774,8 @@ function xalkygetUserGroup($id)
 					
 		foreach ($action as $i) 
 		{
-			$_SESSION['groupXalky'] = $i['groupXalky'];
-			$_SESSION['groupPXalky'] = $i['groupPXalky'];
+			$_SESSION['groupChat'] = $i['groupChat'];
+			$_SESSION['groupPrivateChat'] = $i['groupPrivateChat'];
 			$_SESSION['groupCams'] = $i['groupCams'];
 			$_SESSION['groupWatch'] = $i['groupWatch'];
 			$_SESSION['groupRooms'] = $i['groupRooms'];
@@ -1067,7 +1067,7 @@ function xalkyupdateUser()
 		'room' => makeSafe($_SESSION['room']),
 		'isActive' => getTime(),
 		'isOnline' => '1',
-		'streamID' => makeSafe($_SESSION['myStreamID']),	
+		'streamID' => makeSafe($_SESSION['xalkyStreamID']),	
 		'username' => makeSafe($_SESSION['username'])		
 		);
 		$query = "UPDATE xalky_users 
@@ -1094,7 +1094,7 @@ function xalkyupdateUser()
 }
 
 /*
-* catch previous room (for logout messages)
+* catch previous room (for xalkyLogout messages)
 *
 */
 
@@ -1365,11 +1365,11 @@ function xalkygetLastMessageID($room)
 }
 
 /*
-* auto logout
+* auto xalkyLogout
 * 
 */
 
-function xalkylogoutUser($username,$room)
+function xalkyxalkyLogoutUser($username,$room)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -1486,7 +1486,7 @@ function xalkylogoutUser($username,$room)
 				debugError($error);
 			}			
 		
-			// send logout message
+			// send xalkyLogout message
 			try {
 				$dbh = db_connect();
 				$params = array(
@@ -3236,7 +3236,7 @@ function xalkygetRoomOwner()
 	try {
 		$dbh = db_connect();
 		$params = array(
-		'roomowner' => $_SESSION['myProfileID']
+		'roomowner' => $_SESSION['xalkyProfileID']
 		);
 		$query = "SELECT id  
 				  FROM xalky_rooms 
@@ -3498,7 +3498,7 @@ function xalkyshowPlugins($page)
 	
 	if($page == "main")
 	{
-		$html .= 'initAll();';
+		$html .= 'xalkyIntialise();';
 	}
 	
 	$html .= $plugin;	

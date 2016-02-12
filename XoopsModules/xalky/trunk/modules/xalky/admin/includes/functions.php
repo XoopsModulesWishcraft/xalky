@@ -752,7 +752,7 @@ function getAdminRooms($id)
 		{
 			$html .= '<tr><td class="header" colspan="2">Add New Room</td></tr>';
 			$html .= '<tr><td colspan="2">&nbsp;</td></tr>';
-			$html .= '<input type="hidden" name="addRoom" value="1">';
+			$html .= '<input type="hidden" name="xalkyAddRoom" value="1">';
 			$html .= '<tr><td width="70">RoomName: </td><td><input type="text" name="room" value=""></td></tr>';
 			$html .= '<tr><td>Password: </td><td><input type="text" name="pass" value=""> (optional)</td></tr>';
 			$html .= '<tr><td>Background: </td><td><input type="text" name="bg" value=""> (upload image to folder <i>/images/</i> or enter <i>url</i> to image)</td></tr>';
@@ -955,7 +955,7 @@ function updateAdminRooms($data)
 			return "Success! - Room has been updated.";
 		}
 
-		if(!empty($data['addRoom']))
+		if(!empty($data['xalkyAddRoom']))
 		{
 			$roomID = date("U").rand(1,99999);
 			$roomPass = '';
@@ -1050,8 +1050,8 @@ function getAdminGroups()
 		$html .= '<tr align="center">';
 		$html .= '<td><input type="text" name="id" value="" size="3"></td>';
 		$html .= '<td><input type="text" name="groupName" value=""></td>';
-		$html .= '<td>'.showSelectedID('groupXalky','0').'</td>';
-		$html .= '<td>'.showSelectedID('groupPXalky','0').'</td>';
+		$html .= '<td>'.showSelectedID('groupChat','0').'</td>';
+		$html .= '<td>'.showSelectedID('groupPrivateChat','0').'</td>';
 		$html .= '<td>'.showSelectedID('groupCams','0').'</td>';
 		$html .= '<td>'.showSelectedID('groupWatch','0').'</td>';
 		$html .= '<td>'.showSelectedID('groupRooms','0').'</td>';
@@ -1083,8 +1083,8 @@ function getAdminGroups()
 			$html .= '<tr align="center">';
 			$html .= '<td>'.$i['id'].'</td>';
 			$html .= '<td>'.urldecode($i['groupName']).'</td>';
-			$html .= '<td>'.$i['groupXalky'].'</td>';
-			$html .= '<td>'.$i['groupPXalky'].'</td>';
+			$html .= '<td>'.$i['groupChat'].'</td>';
+			$html .= '<td>'.$i['groupPrivateChat'].'</td>';
 			$html .= '<td>'.$i['groupCams'].'</td>';
 			$html .= '<td>'.$i['groupWatch'].'</td>';
 			$html .= '<td>'.$i['groupRooms'].'</td>';
@@ -1164,8 +1164,8 @@ function editAdminGroups($data)
 				$html .= '<tr align="center">';
 				$html .= '<td>'.$i['id'].'<input type="hidden" name="id" value="'.$i['id'].'"></td>';
 				$html .= '<td><input type="text" name="groupName" value="'.urldecode($i['groupName']).'"></td>';
-				$html .= '<td>'.showSelectedID('groupXalky',$i['groupXalky']).'</td>';
-				$html .= '<td>'.showSelectedID('groupPXalky',$i['groupPXalky']).'</td>';
+				$html .= '<td>'.showSelectedID('groupChat',$i['groupChat']).'</td>';
+				$html .= '<td>'.showSelectedID('groupPrivateChat',$i['groupPrivateChat']).'</td>';
 				$html .= '<td>'.showSelectedID('groupCams',$i['groupCams']).'</td>';
 				$html .= '<td>'.showSelectedID('groupWatch',$i['groupWatch']).'</td>';
 				$html .= '<td>'.showSelectedID('groupRooms',$i['groupRooms']).'</td>';
@@ -1207,8 +1207,8 @@ function updateAdminGroups($data)
 			$params = array(
 			'id' => $data['id'], 
 			'groupName' => $data['groupName'],
-			'groupXalky' => $data['groupXalky'],
-			'groupPXalky' => $data['groupPXalky'],
+			'groupChat' => $data['groupChat'],
+			'groupPrivateChat' => $data['groupPrivateChat'],
 			'groupCams' => $data['groupCams'],
 			'groupWatch' => $data['groupWatch'],
 			'groupRooms' => $data['groupRooms'],
@@ -1218,8 +1218,8 @@ function updateAdminGroups($data)
 			$query = "UPDATE xalky_group
 					  SET
 					  groupName = :groupName,
-					  groupXalky = :groupXalky,
-					  groupPXalky = :groupPXalky,
+					  groupChat = :groupChat,
+					  groupPrivateChat = :groupPrivateChat,
 					  groupCams = :groupCams,
 					  groupWatch = :groupWatch,
 					  groupRooms = :groupRooms,
@@ -1250,8 +1250,8 @@ function updateAdminGroups($data)
 			$params = array(
 			'id' => $data['id'], 
 			'groupName' => urlencode($data['groupName']),
-			'groupXalky' => $data['groupXalky'],
-			'groupPXalky' => $data['groupPXalky'],
+			'groupChat' => $data['groupChat'],
+			'groupPrivateChat' => $data['groupPrivateChat'],
 			'groupCams' => $data['groupCams'],
 			'groupWatch' => $data['groupWatch'],
 			'groupRooms' => $data['groupRooms']
@@ -1260,8 +1260,8 @@ function updateAdminGroups($data)
 								(
 									id, 
 									groupName,
-									groupXalky,
-									groupPXalky,
+									groupChat,
+									groupPrivateChat,
 									groupCams,
 									groupWatch,
 									groupRooms
@@ -1270,8 +1270,8 @@ function updateAdminGroups($data)
 								(
 									:id, 
 									:groupName,
-									:groupXalky,
-									:groupPXalky,
+									:groupChat,
+									:groupPrivateChat,
 									:groupCams,
 									:groupWatch,
 									:groupRooms

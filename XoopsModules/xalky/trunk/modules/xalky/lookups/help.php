@@ -97,7 +97,7 @@
     <p>We use a combination of the API Available from <a target="_blank" href="http://ipinfodb.com">http://ipinfodb.com</a> as well as our own region and locational database for longitude and latitude.</p>
     <h2>Examples of Calls (Using JSON)</h2>
     <p>There is a couple of calls to the API which I will explain.</p>
-    <blockquote>For example if you want a call getting a city information you would :: <a href="<?php echo $source; ?>v1/city/<?php echo $theip; ?>/json.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo $theip; ?>/json.api</a> or in a couple of hours you can use SSL <a href="https://lookup.labs.coop/v1/city/<?php echo $theip; ?>/json.api" target="_blank">https://lookups.labs.coop/v1/city/<?php echo $theip; ?>/json.api</a> which will return the city details of the IP Address of course there is a country data too which would be the following: <a href="<?php echo $source; ?>v1/country/<?php echo $theip; ?>/json.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo $theip; ?>/json.api</a> or if you want to return either details on some form of netbios address you would do the following for example returning the country or city details of bluehost.com would be as follows: <a href="<?php echo $source; ?>v1/city/bluehost.com/json.api" target="_blank"><?php echo $source; ?>v1/city/bluehost.com/json.api</a>.<br/><br/>Of course there is a way of return from your current IP Address of route you would do the following for country or city information using the keyword <em>myself</em> instead of an IP Address or TLD/Subdomain to query on yourself! <a href="<?php echo $source; ?>v1/country/myself/json.api" target="_blank"><?php echo $source; ?>v1/country/myself/json.api</a> this for example will return your own source IP Address for the API information for country, for the city information you would subsitute <strong>country</strong> for <strong>city</strong>.</blockquote>
+    <blockquote>For example if you want a call getting a city information you would :: <a href="<?php echo $source; ?>v1/city/<?php echo $theip; ?>/json.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo $theip; ?>/json.api</a> or in a couple of hours you can use SSL <a href="https://lookup.labs.coop/v1/city/<?php echo $theip; ?>/json.api" target="_blank">https://lookups.labs.coop/v1/city/<?php echo $theip; ?>/json.api</a> which will return the city details of the IP Address of course there is a country data too which would be the following: <a href="<?php echo $source; ?>v1/country/<?php echo $theip; ?>/json.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo $theip; ?>/json.api</a> or if you want to return either details on some form of netbios address you would do the following for example returning the country or city details of bluehost.com would be as follows: <a href="<?php echo $source; ?>v1/city/bluehost.com/json.api" target="_blank"><?php echo $source; ?>v1/city/bluehost.com/json.api</a>.<br/><br/>Of course there is a way of return from your current IP Address of route you would do the following for country or city information using the keyword <em>xalkyself</em> instead of an IP Address or TLD/Subdomain to query on yourself! <a href="<?php echo $source; ?>v1/country/xalkyself/json.api" target="_blank"><?php echo $source; ?>v1/country/xalkyself/json.api</a> this for example will return your own source IP Address for the API information for country, for the city information you would subsitute <strong>country</strong> for <strong>city</strong>.</blockquote>
     <h2>API Services' Peers</h2>
     <p>This is the services the key is dupicated on when lodged for a multiple recover points and options!</p>
     <blockquote>
@@ -120,10 +120,10 @@
         <em><strong><a href="<?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/raw.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/raw.api</a></strong></em><br /><br />
 		<font colour="#009900">This is for a locality city information of the ip of the hostname to the API <em>'<?php echo strtolower($_SERVER['HTTP_HOST']); ?>'</em></font><br/>
         <em><strong><a href="<?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/raw.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/raw.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/country/myself/raw.api" target="_blank"><?php echo $source; ?>v1/country/myself/raw.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/city/myself/raw.api" target="_blank"><?php echo $source; ?>v1/city/myself/raw.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/country/xalkyself/raw.api" target="_blank"><?php echo $source; ?>v1/country/xalkyself/raw.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/city/xalkyself/raw.api" target="_blank"><?php echo $source; ?>v1/city/xalkyself/raw.api</a></strong></em><br /><br />
     </blockquote>
     <h2>HTML Document Output</h2>
     <p>This is done with the <em>html.api</em> extension at the end of the url, you replace the address with either a place, an country either with no spaces in words or country ISO2 or ISO3 code and a name to search for the place on the api</p>
@@ -136,10 +136,10 @@
         <em><strong><a href="<?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/html.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/html.api</a></strong></em><br /><br />
 		<font colour="#009900">This is for a locality city information of the ip of the hostname to the API <em>'<?php echo strtolower($_SERVER['HTTP_HOST']); ?>'</em></font><br/>
         <em><strong><a href="<?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/html.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/html.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/country/myself/html.api" target="_blank"><?php echo $source; ?>v1/country/myself/html.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/city/myself/html.api" target="_blank"><?php echo $source; ?>v1/city/myself/html.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/country/xalkyself/html.api" target="_blank"><?php echo $source; ?>v1/country/xalkyself/html.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/city/xalkyself/html.api" target="_blank"><?php echo $source; ?>v1/city/xalkyself/html.api</a></strong></em><br /><br />
 		</blockquote>
     <h2>Serialisation Document Output</h2>
     <p>This is done with the <em>serial.api</em> extension at the end of the url, you replace the address with either a place, an country either with no spaces in words or country ISO2 or ISO3 code and a name to search for the place on the api</p>
@@ -152,10 +152,10 @@
         <em><strong><a href="<?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/serial.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/serial.api</a></strong></em><br /><br />
 		<font colour="#009900">This is for a locality city information of the ip of the hostname to the API <em>'<?php echo strtolower($_SERVER['HTTP_HOST']); ?>'</em></font><br/>
         <em><strong><a href="<?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/serial.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/serial.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/country/myself/serial.api" target="_blank"><?php echo $source; ?>v1/country/myself/serial.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/city/myself/serial.api" target="_blank"><?php echo $source; ?>v1/city/myself/serial.api</a></strong></em><br /><br />  </blockquote>
+		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/country/xalkyself/serial.api" target="_blank"><?php echo $source; ?>v1/country/xalkyself/serial.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/city/xalkyself/serial.api" target="_blank"><?php echo $source; ?>v1/city/xalkyself/serial.api</a></strong></em><br /><br />  </blockquote>
     <h2>JSON Document Output</h2>
     <p>This is done with the <em>json.api</em> extension at the end of the url, you replace the address with either a place, an country either with no spaces in words or country ISO2 or ISO3 code and a name to search for the place on the api</p>
     <blockquote>
@@ -167,10 +167,10 @@
         <em><strong><a href="<?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/json.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/json.api</a></strong></em><br /><br />
 		<font colour="#009900">This is for a locality city information of the ip of the hostname to the API <em>'<?php echo strtolower($_SERVER['HTTP_HOST']); ?>'</em></font><br/>
         <em><strong><a href="<?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/json.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/json.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/country/myself/json.api" target="_blank"><?php echo $source; ?>v1/country/myself/json.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/city/myself/json.api" target="_blank"><?php echo $source; ?>v1/city/myself/json.api</a></strong></em><br /><br /> </blockquote>
+		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/country/xalkyself/json.api" target="_blank"><?php echo $source; ?>v1/country/xalkyself/json.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/city/xalkyself/json.api" target="_blank"><?php echo $source; ?>v1/city/xalkyself/json.api</a></strong></em><br /><br /> </blockquote>
     <h2>XML Document Output</h2>
     <p>This is done with the <em>xml.api</em> extension at the end of the url, you replace the address with either a place, an country either with no spaces in words or country ISO2 or ISO3 code and a name to search for the place on the api</p>
     <blockquote>
@@ -182,10 +182,10 @@
         <em><strong><a href="<?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/xml.api" target="_blank"><?php echo $source; ?>v1/country/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/xml.api</a></strong></em><br /><br />
 		<font colour="#009900">This is for a locality city information of the ip of the hostname to the API <em>'<?php echo strtolower($_SERVER['HTTP_HOST']); ?>'</em></font><br/>
         <em><strong><a href="<?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/xml.api" target="_blank"><?php echo $source; ?>v1/city/<?php echo strtolower($_SERVER['HTTP_HOST']); ?>/xml.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/country/myself/xml.api" target="_blank"><?php echo $source; ?>v1/country/myself/xml.api</a></strong></em><br /><br />
-		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'myself'</em></font><br/>
-        <em><strong><a href="<?php echo $source; ?>v1/city/myself/xml.api" target="_blank"><?php echo $source; ?>v1/city/myself/xml.api</a></strong></em><br /><br />   </blockquote>
+		<font colour="#009900">This is for a locality country information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/country/xalkyself/xml.api" target="_blank"><?php echo $source; ?>v1/country/xalkyself/xml.api</a></strong></em><br /><br />
+		<font colour="#009900">This is for a locality city information of the ip of the caller to the API <em>'xalkyself'</em></font><br/>
+        <em><strong><a href="<?php echo $source; ?>v1/city/xalkyself/xml.api" target="_blank"><?php echo $source; ?>v1/city/xalkyself/xml.api</a></strong></em><br /><br />   </blockquote>
     <h2>PHP Example of getting clients IP Address</h2>
     <p>These is the best example in PHP for getting a client IP address. The function returning the true IP of the client browsing for the API in retrieving a key and generating one!</p>
     <blockquote>
@@ -193,7 +193,7 @@
 /**
  * Get client IP
  *
- * Adapted from PMA_getIp() [phpmyadmin project]
+ * Adapted from PMA_getIp() [phpxalkyadmin project]
  *
  * @param bool $asString requiring integer or dotted string
  * @return mixed string or integer value for the IP

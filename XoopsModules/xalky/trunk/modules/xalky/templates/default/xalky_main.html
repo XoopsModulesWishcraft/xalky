@@ -1,0 +1,85 @@
+<!--
+<script language="javascript" type="text/javascript">
+
+/* user details */
+var userName = '<{$smarty.const.$username}>';
+var userID = <{$smarty.const.$userid}>;
+var userID = '<{$smarty.const.$id}>';
+var userAvatar = '<{$smarty.const.$avatar}>';
+var roomOwner = <{$smarty.const.$roomOwner}>;
+var blockedList = '<{$smarty.const.$blockedList}>';
+
+/* room details */
+var totalRooms = <{$smarty.const.$totalRooms}>;
+var roomID = <{$smarty.const.$roomID}>;
+var currRoom = <{$smarty.const.$roomID}>;
+var prevRoom = <{$smarty.const.$prevRoom}>;
+var publicWelcome = "<{$smarty.const.$roomDesc}>";
+
+/* last message ID */
+var lastMessageID = <{$smarty.const.$lastMessageID}>;
+
+</script>
+
+//-->
+<div id="xalkyBody" class="xalkyBody">
+	
+	<div id="mainContainer" class="mainContainer">
+	
+		<div id="topContainer" class="topContainer"></div> 
+	
+		<div id="logoContainer" class="logoContainer"></div> 
+	
+		<div id="adverContainer" class="adverContainer"></div> 
+	
+		<div id="chatContainer" class="chatContainer" style="background-image:url('<{$roomConfig.background}>');"></div>
+	
+		<img id="roomIcon" class="roomIcon" src="<{$xalkyConfig.chatroomUrl}>/templates/<{$xalkyConfig.template}>/images/rooms.png" alt="" onclick="xalkyNewRoom('<{if $smarty.get.sID}>0<{else}>1<{/if}>');">
+	
+		<div id="roomCreate" class="roomCreate">
+	
+			<span><{$smarty.const._MN_XALKY_CONST129}><input class="roomInput" type="text" id="roomName" name="roomName" value=""></span>
+			<span><{$smarty.const._MN_XALKY_CONST130}><input class="roomInput" type="text" id="roomPass" name="roomPass" value=""></span>
+			<br><br>
+			<span><input class="roomButtons" type="button" name="roombutton" value="<{$smarty.const._MN_XALKY_CONST131}>" onclick="xalkyAddRoom();">&nbsp;<input class="roomButtons" type="button" name="" value="<{$smarty.const._MN_XALKY_CONST132}>" onclick="xalkyNewRoom('0');"></span>
+	
+		</div>
+	
+		<select id="roomSelect" class="roomSelect" onchange="xalkyChangeRooms(this.value);"></select>
+	
+		<div id="userContainer" class="userContainer"></div>
+	
+		<div id="optionsContainer" class="optionsContainer">
+	
+			<div class="optionsIcons" id="optionsIcons"></div>
+	
+			<textarea class="optionsBar" id="optionsBar" rows="10" cols="5" onKeyPress="return xalkySubmit(this,event,'optionsBar','chatContainer','');" onfocus="xalkyChangeMessageStyle('optionsBar');"></textarea>
+	
+			<span class="optionsSelectStatus">
+				<span id="uwhisperID">
+					<{$smarty.const._MN_XALKY_CONST160}>: <input class="whisper" type="text" id="whisperID">&nbsp;
+				</span>	
+				<input type="checkbox" id="autoScrollID" checked><{$smarty.const._MN_XALKY_CONST135}>&nbsp;
+				<span id="icondigitalCredits" class="icondigitalCredits" style="cursor:pointer;" onclick='xalkyShowBox("ecredits","550","600","25","templates/<{$smarty.const.$xalkyConfig['template']}>/ecredits.php","");'><{$smarty.const._MN_XALKY_CONST109}>: <span id="digitalCreditsID"></span></span>
+			</span>
+	
+			<input class="optionsSend" id="optionsSend" type="button" value="<{$smarty.const._MN_XALKY_CONST136}>" onclick="xalkyAddMessage('optionsBar','chatContainer')">
+	
+			<{if $smarty.get.sID}>
+				<input class="optionsLogout" id="optionsLogout" type="button" value="<{$smarty.const._MN_XALKY_CONST137}>" onclick="xalkyLogout('0');">
+			<{if}>
+	
+		</div>
+	
+		<div id="menuWin" class="menuWin"></div>
+	
+		<div id="settingsWin" class="settingsWin"></div>
+	
+		<div id="pWin" class="pWin"></div>
+	
+		<div id="playSndDiv"></div>
+	
+	</div>
+
+	<div id="oInfo" class="oInfo"></div>
+</div> 

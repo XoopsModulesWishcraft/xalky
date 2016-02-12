@@ -69,7 +69,7 @@ virtualCredits();
 
 if($_SESSION['digitalCreditsInit'] == '1')
 {
-	if($_SESSION['digitalCreditsAwardTo'] != $_SESSION['myProfileID'])
+	if($_SESSION['digitalCreditsAwardTo'] != $_SESSION['xalkyProfileID'])
 	{
 		digitalCredits($_SESSION['digitalCreditsAwardTo']);
 	}
@@ -278,7 +278,7 @@ try {
 				if($i['online'] == '1')
 				{
 					// update user status
-					logoutUser($i['username'],$i['room']);
+					xalkyLogoutUser($i['username'],$i['room']);
 				}
 			}
 
@@ -297,8 +297,8 @@ try {
 			$xml .= $i['digitalCredits']."||";	
 			$xml .= $_SESSION['groupCams']."||";	
 			$xml .= $_SESSION['groupWatch']."||";	
-			$xml .= $_SESSION['groupXalky']."||";	
-			$xml .= $_SESSION['groupPXalky']."||";		
+			$xml .= $_SESSION['groupChat']."||";	
+			$xml .= $_SESSION['groupPrivateChat']."||";		
 			$xml .= $_SESSION['groupRooms']."||";	
 			$xml .= $_SESSION['groupVideo']."||";	
 			$xml .= $i['active']."||";	

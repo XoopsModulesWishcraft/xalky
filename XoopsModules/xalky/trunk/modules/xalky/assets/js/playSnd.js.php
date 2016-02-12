@@ -54,7 +54,7 @@ header("content-type: application/x-javascript");
  * play sound
  *
  */
-function doSound(playSound)
+function xalkySound(playSound)
 {
 	var flashvars = {};
 	flashvars.sndfilename = playSound;

@@ -6648,7 +6648,7 @@ $.widget( "ui.autocomplete", {
 		delay: 300,
 		minLength: 1,
 		position: {
-			my: "left top",
+			xalky: "left top",
 			at: "left bottom",
 			collision: "none"
 		},
@@ -9697,7 +9697,7 @@ $.widget( "ui.dialog", {
 		minWidth: 150,
 		modal: false,
 		position: {
-			my: "center",
+			xalky: "center",
 			at: "center",
 			of: window,
 			collision: "fit",
@@ -10406,28 +10406,28 @@ if ( $.uiBackCompat !== false ) {
 	$.widget( "ui.dialog", $.ui.dialog, {
 		_position: function() {
 			var position = this.options.position,
-				myAt = [],
+				xalkyAt = [],
 				offset = [ 0, 0 ],
 				isVisible;
 
 			if ( position ) {
 				if ( typeof position === "string" || (typeof position === "object" && "0" in position ) ) {
-					myAt = position.split ? position.split(" ") : [ position[0], position[1] ];
-					if ( myAt.length === 1 ) {
-						myAt[1] = myAt[0];
+					xalkyAt = position.split ? position.split(" ") : [ position[0], position[1] ];
+					if ( xalkyAt.length === 1 ) {
+						xalkyAt[1] = xalkyAt[0];
 					}
 
 					$.each( [ "left", "top" ], function( i, offsetPosition ) {
-						if ( +myAt[ i ] === myAt[ i ] ) {
-							offset[ i ] = myAt[ i ];
-							myAt[ i ] = offsetPosition;
+						if ( +xalkyAt[ i ] === xalkyAt[ i ] ) {
+							offset[ i ] = xalkyAt[ i ];
+							xalkyAt[ i ] = offsetPosition;
 						}
 					});
 
 					position = {
-						my: myAt[0] + (offset[0] < 0 ? offset[0] : "+" + offset[0]) + " " +
-							myAt[1] + (offset[1] < 0 ? offset[1] : "+" + offset[1]),
-						at: myAt.join(" ")
+						xalky: xalkyAt[0] + (offset[0] < 0 ? offset[0] : "+" + offset[0]) + " " +
+							xalkyAt[1] + (offset[1] < 0 ? offset[1] : "+" + offset[1]),
+						at: xalkyAt.join(" ")
 					};
 				}
 
@@ -10470,7 +10470,7 @@ $.effects.effect.blind = function( o, done ) {
 		show = mode === "show",
 		wrapper, distance, margin;
 
-	// if already wrapped, the wrapper's properties are my property. #6245
+	// if already wrapped, the wrapper's properties are xalky property. #6245
 	if ( el.parent().is( ".ui-effects-wrapper" ) ) {
 		$.effects.save( el.parent(), props );
 	} else {
@@ -10749,7 +10749,7 @@ $.effects.effect.explode = function( o, done ) {
 		pieces = [],
 
 		// loop
-		i, j, left, top, mx, my;
+		i, j, left, top, mx, xalky;
 
 	// children animate complete:
 	function childComplete() {
@@ -10762,7 +10762,7 @@ $.effects.effect.explode = function( o, done ) {
 	// clone the element for each row and cell.
 	for( i = 0; i < rows ; i++ ) { // ===>
 		top = offset.top + i * height;
-		my = i - ( rows - 1 ) / 2 ;
+		xalky = i - ( rows - 1 ) / 2 ;
 
 		for( j = 0; j < cells ; j++ ) { // |||
 			left = offset.left + j * width;
@@ -10791,11 +10791,11 @@ $.effects.effect.explode = function( o, done ) {
 					width: width,
 					height: height,
 					left: left + ( show ? mx * width : 0 ),
-					top: top + ( show ? my * height : 0 ),
+					top: top + ( show ? xalky * height : 0 ),
 					opacity: show ? 0 : 1
 				}).animate({
 					left: left + ( show ? 0 : mx * width ),
-					top: top + ( show ? 0 : my * height ),
+					top: top + ( show ? 0 : xalky * height ),
 					opacity: show ? 1 : 0
 				}, o.duration || 500, o.easing, childComplete );
 		}
@@ -11453,7 +11453,7 @@ $.widget( "ui.menu", {
 		},
 		menus: "ul",
 		position: {
-			my: "left top",
+			xalky: "left top",
 			at: "right top"
 		},
 		role: "menu",
@@ -12180,9 +12180,9 @@ $.fn.position = function( options ) {
 	// clone to reuse original targetOffset later
 	basePosition = $.extend( {}, targetOffset );
 
-	// force my and at to have valid horizontal and vertical positions
+	// force xalky and at to have valid horizontal and vertical positions
 	// if a value is missing or invalid, it will be converted to center
-	$.each( [ "my", "at" ], function() {
+	$.each( [ "xalky", "at" ], function() {
 		var pos = ( options[ this ] || "" ).split( " " ),
 			horizontalOffset,
 			verticalOffset;
@@ -12243,22 +12243,22 @@ $.fn.position = function( options ) {
 			collisionWidth = elemWidth + marginLeft + parseCss( this, "marginRight" ) + scrollInfo.width,
 			collisionHeight = elemHeight + marginTop + parseCss( this, "marginBottom" ) + scrollInfo.height,
 			position = $.extend( {}, basePosition ),
-			myOffset = getOffsets( offsets.my, elem.outerWidth(), elem.outerHeight() );
+			xalkyOffset = getOffsets( offsets.xalky, elem.outerWidth(), elem.outerHeight() );
 
-		if ( options.my[ 0 ] === "right" ) {
+		if ( options.xalky[ 0 ] === "right" ) {
 			position.left -= elemWidth;
-		} else if ( options.my[ 0 ] === "center" ) {
+		} else if ( options.xalky[ 0 ] === "center" ) {
 			position.left -= elemWidth / 2;
 		}
 
-		if ( options.my[ 1 ] === "bottom" ) {
+		if ( options.xalky[ 1 ] === "bottom" ) {
 			position.top -= elemHeight;
-		} else if ( options.my[ 1 ] === "center" ) {
+		} else if ( options.xalky[ 1 ] === "center" ) {
 			position.top -= elemHeight / 2;
 		}
 
-		position.left += myOffset[ 0 ];
-		position.top += myOffset[ 1 ];
+		position.left += xalkyOffset[ 0 ];
+		position.top += xalkyOffset[ 1 ];
 
 		// if the browser doesn't support fractions, then round for consistent results
 		if ( !$.support.offsetFractions ) {
@@ -12281,8 +12281,8 @@ $.fn.position = function( options ) {
 					collisionPosition: collisionPosition,
 					collisionWidth: collisionWidth,
 					collisionHeight: collisionHeight,
-					offset: [ atOffset[ 0 ] + myOffset[ 0 ], atOffset [ 1 ] + myOffset[ 1 ] ],
-					my: options.my,
+					offset: [ atOffset[ 0 ] + xalkyOffset[ 0 ], atOffset [ 1 ] + xalkyOffset[ 1 ] ],
+					xalky: options.xalky,
 					at: options.at,
 					within: within,
 					elem : elem
@@ -12420,9 +12420,9 @@ $.ui.position = {
 				collisionPosLeft = position.left - data.collisionPosition.marginLeft,
 				overLeft = collisionPosLeft - offsetLeft,
 				overRight = collisionPosLeft + data.collisionWidth - outerWidth - offsetLeft,
-				myOffset = data.my[ 0 ] === "left" ?
+				xalkyOffset = data.xalky[ 0 ] === "left" ?
 					-data.elemWidth :
-					data.my[ 0 ] === "right" ?
+					data.xalky[ 0 ] === "right" ?
 						data.elemWidth :
 						0,
 				atOffset = data.at[ 0 ] === "left" ?
@@ -12435,15 +12435,15 @@ $.ui.position = {
 				newOverLeft;
 
 			if ( overLeft < 0 ) {
-				newOverRight = position.left + myOffset + atOffset + offset + data.collisionWidth - outerWidth - withinOffset;
+				newOverRight = position.left + xalkyOffset + atOffset + offset + data.collisionWidth - outerWidth - withinOffset;
 				if ( newOverRight < 0 || newOverRight < abs( overLeft ) ) {
-					position.left += myOffset + atOffset + offset;
+					position.left += xalkyOffset + atOffset + offset;
 				}
 			}
 			else if ( overRight > 0 ) {
-				newOverLeft = position.left - data.collisionPosition.marginLeft + myOffset + atOffset + offset - offsetLeft;
+				newOverLeft = position.left - data.collisionPosition.marginLeft + xalkyOffset + atOffset + offset - offsetLeft;
 				if ( newOverLeft > 0 || abs( newOverLeft ) < overRight ) {
-					position.left += myOffset + atOffset + offset;
+					position.left += xalkyOffset + atOffset + offset;
 				}
 			}
 		},
@@ -12455,10 +12455,10 @@ $.ui.position = {
 				collisionPosTop = position.top - data.collisionPosition.marginTop,
 				overTop = collisionPosTop - offsetTop,
 				overBottom = collisionPosTop + data.collisionHeight - outerHeight - offsetTop,
-				top = data.my[ 1 ] === "top",
-				myOffset = top ?
+				top = data.xalky[ 1 ] === "top",
+				xalkyOffset = top ?
 					-data.elemHeight :
-					data.my[ 1 ] === "bottom" ?
+					data.xalky[ 1 ] === "bottom" ?
 						data.elemHeight :
 						0,
 				atOffset = data.at[ 1 ] === "top" ?
@@ -12470,15 +12470,15 @@ $.ui.position = {
 				newOverTop,
 				newOverBottom;
 			if ( overTop < 0 ) {
-				newOverBottom = position.top + myOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
-				if ( ( position.top + myOffset + atOffset + offset) > overTop && ( newOverBottom < 0 || newOverBottom < abs( overTop ) ) ) {
-					position.top += myOffset + atOffset + offset;
+				newOverBottom = position.top + xalkyOffset + atOffset + offset + data.collisionHeight - outerHeight - withinOffset;
+				if ( ( position.top + xalkyOffset + atOffset + offset) > overTop && ( newOverBottom < 0 || newOverBottom < abs( overTop ) ) ) {
+					position.top += xalkyOffset + atOffset + offset;
 				}
 			}
 			else if ( overBottom > 0 ) {
-				newOverTop = position.top -  data.collisionPosition.marginTop + myOffset + atOffset + offset - offsetTop;
-				if ( ( position.top + myOffset + atOffset + offset) > overBottom && ( newOverTop > 0 || abs( newOverTop ) < overBottom ) ) {
-					position.top += myOffset + atOffset + offset;
+				newOverTop = position.top -  data.collisionPosition.marginTop + xalkyOffset + atOffset + offset - offsetTop;
+				if ( ( position.top + xalkyOffset + atOffset + offset) > overBottom && ( newOverTop > 0 || abs( newOverTop ) < overBottom ) ) {
+					position.top += xalkyOffset + atOffset + offset;
 				}
 			}
 		}
@@ -14681,7 +14681,7 @@ $.widget( "ui.tooltip", {
 		// Disabled elements have inconsistent behavior across browsers (#8661)
 		items: "[title]:not([disabled])",
 		position: {
-			my: "left top+15",
+			xalky: "left top+15",
 			at: "left bottom",
 			collision: "flipfit flip"
 		},

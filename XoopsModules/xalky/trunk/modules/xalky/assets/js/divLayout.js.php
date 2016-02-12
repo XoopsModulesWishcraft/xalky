@@ -44,7 +44,7 @@ header("content-type: application/x-javascript");
  * @since		1.0.1
  */
 
-function resizeDivs()
+function xalkyResizeDivs()
 {
 	var w = 0, h = 0;
 
@@ -111,5 +111,5 @@ function resizeDivs()
 
 window.onresize = function() 
 {
-	resizeDivs();
+	xalkyResizeDivs();
 }

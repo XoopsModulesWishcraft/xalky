@@ -7,7 +7,7 @@
 
 <?php echo print_r($_POST);?>
 
-<form action ="index.php?option=email" method="post" name="myMail">
+<form action ="index.php?option=email" method="post" name="xalkyMail">
 
 	<table>
 
@@ -23,7 +23,7 @@
 // submit form
 function submitForm()
 {
-	document.myMail.submit();
+	document.xalkyMail.submit();
 }
 
 <?php if($_POST['totalSend']){?>

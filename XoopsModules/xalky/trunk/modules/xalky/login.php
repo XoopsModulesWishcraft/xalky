@@ -266,10 +266,10 @@ function hideshow(divID)
 				<form style="height:210px;" method="post" action="index.php" name="doLogin">
 				<input type="hidden" name="login" value="1">
 				<table class="loginUserTable">
-				<tr><td>&nbsp;</td><td><?php if($xalkyConfig['guestMode']){?><input class="" type="checkbox" name="isGuest" value="1" onclick="toggleLoginPass()"><?php echo C_LANG114;?><?php }?>&nbsp;</td></tr>
+				<tr><td>&nbsp;</td><td><?php if($xalkyConfig['guestMode']){?><input class="" type="checkbox" name="isGuest" value="1" onclick="xalkyLoginPassword()"><?php echo C_LANG114;?><?php }?>&nbsp;</td></tr>
 				<tr><td><?php echo C_LANG54;?></td><td><input class="loginInput" type="text" name="userName" value="" maxlength="16"></td></tr>
 				<tr id="pass"><td><?php echo C_LANG115;?></td><td><input class="loginInput" type="password" name="userPass" value=""></td></tr>
-				<tr id="lostpass"><td>&nbsp;</td><td><span class="link"><a href="javascript:void(0);" onclick='showInfoBox("lost","260","400","200","templates/<?php echo $xalkyConfig['template'];?>/lost.php","");'><?php echo C_LANG116;?></a></span></td></tr>
+				<tr id="lostpass"><td>&nbsp;</td><td><span class="link"><a href="javascript:void(0);" onclick='xalkyShowBox("lost","260","400","200","templates/<?php echo $xalkyConfig['template'];?>/lost.php","");'><?php echo C_LANG116;?></a></span></td></tr>
 				<tr><td><?php echo C_LANG117;?></td><td>
 
 					<select name="roomID" class="loginSelect">
@@ -310,7 +310,7 @@ function hideshow(divID)
 					<tr><td><?php echo C_LANG54;?>*</td><td><input class="loginInput" type="text" name="rUsername" value=""></td></tr>
 					<tr><td><?php echo C_LANG115;?>*</td><td><input class="loginInput" type="password" name="rPassword" value=""></td></tr>
 					<tr><td><?php echo C_LANG121;?>*</td><td><input class="loginInput" type="text" name="rEmail" value=""></td></tr>
-					<tr><td>&nbsp;</td><td><input class="" type="checkbox" name="terms" value="1"><span class="link"><a href="javascript:void(0);" onclick='showInfoBox("terms","400","600","100","templates/<?php echo $xalkyConfig['template'];?>/terms.php","");'><?php echo C_LANG123;?></a></span></td></tr>
+					<tr><td>&nbsp;</td><td><input class="" type="checkbox" name="terms" value="1"><span class="link"><a href="javascript:void(0);" onclick='xalkyShowBox("terms","400","600","100","templates/<?php echo $xalkyConfig['template'];?>/terms.php","");'><?php echo C_LANG123;?></a></span></td></tr>
 					<tr><td>&nbsp;</td><td><input type="image" style="height:22px;width:140px;" src="templates/<?php echo $xalkyConfig['template'];?>/images/register.jpg" name="newRegister" alt="Register"></td></tr>
 					</table>
 					</form>
@@ -336,7 +336,7 @@ function hideshow(divID)
 	
 <div class='copyright'>
 	<?php if($xalkyConfig['usersOnline']){?>
-		<span class="link" style="float:left"><a href="javascript:void(0);" onclick='showInfoBox("online","300","320","100","templates/<?php echo $xalkyConfig['template'];?>/online.php","");'><?php echo C_LANG113;?>: <?php echo getUsersOnline('1');?></a>&nbsp;</span>
+		<span class="link" style="float:left"><a href="javascript:void(0);" onclick='xalkyShowBox("online","300","320","100","templates/<?php echo $xalkyConfig['template'];?>/online.php","");'><?php echo C_LANG113;?>: <?php echo getUsersOnline('1');?></a>&nbsp;</span>
 	<?php } ?>
 	<span style="float:right;"><?php echo copyrightFooter();?></span>
 	<div style="clear:both"></div>

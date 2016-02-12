@@ -44,7 +44,7 @@ $_SESSION['userLastPost'] = getTime();
 
 function checkData($data)
 {
-	$key = 'index.php?logout';
+	$key = 'index.php?xalkyLogout';
 
 	$pos = strpos(strtolower($data), $key);
 
@@ -114,13 +114,13 @@ if($_POST)
 	// check data & strip tags
 	$_POST['toname'] = !isset($_POST['toname']) ? "" : checkData(strip_tags($_POST['toname']));
 	$_POST['umid'] = !isset($_POST['umid']) ? "" : checkData(strip_tags($_POST['umid']));
-	$_POST['newRoomName'] = !isset($_POST['newRoomName']) ? "" : checkData(strip_tags($_POST['newRoomName']));
+	$_POST['xalkyNewRoomName'] = !isset($_POST['xalkyNewRoomName']) ? "" : checkData(strip_tags($_POST['xalkyNewRoomName']));
 	
 	// check data is numeric
 	$_POST['userID'] = !isset($_POST['userID']) ? "0" : checkNumeric($_POST['userID']);
 	$_POST['room'] = !isset($_POST['room']) ? "0" : checkNumeric($_POST['room']);
-	$_POST['addRoom'] = !isset($_POST['addRoom']) ? "0" : checkNumeric($_POST['addRoom']);
-	$_POST['newRoomOwner'] = !isset($_POST['newRoomOwner']) ? "0" : checkNumeric($_POST['newRoomOwner']);
+	$_POST['xalkyAddRoom'] = !isset($_POST['xalkyAddRoom']) ? "0" : checkNumeric($_POST['xalkyAddRoom']);
+	$_POST['xalkyNewRoomOwner'] = !isset($_POST['xalkyNewRoomOwner']) ? "0" : checkNumeric($_POST['xalkyNewRoomOwner']);
 	$_POST['status'] = !isset($_POST['status']) ? "0" : checkNumeric($_POST['status']);
 	$_POST['status'] = !isset($_POST['status']) ? "0" : checkNumeric($_POST['status']);
 	
@@ -195,7 +195,7 @@ if($_POST)
 		// if public webcam view, add stream id
 		if($_POST['umessage'] == 'WEBCAM_ACCEPT')
 		{
-			$_POST['umessage'] = 'WEBCAM_ACCEPT||'.$_SESSION['myStreamID'];
+			$_POST['umessage'] = 'WEBCAM_ACCEPT||'.$_SESSION['xalkyStreamID'];
 		}
 		
 		// check for delete global message
@@ -426,23 +426,23 @@ if($_POST)
 	}
 
 	// add user room
-	if(isset($_POST['addRoom']))
+	if(isset($_POST['xalkyAddRoom']))
 	{
 		// password encryption
-		if(!empty($_POST['newRoomPass']))
+		if(!empty($_POST['xalkyNewRoomPass']))
 		{
-			$_POST['newRoomPass'] = md5($_POST['newRoomPass']);
+			$_POST['xalkyNewRoomPass'] = md5($_POST['xalkyNewRoomPass']);
 		}
 
 		// check room exists
 		try {
 			$dbh = db_connect();
 			$params = array(
-			'newRoomName' => makeSafe($_POST['newRoomName'])
+			'xalkyNewRoomName' => makeSafe($_POST['xalkyNewRoomName'])
 			);
 			$query = "SELECT roomname   
 					  FROM xalky_rooms  
-					  WHERE roomname = :newRoomName
+					  WHERE roomname = :xalkyNewRoomName
 					  LIMIT 1
 					  ";							
 			$action = $dbh->prepare($query);
@@ -463,9 +463,9 @@ if($_POST)
 		if($count < 1)
 		{
 			// if room doesnt exist
-			if($_POST['newRoomName'])
+			if($_POST['xalkyNewRoomName'])
 			{
-				if(validChars($_POST['newRoomName']))
+				if(validChars($_POST['xalkyNewRoomName']))
 				{
 					die("invalid room name");
 				}
@@ -475,9 +475,9 @@ if($_POST)
 					$dbh = db_connect();
 					$params = array(
 					'id' => getTime(),
-					'roomname' => makeSafe($_POST['newRoomName']),
-					'roomowner' => makeSafe($_POST['newRoomOwner']), 
-					'roompassword' => makeSafe($_POST['newRoomPass']), 
+					'roomname' => makeSafe($_POST['xalkyNewRoomName']),
+					'roomowner' => makeSafe($_POST['xalkyNewRoomOwner']), 
+					'roompassword' => makeSafe($_POST['xalkyNewRoomPass']), 
 					'roomusers' => '0', 
 					'roomcreated' => getTime()
 					);
@@ -522,11 +522,11 @@ if($_POST)
 				$dbh = db_connect();
 				$params = array(
 				'roomcreated' => getTime(),
-				'newRoomName' => makeSafe($_POST['newRoomName'])
+				'xalkyNewRoomName' => makeSafe($_POST['xalkyNewRoomName'])
 				);
 				$query = "UPDATE xalky_rooms 
 						  SET roomcreated = :roomcreated 
-						  WHERE roomname = :newRoomName
+						  WHERE roomname = :xalkyNewRoomName
 						  ";							
 				$action = $dbh->prepare($query);
 				$action->execute($params);	
@@ -544,17 +544,17 @@ if($_POST)
 	}
 
 	// update webcam status
-	if(isset($_POST['myWebcamIs']))
+	if(isset($_POST['xalkyWebcamIs']))
 	{
 		$result = '0';
 
-		if($_POST['myWebcamIs'] == 'on')
+		if($_POST['xalkyWebcamIs'] == 'on')
 		{
 			$webcamStatus = '1';
 			$result = '1';
 		}
 
-		if($_POST['myWebcamIs'] == 'off')
+		if($_POST['xalkyWebcamIs'] == 'off')
 		{
 			$webcamStatus = '0';
 			$result = '1';
@@ -643,12 +643,12 @@ if($_POST)
 	}
 
 	// update blocked list
-	if(isset($_POST['myBlockList']))
+	if(isset($_POST['xalkyBlockList']))
 	{
 		try {
 			$dbh = db_connect();
 			$params = array(
-			'blocked' => makeSafe($_POST['myBlockList']),
+			'blocked' => makeSafe($_POST['xalkyBlockList']),
 			'username' => makeSafe($_SESSION['username'])
 			);
 			$query = "UPDATE xalky_users 

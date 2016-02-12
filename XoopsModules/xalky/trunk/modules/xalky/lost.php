@@ -124,7 +124,7 @@ if($_POST){$result = resetPassword($_POST);}
 
 <!-- do not edit below -->
 <p style="text-align:center;">
-	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.closeMdiv('lost');">
+	<input class="button" type="button" name="close" value="<?php echo _MN_XALKY_CONST128;?>" onclick="parent.xalkyCloseMessage('lost');">
 </p>
 
 </body>

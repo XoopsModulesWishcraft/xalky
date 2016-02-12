@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+
+.privateLogin
+{
+	margin:  0 0 0 0; 
+	padding: 2px 2px 2px 2px; 
+	border: 1px solid #84B2DE;
+	background-colour: #FFFFFF;
+	height: 110px;
+	width: 260px;
+	top: 100px;
+	text-align: center;
+	margin: 0 auto;
+	
+	-moz-border-radius: 8px;
+	border-radius: 8px;		
+}
+
+.privateloginSubmit
+{
+	padding: 0 3px 5px 3px;
+	height: 20px;
+	width: 110px;
+	border: 1px solid #333333;
+	background-colour: #666666;
+	colour: #FFFFFF;
+	cursor: pointer;
+	text-align: center;
+	
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.privateloginInput
+{
+	height: 14px;
+	width: 140px;
+	border: 1px solid #CCCCCC;
+}
+
+.privateloginUserTable
+{
+	text-align: left; 
+	colour: #333333;
+	width: 100%;
+}
+
+.privateloginUserTableHeader
+{ 
+	padding: 2px 2px 2px 34px; 
+	padding-left: 30px;
+	background-colour: #666666;
+	font-weight: bold;
+	font-size: 13px;
+	height: 20px;
+	colour: #FFFFFF;
+
+	-moz-border-radius: 3px;
+	border-radius: 3px;	
+
+	background-image: url('templates/default/images/icon.png');
+	background-repeat: no-repeat;
+}
+
+.linka A:link {text-decoration: none; colour: #333333;}
+.linka A:visited {text-decoration: none; colour: #333333;}
+.linka A:active {text-decoration: none; colour: #333333;}
+.linka A:hover {text-decoration: underline; colour: #333333;}

@@ -1,0 +1,61 @@
+@CHARSET "UTF-8";
+
+
+.text
+{
+	font-family: Verdana, Arial;
+	font-size: 12px;
+	font-style: normal;
+	colour: #FFFFFF;
+}
+.sbutton
+{
+	height: 22px;
+	width: 160px;
+	border: 1px solid #333333;
+	background-colour: #666666;
+	colour: #FFFFFF;
+	cursor: pointer;
+	
+	-moz-border-radius: 5px;
+	border-radius: 5px;		
+}
+.sinput
+{
+	width: 162px;
+	border: 1px solid #666666; 
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.obody
+{
+	margin: 5px 5px 0 5px;
+	padding: 0 0 0 0;	
+	background-colour: #999999;
+}
+.pageheader
+{ 
+	padding: 2px 2px 2px 34px; 
+	background-colour: #666666;
+	font-weight: bold;
+	font-size: 13px;
+	height: 20px;
+	colour: #FFFFFF;
+	font-family: Verdana, Arial;
+	font-size: 12px;
+	
+	-moz-border-radius: 3px;
+	border-radius: 3px;	
+
+	background-image: url('images/icon.png');
+	background-repeat: no-repeat;	
+}
+
+.sCaptcha
+{
+	colour: #ffffff;
+	border: 1px solid #eeeeee;
+	padding: 2px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}

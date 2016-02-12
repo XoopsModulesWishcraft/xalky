@@ -45,7 +45,7 @@ if (!class_exists("Domains")) {
 	        private $invalid = 'The domain name is not RFC compliant.';
 	       
 	        // ip url to get this servers public IP
-	        private $ip_url = 'http://www.whatismyip.com/automation/n09230945.asp';
+	        private $ip_url = 'http://www.whatisxalkyip.com/automation/n09230945.asp';
 	       
 	        // set an empty array for populating dns server information on validation
 	        public $servers = array();

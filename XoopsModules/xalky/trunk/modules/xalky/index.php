@@ -51,7 +51,7 @@ validSoftware();
 
 $loginError = '';
 
-if(getUsersOnline('1') >= $xalkyConfig['maxUsers'] && !isset($_GET['logout']))
+if(getUsersOnline('1') >= $xalkyConfig['maxUsers'] && !isset($_GET['xalkyLogout']))
 {
 	$loginError = _MN_XALKY_CONST200;
 
@@ -64,7 +64,7 @@ if(getUsersOnline('1') >= $xalkyConfig['maxUsers'] && !isset($_GET['logout']))
 *
 */
 
-if($xalkyConfig['CMS'] && !isset($_GET['logout']))
+if($xalkyConfig['CMS'] && !isset($_GET['xalkyLogout']))
 {
 	// cookie login
 	if($_REQUEST['uname'])
@@ -93,7 +93,7 @@ if($xalkyConfig['CMS'] && !isset($_GET['logout']))
 		include("cms.php");
 
 		// session login
-		if(C_CUSTOM_LOGIN && $uname)
+		if(XALKY_LOGIN && $uname)
 		{
 			// assign user details
 			$_SESSION['username'] = $uname;
@@ -226,15 +226,15 @@ if($_SESSION['digitalCreditsInit'])
 }
 
 /*
-* logout user
+* xalkyLogout user
 *
 */
 
-if(isset($_REQUEST['logout']) && isset($_SESSION['username']))
+if(isset($_REQUEST['xalkyLogout']) && isset($_SESSION['username']))
 {
-	logoutUser($_SESSION['username'],$_SESSION['room']);
+	xalkyLogoutUser($_SESSION['username'],$_SESSION['room']);
 
-	if($_REQUEST['logout'] == 'kick')
+	if($_REQUEST['xalkyLogout'] == 'kick')
 	{
 		banKickUser('KICK', $_SESSION['username']);
 	}

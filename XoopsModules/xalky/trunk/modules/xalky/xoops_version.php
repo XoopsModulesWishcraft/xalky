@@ -46,8 +46,8 @@ $modversion['min_php']             = '5.3.7';
 $modversion['min_xoops']           = "2.5.7";
 $modversion['min_admin']           = '1.1';
 $modversion['min_db']              = array(
-    										'mysql'  => '5.0.7',
-    										'mysqli' => '5.0.7'
+    										'xalkysql'  => '5.0.7',
+    										'xalkysqli' => '5.0.7'
 									 );
 
 $modversion['hasMain']   = 1;
@@ -62,7 +62,7 @@ $modversion['adminindex'] = "admin/admin.php";
 $modversion['adminmenu']  = "admin/menu.php";
 
 // Mysql file
-$modversion['sqlfile']['mysql'] = "sql/mysql.sql";
+$modversion['sqlfile']['xalkysql'] = "sql/xalkysql.sql";
 
 // Table
 $modversion['tables'][]	=	'xalky_blowfishing';
@@ -341,6 +341,42 @@ $modversion['config'][] = array(
  );
 
 $modversion['config'][] = array(
+		'name'        => 'userStatusMes',
+		'title'       => '_MI_XALKY_STATUS_MESSAGE',
+		'description' => '_MI_XALKY_STATUS_MESSAGE_DESC',
+		'formtype'    => 'textarea',
+		'valuetype'   => 'text',
+		'default'     => 'User is Away!'
+);
+
+$modversion['config'][] = array(
+		'name'        => 'textAdverts',
+		'title'       => '_MI_XALKY_ADVERTS',
+		'description' => '_MI_XALKY_ADVERTS_DESC',
+		'formtype'    => 'textarea',
+		'valuetype'   => 'text',
+		'default'     => ''
+);
+
+$modversion['config'][] = array(
+		'name'        => 'textAdvertsDesc',
+		'title'       => '_MI_XALKY_ADVERTS_DESCRIPTION',
+		'description' => '_MI_XALKY_ADVERTS_DESCRIPTION_DESC',
+		'formtype'    => 'textarea',
+		'valuetype'   => 'text',
+		'default'     => ''
+);
+
+$modversion['config'][] = array(
+		'name'        => 'textAdvertsRate',
+		'title'       => '_MI_XALKY_ADVERTS_RATES',
+		'description' => '_MI_XALKY_ADVERTS_RATES_DESC',
+		'formtype'    => 'text',
+		'valuetype'   => 'int',
+		'default'     => '6000'
+);
+
+$modversion['config'][] = array(
 		'name'        => 'font_colour',
 		'title'       => '_MI_XALKY_FONT_COLOUR',
 		'description' => '_MI_XALKY_FONT_COLOUR_DESC',
@@ -533,7 +569,7 @@ $modversion['config'][] = array(
 );
 
 $modversion['config'][] = array(
-		'name'        => 'ringBell',
+		'name'        => 'xalkyRingBell',
 		'title'       => '_MI_XALKY_RING_BELL',
 		'description' => '_MI_XALKY_RING_BELL_DESC',
 		'formtype'    => 'yesno',

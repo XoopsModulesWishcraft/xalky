@@ -20,55 +20,23 @@
  * @since		1.0.1
  */
 
-
-// INTEGRATION NOTES FOR CUSTOM DEVELOPERS
-
-// You can insert your existing CMS user Global values into the 
-// login procedure. Simply replace the values $_FOO['username'] 
-// and $_FOO['userid'] with your SESSION, COOKIE or MySQL results.
-
-// Example Code:
-
-// define('C_CUSTOM_LOGIN','1'); // 0 OFF, 1 ON
-// define('C_CUSTOM_USERNAME',$_SESSION['username']); // username
-// define('C_CUSTOM_USERID',$_SESSION['userid']); // userid
-// if(!isset($_SESSION['userid']) || empty($_SESSION['userid']))
-// {
-//	 die("userid value is null");
-// }
-
-// You will be able to link directly to the chat room by adding 
-// an <a href> link to your web pages like shown below and only 
-// registered users will be able to auto-login to your chat room.
-
-// <a href="http://yoursite.com/xalky/">Xalky Room</a>
-
-
-## CUSTOM INTEGRATION SETTINGS ##############
-
-
 // Enable custom login details
 
-define('C_CUSTOM_LOGIN','0'); // 0 OFF, 1 ON
 
 
 // Enter your CMS Global values below
-
-define('C_CUSTOM_USERNAME',$_FOO['username']); // username
-define('C_CUSTOM_USERID',$_FOO['userid']); // userid
-
-if(!isset($_FOO['userid']) || empty($_FOO['userid']))
+if (!is_object($GLOBALS['xoopsUser'])) {
+	define('XALKY_LOGIN',false); // 0 OFF, 1 ON
+} else {
+	define('XALKY_LOGIN',true); // 0 OFF, 1 ON
+	define('XALKY_USERNAME',$GLOBALS['xoopsUser']->getVar('uname')); // username
+	define('XALKY_USERID',$GLOBALS['xoopsUser']->getVar('uid')); // userid
+}
+if(defined('XALKY_USERID') || empty(constant('XALKY_USERID')))
 {
 	die("userid value is null");
 }
-
-## DO NOT EDIT BELOW THIS LINE ##############
-
-
-// if remote login via CMS
-
 	if($remotely_hosted){
-
 		// check username isset
 		if(!isset($_COOKIE["uname"])){
 
@@ -76,50 +44,28 @@ if(!isset($_FOO['userid']) || empty($_FOO['userid']))
 			die;
 
 		}
-
 		// if userid is null, assign userid
 		if(!isset($_COOKIE["userID"])){
-
 			$userID='-1';
-
 		}else{
-
 			$userID=$_COOKIE["userID"];
-
 		}
-
 	}
-
-// if custom login
-
-	if(C_CUSTOM_LOGIN){
-
+	if(XALKY_LOGIN){
 		// assign username
-		$uname = C_CUSTOM_USERNAME;
-
-		if(!C_CUSTOM_USERID){
-
+		$uname = XALKY_USERNAME;
+		if(!XALKY_USERID){
 			// userid empty
 			$userID = '-1';
-
 		}else{
-
 			// assign userid
-			$userID = C_CUSTOM_USERID;
-
+			$userID = XALKY_USERID;
 		}
-
 	}
-
-// if default login
-
-	if(!$remotely_hosted && !C_CUSTOM_LOGIN){
-
-	?>
-
-		<SCRIPT LANGUAGE="JavaScript1.2">
-		<!-- 
-		function getCookieVal (offset) {
+	if(!$remotely_hosted && !XALKY_LOGIN){
+		global $xoTheme;
+		$xoTheme->addScript('', array(), '<!-- 
+		function xalkyGetCookieVal (offset) {
 	  		var endstr = document.cookie.indexOf (";", offset);
 	  		if (endstr == -1)
 	  		endstr = document.cookie.length;
@@ -133,7 +79,7 @@ if(!isset($_FOO['userid']) || empty($_FOO['userid']))
 	  		while (i < clen) {
 	    		var j = i + alen;
 	    		if (document.cookie.substring(i, j) == arg)
-	    		return getCookieVal (j);
+	    		return xalkyGetCookieVal (j);
 	    		i = document.cookie.indexOf(" ", i) + 1;
 	    		if (i == 0) break;
 	  		}
@@ -142,7 +88,8 @@ if(!isset($_FOO['userid']) || empty($_FOO['userid']))
 		if(GetCookie("login") == null){ 
 			window.location="error.php";
 		}
-		// -->
-		</SCRIPT>
-
-<?php }?>
+		// -->'); 
+	}
+?>
+		
+		
