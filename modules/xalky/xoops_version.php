@@ -62,7 +62,7 @@ $modversion['adminindex'] = "admin/admin.php";
 $modversion['adminmenu']  = "admin/menu.php";
 
 // Mysql file
-$modversion['sqlfile']['xalkysql'] = "sql/xalkysql.sql";
+$modversion['sqlfile']['mysql'] = "sql/mysql.sql";
 
 // Table
 $modversion['tables'][]	=	'xalky_blowfishing';
@@ -78,13 +78,17 @@ $modversion['tables'][]	=	'xalky_users';
 $modversion['tables'][]	=	'xalky_whois';
 
 // Scripts to run upon installation or update
-$modversion['onInstall'] = "include/install.php";
+//$modversion['onInstall'] = "include/install.php";
 //$modversion['onUpdate']  = "include/update.php";
 
 // Templates
 $modversion['templates']                   = array();
 $modversion['templates'][1]['file']        = 'xalky_index.html';
 $modversion['templates'][1]['description'] = 'Main Index for XALKY';
+$modversion['templates'][2]['file']        = 'xalky_modal.html';
+$modversion['templates'][2]['description'] = 'Modal for below footer for preloader to buffer!';
+$modversion['templates'][3]['file']        = 'xalky_popupbox.html';
+$modversion['templates'][3]['description'] = 'HTML for Popup DIV Boxes';
 
 $modversion['config'][] = array(
 		'name'        => 'chatroomName',
@@ -463,7 +467,7 @@ $modversion['config'][] = array(
 $modversion['config'][] = array(
 		'name'        => 'loginImage',
 		'title'       => '_MI_XALKY_LOGIN_IMAGE',
-		'description' => '_MI_XALKY_SENTRYBOT_NAME_DESC',
+		'description' => '_MI_XALKY_LOGIN_IMAGE_DESC',
 		'formtype'    => 'text',
 		'valuetype'   => 'text',
 		'default'     => '/assets/images/loginbg.jpg'
@@ -555,8 +559,8 @@ $modversion['config'][] = array(
 		'description' => '_MI_XALKY_SENTRYBOT_ROOMID_DESC',
 		'formtype'    => 'select',
 		'valuetype'   => 'text',
-		'default'     => xalky_getLocalRooms(true),
-		'options'	  => xalky_getLocalRooms(false)
+		'default'     => xalkyGetLocalRooms(true),
+		'options'	  => xalkyGetLocalRooms(false)
 );
 
 $modversion['config'][] = array(
@@ -622,7 +626,7 @@ $modversion['config'][] = array(
 		'default'     => '1'
 );
 
-foreach(xalky_getLocalPlugins(true) as $dirname => $values)
+foreach(xalkyGetLocalPlugins(true) as $dirname => $values)
 {
 	$modversion['config'][] = array(
 			'name'        => $values['config']['name'],
@@ -641,8 +645,8 @@ $modversion['config'][] = array(
 		'description' => '_MI_XALKY_DEFAULT_ROOM_DESC',
 		'formtype'    => 'select',
 		'valuetype'   => 'text',
-		'default'     => xalky_getLocalRooms(true),
-		'options'	  => xalky_getLocalRooms(false)
+		'default'     => xalkyGetLocalRooms(true),
+		'options'	  => xalkyGetLocalRooms(false)
 );
 
 $modversion['config'][] = array(

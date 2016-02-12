@@ -19,17 +19,17 @@
 *
 */
 
-include("../includes/ini.php");
-include("../includes/session.php");
-include("../includes/config.php");
-include("../includes/functions.php");
+include("../include/ini.php");
+include("../include/session.php");
+include("../include/config.php");
+include("../include/functions.php");
 
 /*
 * include admin files
 *
 */
 
-include("includes/functions.php");
+include("include/functions.php");
 
 /*
 * do xalkyLogout

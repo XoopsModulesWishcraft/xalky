@@ -1,0 +1,13 @@
+php_value memory_limit 198M
+php_value error_reporting 0
+php_value display_errors 0
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^ping$							ping.php				[L,NC,QSA]
+RewriteRule ^pong$							pong.php				[L,NC,QSA]
+RewriteRule ^(.*?)/callback.api$			callback.php?mode=$1	[L,NC,QSA]
+RewriteRule ^(.*?).(html)?(.*?)$			$1.php?$2				[L,NC,QSA]
+RewriteRule ^(.*?).(html)$					$1.php					[L,NC,QSA]

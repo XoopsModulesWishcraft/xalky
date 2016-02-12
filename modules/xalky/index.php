@@ -25,10 +25,10 @@
 *
 */
 
-include("includes/ini.php");
-include("includes/session.php");
-include("includes/config.php");
-include("includes/functions.php");
+include("include/ini.php");
+include("include/session.php");
+include("include/config.php");
+include("include/functions.php");
 
 /*
 * include language file
@@ -391,11 +391,11 @@ if(isset($_REQUEST['login']) && $loginError)
 
 if(file_exists("plugins/subs/index.php"))
 {
-	include("plugins/subs/includes/config.php");
+	include("plugins/subs/include/config.php");
 	
 	if($enable_subscriptions)
 	{
-		include("plugins/subs/includes/functions.php");
+		include("plugins/subs/include/functions.php");
 		
 		if(!checkActiveSub($username))
 		{

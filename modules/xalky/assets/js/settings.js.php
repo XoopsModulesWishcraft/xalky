@@ -21,10 +21,10 @@
  */
 
 global $xalkyConfig;
-require_once(dirname(dirname(__DIR__))."/includes/ini.php");
-require_once(dirname(dirname(__DIR__))."/includes/session.php");
-require_once(dirname(dirname(__DIR__))."/includes/config.php");
-require_once(dirname(dirname(__DIR__))."/includes/functions.php");
+require_once(dirname(dirname(__DIR__))."/include/ini.php");
+require_once(dirname(dirname(__DIR__))."/include/session.php");
+require_once(dirname(dirname(__DIR__))."/include/config.php");
+require_once(dirname(dirname(__DIR__))."/include/functions.php");
 
 /**
  * Declare header

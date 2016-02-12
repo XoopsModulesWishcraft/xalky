@@ -95,7 +95,7 @@ function xalkygetDocPath()
 function xalkygetLang($id)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// set admin default language file
 	if(file_exists(getDocPath()."lang/".$xalkyConfig['lang'][1]))
@@ -267,7 +267,7 @@ function xalkyvalidEmail($email)
 function xalkyshowLang()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$count = count($xalkyConfig['lang']); 
 
@@ -298,7 +298,7 @@ function xalkyregisterUser($username,$password,$email)
 	$result = '0';	
 
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$username = urlencode($username);
 
@@ -504,7 +504,7 @@ function xalkyregisterUser($username,$password,$email)
 function xalkycreateUser($loginName,$loginID,$loginPass,$loginGender,$login,$guest)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if($login)
 	{
@@ -598,7 +598,7 @@ function xalkygetUser($prevRoom,$roomID)
 	$loginError = '0';
 
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// check username is in database
 	try {
@@ -750,7 +750,7 @@ function xalkygetUser($prevRoom,$roomID)
 function xalkygetUserGroup($id)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if(!is_numeric($id))
 	{
@@ -871,7 +871,7 @@ function xalkyupdateGuestAvatar($loginGender)
 function xalkyaddUser($loginGender)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// assign avatar
 	if($loginGender)
@@ -1012,7 +1012,7 @@ function xalkyaddUser($loginGender)
 function xalkytotalRooms()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// count rooms total	
 	try {
@@ -1176,7 +1176,7 @@ function xalkydeleteUserRoom($id)
 function xalkychatRoomID($id,$pass)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if(!$id || !is_numeric($id))
 	{
@@ -1343,7 +1343,7 @@ function xalkygetLastMessageID($room)
 			$id = $i['id'];
 
 			// include files
-			include(getDocPath()."includes/config.php");
+			include(getDocPath()."include/config.php");
 			$id -= $xalkyConfig['dispLastMess'];				
 		}
 		
@@ -1372,7 +1372,7 @@ function xalkygetLastMessageID($room)
 function xalkyxalkyLogoutUser($username,$room)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if(empty($room) || $room == '')
 	{
@@ -1570,7 +1570,7 @@ function xalkyxalkyLogoutUser($username,$room)
 function xalkystreamID()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$id = md5(date("U").$xalkyConfig['salt'].$_SESSION['username'].rand(1,9999999));
 
@@ -1625,7 +1625,7 @@ function xalkyvalidStreamID($id)
 function xalkyadminPermissions()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// default values	
 	$admin = '0';	
@@ -1682,7 +1682,7 @@ function xalkyadminPermissions()
 function xalkytoUserPermissions($id)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// default values	
 	$admin = '0';	
@@ -2003,7 +2003,7 @@ function xalkygetUserRooms($id)
 		else
 		{
 			// include files
-			include(getDocPath()."includes/config.php");	
+			include(getDocPath()."include/config.php");	
 
 			// check roomID is numeric
 			if(!is_numeric($id))
@@ -2091,7 +2091,7 @@ function xalkygetLoginNews()
 function xalkycopyrightTitle()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$html = "Powered by Xalky ".$xalkyConfig['version'];
 
@@ -2111,7 +2111,7 @@ function xalkycopyrightTitle()
 function xalkycopyrightFooter()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$html = "<span class='link'>&copy;<a href='http://xalky.com'>Xalky</a> ".$xalkyConfig['version']."</span>";
 
@@ -2515,7 +2515,7 @@ function xalkyupdateProfile($id,$profileRealname,$profileAge,$profileGender,$upl
 function xalkydigitalCredits($id)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	// if digitalCredits session not set
 	if(!$_SESSION['digitalCredits_start'])
@@ -2631,8 +2631,8 @@ function xalkydigitalCredits($id)
 function xalkyresetPassword($data)
 {
 	// include files
-	include(getDocPath()."includes/session.php");
-	include(getDocPath()."includes/db.php");
+	include(getDocPath()."include/session.php");
+	include(getDocPath()."include/db.php");
 	include(getDocPath()."lang/".$_SESSION['lang']);
 	
 	$email = $data['userEmail'];
@@ -2736,8 +2736,8 @@ function xalkyresetPassword($data)
 function xalkysendUserEmail($id,$username,$email,$newpass,$status)
 {
 	// include files
-	include(getDocPath()."includes/session.php");
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/session.php");
+	include(getDocPath()."include/config.php");
 	include(getDocPath()."lang/".$_SESSION['lang']);
 
 	// create headers
@@ -2783,7 +2783,7 @@ function xalkysendUserEmail($id,$username,$email,$newpass,$status)
 function xalkysendAdminEmail($status,$report,$message)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if(!$_SESSION['username'])
 	{
@@ -2849,7 +2849,7 @@ function xalkysendAdminEmail($status,$report,$message)
 function xalkyconfirmReg($id,$email)
 {
 	// include files
-	include(getDocPath()."includes/session.php");
+	include(getDocPath()."include/session.php");
 	include(getDocPath()."lang/".$_SESSION['lang']);
 
 	$confirm = '0';
@@ -2925,8 +2925,8 @@ function xalkyconfirmReg($id,$email)
 function xalkygetTranscripts($room)
 {
 	// include files
-	include(getDocPath()."includes/session.php");
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/session.php");
+	include(getDocPath()."include/config.php");
 	include(getDocPath()."lang/".$_SESSION['lang']);
 
 	// check room id is numeric
@@ -3087,7 +3087,7 @@ function xalkybanKickUser($message, $toname)
 	}
 		
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	try {
 		$dbh = db_connect();
@@ -3165,9 +3165,9 @@ function xalkybanKickUser($message, $toname)
 function xalkygetUsersOnline($id)
 {
 	// include files
-	include(getDocPath()."includes/session.php");
-	include(getDocPath().'includes/db.php');
-	include(getDocPath().'includes/config.php');
+	include(getDocPath()."include/session.php");
+	include(getDocPath().'include/db.php');
+	include(getDocPath().'include/config.php');
 	include(getDocPath()."lang/".$_SESSION['lang']);
 
 	try {
@@ -3343,7 +3343,7 @@ function xalkygetIPBanList($id)
 function xalkyremBrand()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$remBranding = '1';
 
@@ -3363,7 +3363,7 @@ function xalkyremBrand()
 function xalkycheckEvent()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if($xalkyConfig['eventsPlugin'])
 	{
@@ -3384,7 +3384,7 @@ function xalkycheckEvent()
 function xalkyvirtualCredits()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	if($xalkyConfig['virtualCreditsPlugin'])
 	{
@@ -3403,7 +3403,7 @@ function xalkyvirtualCredits()
 function xalkymoderatedXalky()
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$result = '0';
 
@@ -3426,7 +3426,7 @@ function xalkymoderatedXalky()
 function xalkyinvisibleAdmins($username)
 {
 	// include files
-	include(getDocPath()."includes/config.php");
+	include(getDocPath()."include/config.php");
 
 	$result = '0';
 
