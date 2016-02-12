@@ -4,7 +4,7 @@
 <title><?php echo copyrightTitle();?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<link type="text/css" rel="stylesheet" href="templates/<?php echo $CONFIG['template'];?>/style.css">
+<link type="text/css" rel="stylesheet" href="templates/<?php echo $xalkyConfig['template'];?>/style.css">
 
 <style>
 
@@ -13,7 +13,7 @@
 	margin:  0 0 0 0; 
 	padding: 2px 2px 2px 2px; 
 	border: 1px solid #84B2DE;
-	background-color: #FFFFFF;
+	background-colour: #FFFFFF;
 	height: 110px;
 	width: 260px;
 	top: 100px;
@@ -30,8 +30,8 @@
 	height: 20px;
 	width: 110px;
 	border: 1px solid #333333;
-	background-color: #666666;
-	color: #FFFFFF;
+	background-colour: #666666;
+	colour: #FFFFFF;
 	cursor: pointer;
 	text-align: center;
 	
@@ -49,7 +49,7 @@
 .privateloginUserTable
 {
 	text-align: left; 
-	color: #333333;
+	colour: #333333;
 	width: 100%;
 }
 
@@ -57,11 +57,11 @@
 { 
 	padding: 2px 2px 2px 34px; 
 	padding-left: 30px;
-	background-color: #666666;
+	background-colour: #666666;
 	font-weight: bold;
 	font-size: 13px;
 	height: 20px;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 
 	-moz-border-radius: 3px;
 	border-radius: 3px;	
@@ -70,10 +70,10 @@
 	background-repeat: no-repeat;
 }
 
-.linka A:link {text-decoration: none; color: #333333;}
-.linka A:visited {text-decoration: none; color: #333333;}
-.linka A:active {text-decoration: none; color: #333333;}
-.linka A:hover {text-decoration: underline; color: #333333;}
+.linka A:link {text-decoration: none; colour: #333333;}
+.linka A:visited {text-decoration: none; colour: #333333;}
+.linka A:active {text-decoration: none; colour: #333333;}
+.linka A:hover {text-decoration: underline; colour: #333333;}
 
 </style>
 
@@ -86,11 +86,11 @@
 
 		<form method="post" action="index.php?roomID=<?php echo $_REQUEST['roomID'];?>" name="privateRoom">
 		<table class="privateloginUserTable">
-		<tr><td class="privateloginUserTableHeader" colspan="2"><?php echo C_LANG139;?></td></tr>
-		<tr><td><?php echo C_LANG115;?></td><td><input class="privateloginInput" type="text" name="roomPass" value=""></td></tr>
-		<tr><td>&nbsp;</td><td><input class="privateloginSubmit" type="submit" name="plogin" value="<?php echo C_LANG122;?>"></td></tr>
+		<tr><td class="privateloginUserTableHeader" colspan="2"><?php echo _MN_XALKY_CONST139;?></td></tr>
+		<tr><td><?php echo _MN_XALKY_CONST115;?></td><td><input class="privateloginInput" type="text" name="roomPass" value=""></td></tr>
+		<tr><td>&nbsp;</td><td><input class="privateloginSubmit" type="submit" name="plogin" value="<?php echo _MN_XALKY_CONST122;?>"></td></tr>
 		<tr><td colspan="2">&nbsp;</td></tr>
-		<tr><td colspan="2" align="right"><span class="linka"><a href="index.php?roomID=<?php echo $CONFIG['defaultRoom'];?>"><?php echo C_LANG140;?></a></span></td></tr>
+		<tr><td colspan="2" align="right"><span class="linka"><a href="index.php?roomID=<?php echo $xalkyConfig['defaultRoom'];?>"><?php echo _MN_XALKY_CONST140;?></a></span></td></tr>
 		</table>
 		</form>
 

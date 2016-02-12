@@ -1,18 +1,24 @@
 <?php
-/********************************************************************************************
-*
-*  Software: Xalky
-*  Developer: Xalky
-*  Url: http://xalky.com
-*  Support: http://community.xalky.com
-* 
-*  Xalky is NOT free software - For more details visit, http://www.xalky.com
-*  This software and all of its source code/files are protected by Copyright Laws. 
-*  The software license permits you to install this software on one domain only. Additional
-*  installations require additional licences (one software licence per installation).
-*  Xalky is unable to provide support if this software is modified by the end user.
-*
-********************************************************************************************/
+/**
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
 /*
 * include files
@@ -45,11 +51,11 @@ validSoftware();
 
 $loginError = '';
 
-if(getUsersOnline('1') >= $CONFIG['maxUsers'] && !isset($_GET['logout']))
+if(getUsersOnline('1') >= $xalkyConfig['maxUsers'] && !isset($_GET['logout']))
 {
-	$loginError = C_LANG200;
+	$loginError = _MN_XALKY_CONST200;
 
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -58,7 +64,7 @@ if(getUsersOnline('1') >= $CONFIG['maxUsers'] && !isset($_GET['logout']))
 *
 */
 
-if($CONFIG['CMS'] && !isset($_GET['logout']))
+if($xalkyConfig['CMS'] && !isset($_GET['logout']))
 {
 	// cookie login
 	if($_REQUEST['uname'])
@@ -69,7 +75,7 @@ if($CONFIG['CMS'] && !isset($_GET['logout']))
 			// assign user details
 			$_REQUEST['userName'] = $_REQUEST['uname'];
 			$_SESSION['username'] = $_REQUEST['uname'];
-			$_SESSION['userid'] = $_REQUEST['uid'];
+			$_SESSION['userid'] = $_REQUEST['userID'];
 
 			// unset login
 			setcookie($_COOKIE['login'],'',time()-3600);
@@ -91,7 +97,7 @@ if($CONFIG['CMS'] && !isset($_GET['logout']))
 		{
 			// assign user details
 			$_SESSION['username'] = $uname;
-			$_SESSION['userid'] = $uid;
+			$_SESSION['userid'] = $userID;
 		}
 
 	}
@@ -129,7 +135,7 @@ $loginError = checkEvent();
 
 if($loginError)
 {
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -140,7 +146,7 @@ if($loginError)
 
 if(isset($_GET['transcripts']) && isset($_GET['roomID']))
 {
-	include("templates/".$CONFIG['template']."/transcripts.php");
+	include("templates/".$xalkyConfig['template']."/transcripts.php");
 	die;
 }
 
@@ -153,7 +159,7 @@ if(isset($_GET['nReg']) && isset($_GET['email']))
 {
 	$loginError = confirmReg($_GET['nReg'],$_GET['email']);
 
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -166,7 +172,7 @@ if(isset($_POST['reg']))
 {
 	if(empty($_POST['rUsername']))
 	{
-		$loginError .= C_LANG1."<br>";
+		$loginError .= _MN_XALKY_CONST1."<br>";
 	}
 	else
 	{
@@ -175,12 +181,12 @@ if(isset($_POST['reg']))
 
 	if(empty($_POST['rPassword']))
 	{
-		$loginError .= C_LANG2."<br>";
+		$loginError .= _MN_XALKY_CONST2."<br>";
 	}
 
 	if(empty($_POST['rEmail']))
 	{
-		$loginError .= C_LANG3."<br>";
+		$loginError .= _MN_XALKY_CONST3."<br>";
 	}
 	else
 	{
@@ -189,34 +195,34 @@ if(isset($_POST['reg']))
 
 	if(empty($_POST['terms']))
 	{
-		$loginError .= C_LANG4."<br>";
+		$loginError .= _MN_XALKY_CONST4."<br>";
 	}
 
 	if($loginError)
 	{
-		include("templates/".$CONFIG['template']."/login.php");
+		include("templates/".$xalkyConfig['template']."/login.php");
 		die;	
 	}
 	else
 	{
 		$loginError = registerUser($_POST['rUsername'],$_POST['rPassword'],$_POST['rEmail']);
 
-		include("templates/".$CONFIG['template']."/login.php");
+		include("templates/".$xalkyConfig['template']."/login.php");
 		die;
 	}	
 
 }
 
 /*
-* reset eCredit sessions
+* reset digitalCredit sessions
 *
 */
 
-if($_SESSION['eCreditsInit'])
+if($_SESSION['digitalCreditsInit'])
 {
-	unset($_SESSION['eCreditsInit']);
-	unset($_SESSION['eCreditsAwardTo']);
-	unset($_SESSION['eCredits_start']);
+	unset($_SESSION['digitalCreditsInit']);
+	unset($_SESSION['digitalCreditsAwardTo']);
+	unset($_SESSION['digitalCredits_start']);
 }
 
 /*
@@ -238,15 +244,15 @@ if(isset($_REQUEST['logout']) && isset($_SESSION['username']))
 	unset($_SESSION['room']);
 	unset($_SESSION['guest']);
 
-	$loginError = C_LANG5;
+	$loginError = _MN_XALKY_CONST5;
 
-	if($CONFIG['CMS'])
+	if($xalkyConfig['CMS'])
 	{
 		die($loginError);
 	}
 	else
 	{
-		include("templates/".$CONFIG['template']."/login.php");
+		include("templates/".$xalkyConfig['template']."/login.php");
 		die;
 	}
 }
@@ -258,7 +264,7 @@ if(isset($_REQUEST['logout']) && isset($_SESSION['username']))
 
 if(!$_REQUEST['roomID'][0])
 {
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -269,17 +275,17 @@ if(!$_REQUEST['roomID'][0])
 
 if(!isset($_SESSION['username']) && empty($_REQUEST['userName']))
 {
-	$loginError = C_LANG1;
+	$loginError = _MN_XALKY_CONST1;
 
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
 if(empty($_REQUEST['userName']) && isset($_REQUEST['login']))
 {
-	$loginError = C_LANG1;
+	$loginError = _MN_XALKY_CONST1;
 
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -289,7 +295,7 @@ if(isset($_REQUEST['userName']))
 
 	if($loginError)
 	{
-		include("templates/".$CONFIG['template']."/login.php");
+		include("templates/".$xalkyConfig['template']."/login.php");
 		die;
 	}
 
@@ -307,9 +313,9 @@ if($_POST['userName'])
 
 if(!$_POST['isGuest'] && isset($_POST['userPass']) && empty($_POST['userPass']))
 {
-	$loginError = C_LANG6;
+	$loginError = _MN_XALKY_CONST6;
 
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -326,7 +332,7 @@ delete_expired_rooms();
 
 $totalRooms = totalRooms();
 
-if($CONFIG['singleRoom'] || $_REQUEST['singleRoom'])
+if($xalkyConfig['singleRoom'] || $_REQUEST['singleRoom'])
 {
 	$totalRooms = '1';
 }
@@ -374,7 +380,7 @@ list($username,$userid,$loginError) = createUser(
 
 if(isset($_REQUEST['login']) && $loginError)
 {
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -445,13 +451,13 @@ if($loginError)
 {
 	// if single room mode, ignore user name not found error
 	// this is only an option for multi user rooms and cms
-	if($CONFIG['singleRoom'] && $loginError == C_LANG17)
+	if($xalkyConfig['singleRoom'] && $loginError == _MN_XALKY_CONST17)
 	{
 		$loginError = '';
 	}
 
 	// show login error
-	include("templates/".$CONFIG['template']."/login.php");
+	include("templates/".$xalkyConfig['template']."/login.php");
 	die;
 }
 
@@ -472,7 +478,7 @@ if($id == $roomOwnerID)
 *
 */
 
-$silent = $CONFIG['silent'];
+$silent = $xalkyConfig['silent'];
 
 /*
 * get room last message id
@@ -486,6 +492,6 @@ $lastMessageID = getLastMessageID($roomID);
 *
 */
 
-include("templates/".$CONFIG['template']."/main.php");
+include("templates/".$xalkyConfig['template']."/main.php");
 
 ?>

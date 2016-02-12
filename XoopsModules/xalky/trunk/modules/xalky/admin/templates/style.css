@@ -15,7 +15,7 @@ padding: 0 0 0 0;
 {
 	margin: 10px 10px 10px 10px;
 	padding: 0 0 0 0; 
-	background-color: #333333;	
+	background-colour: #333333;	
 	background-image:url('images/background.jpg');	
 	background-repeat:repeat-x;
 	font-family: Verdana, Arial;
@@ -39,11 +39,11 @@ padding: 0 0 0 0;
 .header
 {
 	padding: 0 0 3px 34px; 
-	background-color: #666666;
+	background-colour: #666666;
 	font-weight: bold;
 	font-size: 13px;
 	height: 20px;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 
 	-moz-border-radius: 3px;
 	border-radius: 3px;	
@@ -58,8 +58,8 @@ padding: 0 0 0 0;
 	height: 24px;
 	width: 75px;
 	border: 1px solid #333333;
-	background-color: #666666;
-	color: #FFFFFF;
+	background-colour: #666666;
+	colour: #FFFFFF;
 	cursor: pointer;
 	float: left;
 	text-align: center;
@@ -74,8 +74,8 @@ padding: 0 0 0 0;
 	height: 20px;
 	width: 110px;
 	border: 1px solid #333333;
-	background-color: #666666;
-	color: #FFFFFF;
+	background-colour: #666666;
+	colour: #FFFFFF;
 	cursor: pointer;
 	text-align: center;
 	
@@ -85,18 +85,18 @@ padding: 0 0 0 0;
 
 .result
 {
-	color: green;
+	colour: green;
 }
 
 .menu
 {
-	color: #000000;
+	colour: #000000;
 }
 
 .captcha
 {
-	color: #FFFFFF;
-	background-color: #333333;
+	colour: #FFFFFF;
+	background-colour: #333333;
 	border: 1px solid #999999;
 	padding: 2px;
 	
@@ -106,7 +106,7 @@ padding: 0 0 0 0;
 
 .mainheader
 {
-	background-color: #EDF1FA;
+	background-colour: #EDF1FA;
 	border: 1px solid #84B2DE;
 	font-family: Verdana, Arial;
 	font-size: 12px;
@@ -129,7 +129,7 @@ padding: 0 0 0 0;
 
 .logintable
 {
-	background-color: #EDF1FA;
+	background-colour: #EDF1FA;
 	border: 1px solid #84B2DE;
 	font-family: Verdana, Arial;
 	font-size: 12px;
@@ -148,7 +148,7 @@ table
 	font-size: 12px;
 	font-style: normal;
 	width: 100%;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 	border: 1px solid #666666; 	
 	
 	-moz-border-radius: 5px 5px 5px 5px;		
@@ -187,7 +187,7 @@ textarea
 	border-radius: 5px 5px 5px 5px;	
 }
 
-a:link {text-decoration: none; color: #FFFFFF;}
-a:visited {text-decoration: none; color: #FFFFFF;}
-a:active {text-decoration: none; color: #FFFFFF;}
-a:hover {text-decoration: underline; color: #FFFFFF;}
+a:link {text-decoration: none; colour: #FFFFFF;}
+a:visited {text-decoration: none; colour: #FFFFFF;}
+a:active {text-decoration: none; colour: #FFFFFF;}
+a:hover {text-decoration: underline; colour: #FFFFFF;}

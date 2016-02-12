@@ -3,7 +3,7 @@
 <head> 
 <title><?php echo @copyrightTitle();?></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link type="text/css" rel="stylesheet" href="../templates/<?php echo $CONFIG['template'];?>/style.css">
+<link type="text/css" rel="stylesheet" href="../templates/<?php echo $xalkyConfig['template'];?>/style.css">
 
 
 <style>
@@ -12,7 +12,7 @@
 	margin: 0 0 0 0; 
 	padding: 2px 2px 2px 2px; 
 	border: 1px solid #333333;
-	background-color: #CCCCCC;
+	background-colour: #CCCCCC;
 	text-align: left;
 	width: 320px;
 	margin: 0 auto;
@@ -23,32 +23,32 @@
 
 .profileTableHeader
 { 
-	background-color: #EDF1FA;
+	background-colour: #EDF1FA;
 	font-weight: bold;
 	font-size: 13px;
-	color: #84B2DE;
+	colour: #84B2DE;
 }
 
 .profileCopyright
 {
 	text-align: center;
-	color: #666666;
+	colour: #666666;
 	font-size: 12px;
 }
 
 .profileHeader
 { 
 	padding: 2px 2px 2px 34px; 
-	background-color: #666666;
+	background-colour: #666666;
 	font-weight: bold;
 	font-size: 13px;
 	height: 20px;
-	color: #FFFFFF;
+	colour: #FFFFFF;
 
 	-moz-border-radius: 3px;
 	border-radius: 3px;	
 
-	background-image: url('../templates/<?php echo $CONFIG['template'];?>/images/icon.png');
+	background-image: url('../templates/<?php echo $xalkyConfig['template'];?>/images/icon.png');
 	background-repeat: no-repeat;	
 }
 
@@ -57,10 +57,10 @@
 	height: 100px;
 }
 
-.linka A:link {text-decoration: none; color: #666666;}
-.linka A:visited {text-decoration: none; color: #666666;}
-.linka A:active {text-decoration: none; color: #666666;}
-.linka A:hover {text-decoration: underline; color: #666666;}
+.linka A:link {text-decoration: none; colour: #666666;}
+.linka A:visited {text-decoration: none; colour: #666666;}
+.linka A:active {text-decoration: none; colour: #666666;}
+.linka A:hover {text-decoration: underline; colour: #666666;}
 </style>
 
 </head>
@@ -70,7 +70,7 @@
 
 <div class="spacer1">&nbsp;</div>
 
-<span style="color: red;"><?php echo $profileUpdated;?></span>
+<span style="colour: red;"><?php echo $profileUpdated;?></span>
 
 <?php if(isset($_REQUEST['edit'])){?>
 	<form enctype="multipart/form-data" action="index.php?id=<?php echo $_REQUEST['id'];?>" method="POST">
@@ -79,17 +79,17 @@
 <?php }?>
 
 	<table class="profileTable">
-	<tr><td colspan="2" class="profileHeader"><?php echo C_LANG141;?></td></tr>
-	<tr><td><?php echo C_LANG54;?>:</td><td>
+	<tr><td colspan="2" class="profileHeader"><?php echo _MN_XALKY_CONST141;?></td></tr>
+	<tr><td><?php echo _MN_XALKY_CONST54;?>:</td><td>
 
 		<?php echo urldecode($username);?> 
 
 		<?php if(!$_REQUEST['edit'] && $_SESSION['myProfileID'] == $_REQUEST['id']){?>
-			&nbsp;<span class="linka">[<a href="index.php?id=<?php echo $_REQUEST['id'];?>&edit=1" <?php if(isset($_SESSION['guest'])){?>onclick="javascript:alert('Please register to edit your profile!');return false;"<?php }?> ><?php echo C_LANG142;?></a>]</span>
+			&nbsp;<span class="linka">[<a href="index.php?id=<?php echo $_REQUEST['id'];?>&edit=1" <?php if(isset($_SESSION['guest'])){?>onclick="javascript:alert('Please register to edit your profile!');return false;"<?php }?> ><?php echo _MN_XALKY_CONST142;?></a>]</span>
 		<?php }?>
 
 	</td></tr>
-	<tr><td><?php echo C_LANG143;?>:</td><td>
+	<tr><td><?php echo _MN_XALKY_CONST143;?>:</td><td>
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<input maxlength="64" type="text" name="profileRealname" value="<?php echo stripslashes(urldecode($realname));?>">
@@ -101,17 +101,17 @@
 
 	<?php if(isset($_REQUEST['edit'])){?>
 
-		<tr><td align><?php echo C_LANG115;?>:</td><td>
+		<tr><td align><?php echo _MN_XALKY_CONST115;?>:</td><td>
 
 			<input maxlength="64" type="text" name="profilePass" value=""><br>
 
 		</td></tr>
 		<tr><td align>&nbsp;</td><td>
 
-			<font size="1">(<?php echo C_LANG144;?>)</font>
+			<font size="1">(<?php echo _MN_XALKY_CONST144;?>)</font>
 
 		</td></tr>
-		<tr><td><?php echo C_LANG121;?>:</td><td>
+		<tr><td><?php echo _MN_XALKY_CONST121;?>:</td><td>
 
 			<input maxlength="100" type="text" name="profileEmail" value="<?php echo urldecode($email);?>">
 
@@ -119,7 +119,7 @@
 
 	<?php }?>
 
-	<tr><td><?php echo C_LANG145;?>:</td><td>
+	<tr><td><?php echo _MN_XALKY_CONST145;?>:</td><td>
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<select name="profileAge">
@@ -130,7 +130,7 @@
 		<?php }?>
 
 	</td></tr>
-	<tr><td><?php echo C_LANG119;?>:</td><td>
+	<tr><td><?php echo _MN_XALKY_CONST119;?>:</td><td>
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<select name="profileGender">
@@ -141,19 +141,19 @@
 		<?php }?>
 
 	</td></tr>
-	<tr><td><?php echo C_LANG146;?>:</td><td>
+	<tr><td><?php echo _MN_XALKY_CONST146;?>:</td><td>
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<input type="file" name="uploadedfile">
 			</td></tr>
 			<tr><td>&nbsp;</td><td>
-			<input type="checkbox" name="del" value="1"><?php echo C_LANG147;?>
+			<input type="checkbox" name="del" value="1"><?php echo _MN_XALKY_CONST147;?>
 		<?php }else{?>
 			<a href="view.php?id=<?php echo $_GET['id'];?>" target="_blank"><img src="view.php?id=<?php echo $_GET['id'];?>" height="110" width="120" border="0"></a>
 		<?php }?>
 
 	</td></tr>
-	<tr><td><?php echo C_LANG148;?>:</td><td>
+	<tr><td><?php echo _MN_XALKY_CONST148;?>:</td><td>
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<input maxlength="64" type="text" name="profileLocation" value="<?php echo stripslashes(urldecode($location));?>">
@@ -162,7 +162,7 @@
 		<?php }?>
 
 	</td></tr>
-	<tr><td><?php echo C_LANG149;?>:</td><td>
+	<tr><td><?php echo _MN_XALKY_CONST149;?>:</td><td>
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<input maxlength="64" type="text" name="profileHobbies" value="<?php echo stripslashes(urldecode($hobbies));?>">
@@ -171,7 +171,7 @@
 		<?php }?>
 
 	</td></tr>
-	<tr><td valign="top"><?php echo C_LANG150;?>:</td><td valign="top">
+	<tr><td valign="top"><?php echo _MN_XALKY_CONST150;?>:</td><td valign="top">
 
 		<?php if(isset($_REQUEST['edit'])){?>
 			<textarea maxlength="500" name="profileAboutme" rows="5" cols="20"><?php echo stripslashes(urldecode($aboutme));?></textarea>
@@ -183,8 +183,8 @@
 	<tr><td colspan="2" align="center" style="word-wrap: break-word;">&nbsp;
 
 		<?php if(isset($_REQUEST['edit'])){?>
-			<input class="button" type="submit" name="submit" value="<?php echo C_LANG151;?>"><br><br>
-			<span class="linka"><a href="index.php?id=<?php echo $_REQUEST['id'];?>"><?php echo C_LANG152;?></a></span>
+			<input class="button" type="submit" name="submit" value="<?php echo _MN_XALKY_CONST151;?>"><br><br>
+			<span class="linka"><a href="index.php?id=<?php echo $_REQUEST['id'];?>"><?php echo _MN_XALKY_CONST152;?></a></span>
 		<?php }?>
 
 	</td></tr>

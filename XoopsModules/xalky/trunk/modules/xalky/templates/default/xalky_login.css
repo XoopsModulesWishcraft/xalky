@@ -1,0 +1,172 @@
+@CHARSET "UTF-8";
+
+
+.loginBody
+{
+	margin: 0 0 0 0px; 
+	padding: 0 0 0 0; 
+	background-colour: #FFFFFF;
+	background-image:url('templates/<?php echo $xalkyConfig['template'];?>/images/background.jpg');	
+	background-repeat:repeat-x;
+	font-family: Verdana, Arial;
+	font-size: 12px;
+	font-style: normal;
+}
+
+.backgroundContainer
+{
+	margin-top: 42px;
+	height: 460px;
+	width: 100%;
+
+    background: url(<?php echo $xalkyConfig['loginImage'];?>) no-repeat center center fixed;
+    -webkit-background-size: cover; /* For WebKit*/
+    -moz-background-size: cover;    /* Mozilla*/
+    -o-background-size: cover;      /* Opera*/
+    background-size: cover;         /* Generic*/		
+}
+
+.loginContainer
+{
+	margin: 0 0 0 0; 
+	padding: 40px 10px 0px 10px; 
+	border: 0px solid #84B2DE;
+	height: 420px;
+	width: 900px;
+	margin: 0 auto;
+}
+
+.loginLeft
+{
+	margin: 0px 0 0 0; 
+	padding: 2px 2px 2px 2px; 
+	height: 380px !important;
+	height: 428px;
+	width: 528px;
+	text-align: left;
+	display: inline;
+	float: left;
+}
+
+.loginRight
+{
+	margin: 10px 0 0 0; 
+	padding: 2px 2px 2px 2px; 
+	border: 0px solid #84B2DE;
+	height: 380px;
+	width: 260px;
+	text-align: center;
+	display: inline;
+	float: right;
+}
+
+.loginSubmit
+{
+	height: 24px;
+	width: 140px;
+	colour: #FFFFFF;
+	cursor: pointer;
+	font-weight: bold;
+	background-image: url('templates/<?php echo $xalkyConfig['template'];?>/images/loginbutton.gif');
+	background-repeat: no-repeat;
+}
+
+.loginInput
+{
+	height: 14px;
+	width: 140px;
+	border: 1px solid #CCCCCC;
+	
+	-moz-border-radius: 5px;
+	border-radius: 5px;	
+}
+
+.loginSelect
+{
+	height: 20px;
+	width: 140px;
+	border: 1px solid #CCCCCC;
+	
+	-moz-border-radius: 5px;
+	border-radius: 5px;		
+}
+
+.loginUserTable
+{
+	text-align: left; 
+	colour: #333333;
+	width: auto;
+	-moz-border-radius: 3px;
+	border-radius: 3px;		
+}
+
+.loginUserTableHeader
+{ 
+	padding: 2px 2px 2px 34px; 
+	background-colour: #666666;
+	font-weight: bold;
+	font-size: 13px;
+	height: 20px;
+	colour: #FFFFFF;
+
+	-moz-border-radius: 3px;
+	border-radius: 3px;	
+
+	background-image: url('templates/<?php echo $xalkyConfig['template'];?>/images/icon.png');
+	background-repeat: no-repeat;	
+}
+
+.loginUserLatestNews
+{
+	colour: #FFFFFF;
+	min-height: 100px;
+}
+
+.loginFooter
+{
+	min-height: 200px;
+	width: 100%;
+	background-colour: #FFFFFF;
+}
+
+.latestMembers
+{
+	min-height: 110px;
+	width: 100%;
+	background-colour: #E2E2E2;
+	padding-bottom: 10px;
+}
+
+.copyright
+{
+	padding-top:10px;
+	padding-right:10px;	
+	text-align: center;
+	colour: #333333;
+	font-size: 12px;
+	width: 900px;
+	margin: 0 auto;
+	border: 0px solid #84B2DE;	
+}
+
+.loginButton
+{
+	margin-top: 50px;
+	cursor: pointer;
+}
+
+.registerButton
+{
+	margin-top: 10px;
+	cursor: pointer;
+}
+
+.copyright A:link {text-decoration: none; colour: #333333;}
+.copyright A:visited {text-decoration: none; colour: #333333;}
+.copyright A:active {text-decoration: none; colour: #333333;}
+.copyright A:hover {text-decoration: underline; colour: #333333;}
+
+.link A:link {text-decoration: none; colour: #333333;}
+.link A:visited {text-decoration: none; colour: #333333;}
+.link A:active {text-decoration: none; colour: #333333;}
+.link A:hover {text-decoration: underline; colour: #333333;}

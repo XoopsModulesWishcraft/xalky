@@ -1,4 +1,26 @@
 <?php
+/**
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
+
+require_once (dirname(dirname(__DIR__))."/includes/config.php");
 
 /**
  * Declare header
@@ -7,15 +29,33 @@
 header("content-type: application/x-javascript");
 
 ?>
-
+/**
+ * Xalky - Private Chat Room - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
+ 
 /*
-* create private chat div
-*
-*/
-
+ * create private chat div
+ *
+ */
 var privateXalky = 0;
-
-function createPXalkyDiv(divPName,divToName,dPID,duID)
+function createPXalkyDiv(divPName,divToName,dPID,duserID)
 {
 	if(privateXalky == 1)
 	{
@@ -37,16 +77,16 @@ function createPXalkyDiv(divPName,divToName,dPID,duID)
 	var pTitle = uUser;
 
 	// div name
-	divPName = duID+"_"+dPID;
+	divPName = duserID+"_"+dPID;
 	
 	// prevent duplicate private chat windows 
-	if(document.getElementById(dPID+"_"+duID))
+	if(document.getElementById(dPID+"_"+duserID))
 	{
-		document.getElementById(dPID+"_"+duID).style.visibility = 'visible';
-		document.getElementById("pcontent_"+dPID+"_"+duID).style.visibility = 'visible';
-		document.getElementById("pmenuBar_"+dPID+"_"+duID).style.visibility = 'visible';
-		document.getElementById("psendbox_"+dPID+"_"+duID).style.visibility = 'visible';
-		document.getElementById("pmenuWin_"+dPID+"_"+duID).style.visibility = 'visible';	
+		document.getElementById(dPID+"_"+duserID).style.visibility = 'visible';
+		document.getElementById("pcontent_"+dPID+"_"+duserID).style.visibility = 'visible';
+		document.getElementById("pmenuBar_"+dPID+"_"+duserID).style.visibility = 'visible';
+		document.getElementById("psendbox_"+dPID+"_"+duserID).style.visibility = 'visible';
+		document.getElementById("pmenuWin_"+dPID+"_"+duserID).style.visibility = 'visible';	
 		
 		return false;
 	}	
@@ -62,7 +102,7 @@ function createPXalkyDiv(divPName,divToName,dPID,duID)
 		newdiv.className = "pXalkyWin";
 
 		// title
-		newdiv.innerHTML = "<div id='ptitle_"+divPName+"' class='ptitle' style='cursor:move;' onclick=doFocus(\""+divPName+"\")> <span style='float:left;'>&nbsp;<img style='vertical-align:middle;' src='avatars/online.gif'>&nbsp;"+decodeURI(pTitle)+"</span> <span style='float:right;'><span style='cursor:pointer;' onclick='minPwin(\""+divPName+"\",\""+divPName+"\")'><img src='images/min.gif'></span>&nbsp;<span style='cursor:pointer;' onclick='closePWin(\""+divPName+"\");eCreditsRequest(\""+divPName+"\",\"off\");privateXalkyCount();'><img src='images/close.gif'></span>&nbsp;</div>";
+		newdiv.innerHTML = "<div id='ptitle_"+divPName+"' class='ptitle' style='cursor:move;' onclick=doFocus(\""+divPName+"\")> <span style='float:left;'>&nbsp;<img style='vertical-align:middle;' src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/avatars/online.gif'>&nbsp;"+decodeURI(pTitle)+"</span> <span style='float:right;'><span style='cursor:pointer;' onclick='minPwin(\""+divPName+"\",\""+divPName+"\")'><img src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/images/min.gif'></span>&nbsp;<span style='cursor:pointer;' onclick='closePWin(\""+divPName+"\");digitalCreditsRequest(\""+divPName+"\",\"off\");privateXalkyCount();'><img src='<?php echo $xalkyConfig['chatroomUrl']; ?>/assets/images/close.gif'></span>&nbsp;</div>";
 
 		// content
 		newdiv.innerHTML += "<div id='pcontent_"+divPName+"' class='pcontent'></div>";
@@ -88,29 +128,27 @@ function createPXalkyDiv(divPName,divToName,dPID,duID)
 		$( "#"+divPName ).draggable();
 	}
 
-	// if eCredits is enabled
-	if(eCredits == 1 && Number(duID) == Number(uID))
+	// if digitalCredits is enabled
+	if(digitalCredits == 1 && Number(duserID) == Number(userID))
 	{
-		eCreditsRequest(divPName,'on');
+		digitalCreditsRequest(divPName,'on');
 		privateXalky = 1;
 	}
 }
 
 /*
-* reset private window count
-*
-*/
-
+ * reset private window count
+ *
+ */
 function privateXalkyCount()
 {
 	privateXalky = 0;
 }
 
 /*
-* send private message
-*
-*/
-
+ * send private message
+ *
+ */
 function sendPMessage(uUser,divPName1,divPName2)
 {
 	// send message
@@ -119,20 +157,18 @@ function sendPMessage(uUser,divPName1,divPName2)
 }
 
 /*
-* minimise private div
-*
-*/
-
-function minPwin(divID,uID)
+ * minimise private div
+ *
+ */
+function minPwin(divID,userID)
 {
-	toggleHeader(divID, uID);
+	toggleHeader(divID, userID);
 }
 
 /*
-* close private div
-*
-*/
-
+ * close private div
+ *
+ */
 function closePWin(divID)
 {
 	document.getElementById(divID).style.visibility = 'hidden';
@@ -143,23 +179,22 @@ function closePWin(divID)
 }
 
 /*
-* private chat is initiated
-* eCredits function
-*/
-
-function eCreditsRequest(uuID,status)
+ * private chat is initiated
+ * digitalCredits function
+ */
+function digitalCreditsRequest(uuserID,status)
 {
-	uuID = uuID.replace(uID,'');
-	uuID = uuID.replace("_",'');
+	uuserID = uuserID.replace(userID,'');
+	uuserID = uuserID.replace("_",'');
 
 	var param = '?';
-	param += '&eCreditID=' + escape(uuID);
-	param += '&eCreditStatus=' + escape(status);	
+	param += '&digitalCreditID=' + escape(uuserID);
+	param += '&digitalCreditStatus=' + escape(status);	
 
 	// if ready to send message to DB
 	if (sendReq.readyState == 4 || sendReq.readyState == 0) 
 	{
-		sendReq.open("POST", 'includes/sendData.php?rnd='+ Math.random(), true);
+		sendReq.open("POST", '<?php echo $xalkyConfig['chatroomUrl']; ?>/outbound.php?rnd='+ Math.random(), true);
 		sendReq.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
 		sendReq.onreadystatechange = handleSendXalky;
 		sendReq.send(param);

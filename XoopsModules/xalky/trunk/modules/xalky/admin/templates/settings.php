@@ -17,7 +17,7 @@
 	<tr><td width="100">login password</td><td><input type="text" name="adminLogin" value=""></td><td>Password to login to admin area. Leave blank if no change.<br><br></td></tr>
 	<tr><td>avatars</td><td width="300"><input style="width: 300px" type="text" name="avatars" value="<?php echo $avatars;?>"></td><td>Seperate with comma. Example: <i>image1.gif,image2.gif,image3.gif</i><br>Upload thumbnail image to <i>/avatars/</i> folder (height/width: 24x32px).<br>Upload original image to <i>/avatars/40/</i> folder (height/width: 40x55px).<br></td></tr>	
 	<tr><td>badwords</td><td><input style="width: 300px" type="text" name="badwords" value="<?php echo $badwords;?>"></td><td>Seperate with comma. Example: <i>word1,word2,word3</i></td></tr>
-	<tr><td>font_color</td><td><input style="width: 300px" type="text" name="font_color" value="<?php echo $font_color;?>"></td><td>Seperate with comma. Example: <i>#000000,#F5F5F5,#FFFFFF</i></td></tr>
+	<tr><td>font_colour</td><td><input style="width: 300px" type="text" name="font_colour" value="<?php echo $font_colour;?>"></td><td>Seperate with comma. Example: <i>#000000,#F5F5F5,#FFFFFF</i></td></tr>
 	<tr><td>font_size</td><td><input type="text" style="width: 300px" name="font_size" value="<?php echo $font_size;?>"></td><td>Seperate with comma. Example: <i>10px,12px,14px</i></td></tr>
 	<tr><td>font_family</td><td><input type="text" style="width: 300px" name="font_family" value="<?php echo $font_family;?>"></td><td>Seperate with comma. Example: <i>Arial,Verdana,Courier</i></td></tr>
 	<tr><td>sfx</td><td><input type="text" style="width: 300px" name="sfx" value="<?php echo $sfx;?>"></td><td>Seperate with comma. Example: <i>sfx1.mp3,sfx2.mp3,sfx3.mp3</i><br>Upload all mp3 to <i>/sounds/sfx/</i> folder.</td></tr>
@@ -51,8 +51,8 @@
 	<tr><td>enableEmail</td><td><?php echo showSelectedID('enableEmail',$enableEmail);?></td><td>Hotlink emails in messages</td></tr>
 	<tr><td>enableShoutFilter</td><td><?php echo showSelectedID('enableShoutFilter',$enableShoutFilter);?></td><td>Enable shout filter (converts all messages to lowercase)</td></tr>
 	<tr><td>floodXalky</td><td><input type="text" name="floodXalky" value="<?php echo $floodXalky;?>"></td><td>Seconds between sending messages</td></tr>
-	<tr><td>newPm</td><td><input type="text" name="newPm" value="<?php echo $newPm;?>"></td><td>Private window header bar color</td></tr>
-	<tr><td>newPmMin</td><td><input type="text" name="newPmMin" value="<?php echo $newPmMin;?>"></td><td>New private message header bar color (when pm is minimised)</td></tr>
+	<tr><td>newPm</td><td><input type="text" name="newPm" value="<?php echo $newPm;?>"></td><td>Private window header bar colour</td></tr>
+	<tr><td>newPmMin</td><td><input type="text" name="newPmMin" value="<?php echo $newPmMin;?>"></td><td>New private message header bar colour (when pm is minimised)</td></tr>
 	<tr><td>refreshRate</td><td><input type="text" name="refreshRate" value="<?php echo $refreshRate;?>"></td><td>Milliseconds (recommended: 3000)</td></tr>
 	<tr><td>totalMessages</td><td><input type="text" name="totalMessages" value="<?php echo $totalMessages;?>"></td><td>Total messages displayed in chat window</td></tr>
 	<tr><td>textAdverts</td><td><?php echo showSelectedID('textAdverts',$textAdverts);?></td><td>Enable text adverts</td></tr>

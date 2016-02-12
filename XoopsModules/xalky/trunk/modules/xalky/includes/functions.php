@@ -1,11 +1,31 @@
 <?php
+/**
+ * Xalky - Talks like a cockatoo - XOOPS Chat Rooms
+ *
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ *
+ * @copyright   Chronolabs Cooperative http://sourceforge.net/projects/chronolabs/
+ * @license     GNU GPL 3 (http://labs.coop/briefs/legal/general-public-licence/13,3.html)
+ * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
+ * @see			http://sourceforge.net/projects/xoops/
+ * @see			http://sourceforge.net/projects/chronolabs/
+ * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://labs.coop
+ * @version     1.0.5
+ * @since		1.0.1
+ */
 
 /* 
 * conect to database
 *
 */
 
-function db_connect()
+function xalkydb_connect()
 {
 	include(dirname(__FILE__)."/db.php");
 	
@@ -42,11 +62,11 @@ function db_connect()
 *
 */
 
-function debugError($data)
+function xalkydebugError($data)
 {
 	include(dirname(__FILE__)."/config.php");
 	
-	if($CONFIG['debug'])
+	if($xalkyConfig['debug'])
 	{
 		$error_log = fopen(dirname(dirname(__FILE__))."/error_log.txt","a+");
 		echo fwrite($error_log, "Date: ".date("d/m/Y - H:i:s")."\r\n");		
@@ -62,7 +82,7 @@ function debugError($data)
 *
 */
 
-function getDocPath()
+function xalkygetDocPath()
 {
 	return dirname(dirname(__FILE__))."/";
 }
@@ -72,21 +92,21 @@ function getDocPath()
 *
 */
 
-function getLang($id)
+function xalkygetLang($id)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
 	// set admin default language file
-	if(file_exists(getDocPath()."lang/".$CONFIG['lang'][1]))
+	if(file_exists(getDocPath()."lang/".$xalkyConfig['lang'][1]))
 	{
-		$_SESSION['lang'] = $CONFIG['lang'][1];		
+		$_SESSION['lang'] = $xalkyConfig['lang'][1];		
 	}
 
 	// if $id is set, check file exists and set new language file
-	if(is_numeric($id) && file_exists(getDocPath()."lang/".$CONFIG['lang'][$id]))
+	if(is_numeric($id) && file_exists(getDocPath()."lang/".$xalkyConfig['lang'][$id]))
 	{
-		$_SESSION['lang'] = $CONFIG['lang'][$id];		
+		$_SESSION['lang'] = $xalkyConfig['lang'][$id];		
 	}
 	
 	// if no language file set system language file
@@ -103,7 +123,7 @@ function getLang($id)
 * 
 */
 
-function getTime()
+function xalkygetTime()
 {
 	return date("U");
 }
@@ -113,7 +133,7 @@ function getTime()
 *
 */
 
-function getCaptchaText()
+function xalkygetCaptchaText()
 {
 	return substr(md5(date("U").rand(1,99999)),0,-26);
 }
@@ -123,7 +143,7 @@ function getCaptchaText()
 *
 */
 
-function makeSafe($data)
+function xalkymakeSafe($data)
 {
 	$data = htmlspecialchars($data);
 
@@ -135,11 +155,11 @@ function makeSafe($data)
 *
 */
 
-function validSoftware()
+function xalkyvalidSoftware()
 {
 	if(!file_exists("LICENSE"))
 	{
-		die(C_LANG7);
+		die(_MN_XALKY_CONST7);
 	}
 }
 
@@ -148,7 +168,7 @@ function validSoftware()
 *
 */
 
-function badChars()
+function xalkybadChars()
 {
 
 	$badChars = array(
@@ -181,7 +201,7 @@ function badChars()
 				']',
 				'{',
 				'}',
-				'£',
+				'ï¿½',
 				'$',
 				'%',
 				'^',
@@ -200,7 +220,7 @@ function badChars()
 *
 */
 
-function validChars($data)
+function xalkyvalidChars($data)
 {
 	$i = 0;
 
@@ -221,7 +241,7 @@ function validChars($data)
 				$badChars[$i] = 'space';
 			}
 
-			return C_LANG8.": [ ".$badChars[$i]." ]<br>";
+			return _MN_XALKY_CONST8.": [ ".$badChars[$i]." ]<br>";
 		}
 	}
 }
@@ -231,11 +251,11 @@ function validChars($data)
 *
 */
 
-function validEmail($email)
+function xalkyvalidEmail($email)
 {
 	if(!filter_var($email, FILTER_VALIDATE_EMAIL))	
 	{ 
-		return C_LANG9."<br>"; 
+		return _MN_XALKY_CONST9."<br>"; 
 	} 	
 }
 
@@ -244,12 +264,12 @@ function validEmail($email)
 * displays on login page
 */
 
-function showLang()
+function xalkyshowLang()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	$count = count($CONFIG['lang']); 
+	$count = count($xalkyConfig['lang']); 
 
 	$html = '';
 
@@ -257,12 +277,12 @@ function showLang()
 	{
 		$selected = '';
 
-		if($CONFIG['lang'][$i] == $_SESSION['lang'])
+		if($xalkyConfig['lang'][$i] == $_SESSION['lang'])
 		{
 			$selected = 'SELECTED';
 		}
 
-		$html .= "<option value='".$i."' ".$selected.">".ucfirst(substr($CONFIG['lang'][$i], 0, -4))."</option>";
+		$html .= "<option value='".$i."' ".$selected.">".ucfirst(substr($xalkyConfig['lang'][$i], 0, -4))."</option>";
 	}
 
 	return $html;
@@ -273,7 +293,7 @@ function showLang()
 *
 */
 
-function registerUser($username,$password,$email)
+function xalkyregisterUser($username,$password,$email)
 {
 	$result = '0';	
 
@@ -344,7 +364,7 @@ function registerUser($username,$password,$email)
 			debugError($error);
 		}			
 
-		$result = C_LANG10;
+		$result = _MN_XALKY_CONST10;
 
 		return $result;
 	}
@@ -353,29 +373,29 @@ function registerUser($username,$password,$email)
 	// user is already registered (already member)
 	if($pass)
 	{
-		$result = C_LANG11;	
+		$result = _MN_XALKY_CONST11;	
 	}
 	else
 	{
 		// if new registrations require email confirmation
-		if($CONFIG['approve'])
+		if($xalkyConfig['approve'])
 		{
-			$CONFIG['approve'] = substr(md5(date("U").rand(1,99999)), 0, -20);
+			$xalkyConfig['approve'] = substr(md5(date("U").rand(1,99999)), 0, -20);
 
-			sendUserEmail($CONFIG['approve'],$username,$email,'','2');
+			sendUserEmail($xalkyConfig['approve'],$username,$email,'','2');
 
-			$result = C_LANG12;
+			$result = _MN_XALKY_CONST12;
 		}
 		else
 		{
-			$result = C_LANG13;
+			$result = _MN_XALKY_CONST13;
 		}
 
 		$incUserGroup = '1'; // default, guest account
 
 		if(isset($email))
 		{
-			$incUserGroup = $CONFIG['userGroup'];
+			$incUserGroup = $xalkyConfig['userGroup'];
 		}
 
 		// user doesnt exist, add to database
@@ -391,7 +411,7 @@ function registerUser($username,$password,$email)
 			'avatar' => assignGenderImage('0'),
 			'webcam' => '0',
 			'online' => '0',
-			'enabled' => $CONFIG['approve'],
+			'enabled' => $xalkyConfig['approve'],
 			'active' => '0',
 			'userGroup' => makeSafe($incUserGroup),
 			'watching' => '',
@@ -481,7 +501,7 @@ function registerUser($username,$password,$email)
 *
 */
 
-function createUser($loginName,$loginID,$loginPass,$loginGender,$login,$guest)
+function xalkycreateUser($loginName,$loginID,$loginPass,$loginGender,$login,$guest)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -510,16 +530,16 @@ function createUser($loginName,$loginID,$loginPass,$loginGender,$login,$guest)
 				{
 					if(!$guest)
 					{
-						if($CONFIG['approve'] && ($i['enabled'] != '1') && $i['kick'] == '' && $i['ban'] == '')
+						if($xalkyConfig['approve'] && ($i['enabled'] != '1') && $i['kick'] == '' && $i['ban'] == '')
 						{
-							$loginError = C_LANG14;
+							$loginError = _MN_XALKY_CONST14;
 							return array('','',$loginError);
 						}
 					}
 
 					if($i['active'] > date("U")-15)
 					{
-						$loginError = C_LANG15;
+						$loginError = _MN_XALKY_CONST15;
 						return array('','',$loginError);
 					}
 
@@ -528,7 +548,7 @@ function createUser($loginName,$loginID,$loginPass,$loginGender,$login,$guest)
 
 				if($loginPass && $password != md5($loginPass) || $password && $password != md5($loginPass))
 				{
-					$loginError = C_LANG16;
+					$loginError = _MN_XALKY_CONST16;
 					return array('','',$loginError);
 				}				
 					
@@ -573,7 +593,7 @@ function createUser($loginName,$loginID,$loginPass,$loginGender,$login,$guest)
 *
 */
 
-function getUser($prevRoom,$roomID)
+function xalkygetUser($prevRoom,$roomID)
 {
 	$loginError = '0';
 
@@ -621,22 +641,22 @@ function getUser($prevRoom,$roomID)
 
 	if(!$id)
 	{
-		$loginError = C_LANG17;		
+		$loginError = _MN_XALKY_CONST17;		
 	}
 
 	if($kick > date("U"))
 	{
-		$loginError = C_LANG18.' '.$CONFIG['kickTime'].' '.C_LANG19;
+		$loginError = _MN_XALKY_CONST18.' '.$xalkyConfig['kickTime'].' '._MN_XALKY_CONST19;
 	}
 
 	if($ban)
 	{
-		$loginError = C_LANG20;
+		$loginError = _MN_XALKY_CONST20;
 	}
 
-	if($CONFIG['banIP'] && getIPBanList(getIP()))
+	if($xalkyConfig['banIP'] && getIPBanList(getIP()))
 	{
-		$loginError = C_LANG20;
+		$loginError = _MN_XALKY_CONST20;
 	}
 
 	if(!$loginError)
@@ -727,7 +747,7 @@ function getUser($prevRoom,$roomID)
 *
 */
 
-function getUserGroup($id)
+function xalkygetUserGroup($id)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -735,7 +755,7 @@ function getUserGroup($id)
 	if(!is_numeric($id))
 	{
 		// set default user group
-		$_SESSION['userGroup'] = $CONFIG['userGroup'];
+		$_SESSION['userGroup'] = $xalkyConfig['userGroup'];
 	}
 
 	// select user group 
@@ -780,7 +800,7 @@ function getUserGroup($id)
 *
 */
 
-function assignGenderImage($loginGender)
+function xalkyassignGenderImage($loginGender)
 {
 	// assign avatar
 	switch ($loginGender)
@@ -806,7 +826,7 @@ function assignGenderImage($loginGender)
 *
 */
 
-function updateGuestAvatar($loginGender)
+function xalkyupdateGuestAvatar($loginGender)
 {
 	// assign guest user
 	$_SESSION['guest'] = '1';
@@ -848,7 +868,7 @@ function updateGuestAvatar($loginGender)
 *
 */
 
-function addUser($loginGender)
+function xalkyaddUser($loginGender)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -894,7 +914,7 @@ function addUser($loginGender)
 	{
 		$incUserGroup = '1'; // default, guest account
 		
-		if($CONFIG['CMS'])
+		if($xalkyConfig['CMS'])
 		{
 			if(isset($_SESSION['userGroup']))
 			{
@@ -902,7 +922,7 @@ function addUser($loginGender)
 			}
 			else
 			{
-				$incUserGroup = $CONFIG['userGroup'];
+				$incUserGroup = $xalkyConfig['userGroup'];
 			}
 		}
 
@@ -989,7 +1009,7 @@ function addUser($loginGender)
 * 
 */
 
-function totalRooms()
+function xalkytotalRooms()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -1003,9 +1023,9 @@ function totalRooms()
 		$action->execute($params);
 		$count = $action->rowCount();	
 
-		if($CONFIG['singleRoom'])
+		if($xalkyConfig['singleRoom'])
 		{
-			return $CONFIG['singleRoom'];
+			return $xalkyConfig['singleRoom'];
 		}
 		else
 		{
@@ -1030,7 +1050,7 @@ function totalRooms()
 *
 */
 
-function updateUser()
+function xalkyupdateUser()
 {
 	// get roomID
 	if($_room_ >= '1')
@@ -1078,7 +1098,7 @@ function updateUser()
 *
 */
 
-function prevRoom()
+function xalkyprevRoom()
 {
 	$prevRoom = '1';
 
@@ -1126,7 +1146,7 @@ function prevRoom()
 *
 */
 
-function deleteUserRoom($id)
+function xalkydeleteUserRoom($id)
 {
 	try {
 		$dbh = db_connect();
@@ -1153,7 +1173,7 @@ function deleteUserRoom($id)
 *
 */
 
-function chatRoomID($id,$pass)
+function xalkychatRoomID($id,$pass)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -1163,9 +1183,9 @@ function chatRoomID($id,$pass)
 		// if no room ID or room ID is not numeric then
 		// log user into default room (set in config.php)
 
-		$_SESSION['room'] = $CONFIG['defaultRoom'];
+		$_SESSION['room'] = $xalkyConfig['defaultRoom'];
 
-		return array($CONFIG['defaultRoom'],'1');	
+		return array($xalkyConfig['defaultRoom'],'1');	
 	}
 	else
 	{
@@ -1230,7 +1250,7 @@ function chatRoomID($id,$pass)
 			}
 			else
 			{
-				include("templates/".$CONFIG['template']."/private.php");
+				include("templates/".$xalkyConfig['template']."/private.php");
 				die;
 			}			
 			
@@ -1256,7 +1276,7 @@ function chatRoomID($id,$pass)
 *
 */
 
-function chatRoomDesc($roomID)
+function xalkychatRoomDesc($roomID)
 {
 	try {
 		$dbh = db_connect();
@@ -1296,7 +1316,7 @@ function chatRoomDesc($roomID)
 *
 */
 
-function getLastMessageID($room)
+function xalkygetLastMessageID($room)
 {
 	$id = '0';
 	
@@ -1324,7 +1344,7 @@ function getLastMessageID($room)
 
 			// include files
 			include(getDocPath()."includes/config.php");
-			$id -= $CONFIG['dispLastMess'];				
+			$id -= $xalkyConfig['dispLastMess'];				
 		}
 		
 		$dbh = null;
@@ -1349,7 +1369,7 @@ function getLastMessageID($room)
 * 
 */
 
-function logoutUser($username,$room)
+function xalkylogoutUser($username,$room)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -1408,7 +1428,7 @@ function logoutUser($username,$room)
 			}		
 
 			// set user to offline
-			$offlineTime = getTime()-$CONFIG['activeTimeout'];
+			$offlineTime = getTime()-$xalkyConfig['activeTimeout'];
 			
 			try {
 				$dbh = db_connect();
@@ -1470,18 +1490,18 @@ function logoutUser($username,$room)
 			try {
 				$dbh = db_connect();
 				$params = array(
-				'uid' => $id,
+				'userID' => $id,
 				'mid' => 'chatContainer',
 				'username' => makeSafe($username),
 				'tousername' => '',
-				'message' =>  '1|#000000|12px|Verdana|** '.makeSafe($username).' '.makeSafe(C_LANG22),
+				'message' =>  '1|#000000|12px|Verdana|** '.makeSafe($username).' '.makeSafe(_MN_XALKY_CONST22),
 				'sfx' => 'beep_high.mp3',
 				'room' => makeSafe($room),
 				'messtime' => getTime()
 				);
 				$query = "INSERT INTO xalky_message
 									(
-										uid,
+										userID,
 										mid,
 										username, 
 										tousername, 
@@ -1492,7 +1512,7 @@ function logoutUser($username,$room)
 									) 
 									VALUES 
 									(
-										:uid,
+										:userID,
 										:mid,
 										:username, 
 										:tousername, 
@@ -1547,12 +1567,12 @@ function logoutUser($username,$room)
 * 
 */
 
-function streamID()
+function xalkystreamID()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	$id = md5(date("U").$CONFIG['salt'].$_SESSION['username'].rand(1,9999999));
+	$id = md5(date("U").$xalkyConfig['salt'].$_SESSION['username'].rand(1,9999999));
 
 	return $id;
 }
@@ -1562,7 +1582,7 @@ function streamID()
 *
 */
 
-function validStreamID($id)
+function xalkyvalidStreamID($id)
 {
 	try {
 		$dbh = db_connect();
@@ -1602,7 +1622,7 @@ function validStreamID($id)
 *			
 */
 
-function adminPermissions()
+function xalkyadminPermissions()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -1633,7 +1653,7 @@ function adminPermissions()
 			
 			// if user is admin and config setting is set to 1 
 			// allows auto-login to admin area
-			if($admin && $CONFIG['adminArea'])
+			if($admin && $xalkyConfig['adminArea'])
 			{
 				$_SESSION['adminUser'] = '1';
 			}
@@ -1655,11 +1675,11 @@ function adminPermissions()
 
 /*
 * toUser permissions
-* this function is called when we send a message to a user
-* sendData.php		
+* this function xalkyis called when we send a message to a user
+* outbound.php		
 */
 
-function toUserPermissions($id)
+function xalkytoUserPermissions($id)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -1709,7 +1729,7 @@ function toUserPermissions($id)
 * 
 */
 
-function getAdmin($id)
+function xalkygetAdmin($id)
 {
 	$result = '0';	
 
@@ -1750,7 +1770,7 @@ function getAdmin($id)
 * 
 */
 
-function getModerator($id)
+function xalkygetModerator($id)
 {
 	$result = '0';
 
@@ -1791,7 +1811,7 @@ function getModerator($id)
 * 
 */
 
-function getSpeaker($id)
+function xalkygetSpeaker($id)
 {
 	$result = '0';
 	
@@ -1832,7 +1852,7 @@ function getSpeaker($id)
 * shows on profile
 */
 
-function getUserAge($age)
+function xalkygetUserAge($age)
 {
 	$html = '';
 	$selected = ''; 
@@ -1860,7 +1880,7 @@ function getUserAge($age)
 * shows on login/profiles
 */
 
-function getUserGenders($userGender)
+function xalkygetUserGenders($userGender)
 {
 	try {
 		$dbh = db_connect();
@@ -1920,7 +1940,7 @@ function getUserGenders($userGender)
 * shows on profile
 */
 
-function getProfileGenders($userGender)
+function xalkygetProfileGenders($userGender)
 {
 	try {
 		$dbh = db_connect();
@@ -1962,7 +1982,7 @@ function getProfileGenders($userGender)
 * shows on login
 */
 
-function getUserRooms($id)
+function xalkygetUserRooms($id)
 {
 	try {
 		$dbh = db_connect();
@@ -1988,7 +2008,7 @@ function getUserRooms($id)
 			// check roomID is numeric
 			if(!is_numeric($id))
 			{
-				$id = $CONFIG['defaultRoom'];
+				$id = $xalkyConfig['defaultRoom'];
 			}
 		
 			$params = array(
@@ -2032,7 +2052,7 @@ function getUserRooms($id)
 * shows on login
 */
 
-function getLoginNews()
+function xalkygetLoginNews()
 {
 	try {
 		$dbh = db_connect();
@@ -2068,16 +2088,16 @@ function getLoginNews()
 * 
 */
 
-function copyrightTitle()
+function xalkycopyrightTitle()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	$html = "Powered by Xalky ".$CONFIG['version'];
+	$html = "Powered by Xalky ".$xalkyConfig['version'];
 
 	if(file_exists(getDocPath()."plugins/rembrand/index.php"))
 	{
-		$html = $CONFIG['chatroomName'];
+		$html = $xalkyConfig['chatroomName'];
 	}
 
 	return $html;
@@ -2088,16 +2108,16 @@ function copyrightTitle()
 * 
 */
 
-function copyrightFooter()
+function xalkycopyrightFooter()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	$html = "<span class='link'>&copy;<a href='http://xalky.com'>Xalky</a> ".$CONFIG['version']."</span>";
+	$html = "<span class='link'>&copy;<a href='http://xalky.com'>Xalky</a> ".$xalkyConfig['version']."</span>";
 
 	if(file_exists(getDocPath()."/plugins/rembrand/index.php"))
 	{
-		$html = "<span class='link'>&copy;".date("Y")." - <a href='".$CONFIG['chatroomUrl']."'>".$CONFIG['chatroomName']."</a></span>";	
+		$html = "<span class='link'>&copy;".date("Y")." - <a href='".$xalkyConfig['chatroomUrl']."'>".$xalkyConfig['chatroomName']."</a></span>";	
 	}
 
 	return $html;
@@ -2108,7 +2128,7 @@ function copyrightFooter()
 * 
 */
 
-function showImage($id)
+function xalkyshowImage($id)
 {
 	// strip tags
 	if(!ctype_digit($id))
@@ -2164,7 +2184,7 @@ function showImage($id)
 * 
 */
 
-function userProfileInfo($id)
+function xalkyuserProfileInfo($id)
 {
 	// strip tags
 	$id = strip_tags($id);
@@ -2218,7 +2238,7 @@ function userProfileInfo($id)
 * 
 */
 
-function updateProfile($id,$profileRealname,$profileAge,$profileGender,$uploadedfile,$deleteImage,$imgID,$profileLocation,$profileHobbies,$profileAboutme,$profilePass,$profileEmail)
+function xalkyupdateProfile($id,$profileRealname,$profileAge,$profileGender,$uploadedfile,$deleteImage,$imgID,$profileLocation,$profileHobbies,$profileAboutme,$profilePass,$profileEmail)
 {
 	// include files
 	include(getDocPath()."lang/".$_SESSION['lang']);
@@ -2326,7 +2346,7 @@ function updateProfile($id,$profileRealname,$profileAge,$profileGender,$uploaded
 
 			$incImage = 'delete';
 
-       		$image_result = C_LANG23;
+       		$image_result = _MN_XALKY_CONST23;
 
 		}
 	}
@@ -2476,52 +2496,52 @@ function updateProfile($id,$profileRealname,$profileAge,$profileGender,$uploaded
 
 	if(!$profile_updated)
 	{
-		$profile_updated = C_LANG24;
+		$profile_updated = _MN_XALKY_CONST24;
 	}
 
 	if(!$image_error && $imageUploaded)
 	{
-		$profile_updated = C_LANG25;
+		$profile_updated = _MN_XALKY_CONST25;
 	}	
 
 	return $profile_updated;	
 }
 
 /*
-* eCredits
+* digitalCredits
 *
 */
 
-function eCredits($id)
+function xalkydigitalCredits($id)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	// if eCredits session not set
-	if(!$_SESSION['eCredits_start'])
+	// if digitalCredits session not set
+	if(!$_SESSION['digitalCredits_start'])
 	{
-		$_SESSION['eCredits_start'] = date("U");
+		$_SESSION['digitalCredits_start'] = date("U");
 	}
 	else
 	{
 		// update count on page refresh
-		$_SESSION['eCredits'] =  date("U") - $_SESSION['eCredits_start'];
+		$_SESSION['digitalCredits'] =  date("U") - $_SESSION['digitalCredits_start'];
 	}
 
-	// if 60 secs, update eCredits count
-	if($_SESSION['eCredits'] >= '60')
+	// if 60 secs, update digitalCredits count
+	if($_SESSION['digitalCredits'] >= '60')
 	{
 		// deduct credit from sender
 		try {
 			$dbh = db_connect();
 			$params = array(
-			'eCredits' => $CONFIG['eCredits'],
+			'digitalCredits' => $xalkyConfig['digitalCredits'],
 			'username' => makeSafe($_SESSION['username'])
 			);
 			$query = "UPDATE xalky_users 
-					  SET eCredits = eCredits - :eCredits 
+					  SET digitalCredits = digitalCredits - :digitalCredits 
 					  WHERE username = :username
-					  AND eCredits > '0'
+					  AND digitalCredits > '0'
 					  ";							
 			$action = $dbh->prepare($query);
 			$action->execute($params);	
@@ -2542,7 +2562,7 @@ function eCredits($id)
 			$params = array(
 			'username' => makeSafe($_SESSION['username'])
 			);
-			$query = "SELECT eCredits   
+			$query = "SELECT digitalCredits   
 					  FROM xalky_users 
 					  WHERE username = :username
 					  LIMIT 1
@@ -2550,13 +2570,13 @@ function eCredits($id)
 			$action = $dbh->prepare($query);
 			$action->execute($params);
 			
-			$updateeCredits = '0';
+			$updatedigitalCredits = '0';
 						
 			foreach ($action as $i) 
 			{
-				if($i['eCredits'] > 0)
+				if($i['digitalCredits'] > 0)
 				{
-					$updateeCredits = '1';
+					$updatedigitalCredits = '1';
 				}					
 			}
 			
@@ -2571,17 +2591,17 @@ function eCredits($id)
 			debugError($error);
 		}
 
-		// if user has eCredits
-		if($updateeCredits)
+		// if user has digitalCredits
+		if($updatedigitalCredits)
 		{
 			try {
 				$dbh = db_connect();
 				$params = array(
-				'eCredits' => $CONFIG['eCredits'],
+				'digitalCredits' => $xalkyConfig['digitalCredits'],
 				'id' => makeSafe($id)
 				);
 				$query = "UPDATE xalky_users 
-						  SET eCreditsEarned = eCreditsEarned + :eCredits 
+						  SET digitalCreditsEarned = digitalCreditsEarned + :digitalCredits 
 						  WHERE id = :id
 						  ";							
 				$action = $dbh->prepare($query);
@@ -2598,8 +2618,8 @@ function eCredits($id)
 			}		
 		}
 	
-		// reset eCredit count
-		$_SESSION['eCredits_start'] = date("U");
+		// reset digitalCredit count
+		$_SESSION['digitalCredits_start'] = date("U");
 	}
 }
 
@@ -2608,7 +2628,7 @@ function eCredits($id)
 *
 */
 
-function resetPassword($data)
+function xalkyresetPassword($data)
 {
 	// include files
 	include(getDocPath()."includes/session.php");
@@ -2623,12 +2643,12 @@ function resetPassword($data)
 
 	if($error)
 	{
-		return C_LANG26;
+		return _MN_XALKY_CONST26;
 	}
 
 	if($uCaptcha != $sCaptcha)
 	{
-		return C_LANG158;
+		return _MN_XALKY_CONST158;
 	}
 
 	$userFound = '0';
@@ -2699,12 +2719,12 @@ function resetPassword($data)
 		// send email with new password
 		sendUserEmail('',$sendToUser,$sendToEmail,$newpass,'1');
 
-		return C_LANG27;	
+		return _MN_XALKY_CONST27;	
 	}
 	
 	if(!$userFound)
 	{
-		return C_LANG28;
+		return _MN_XALKY_CONST28;
 	}
 }
 
@@ -2713,7 +2733,7 @@ function resetPassword($data)
 *
 */
 
-function sendUserEmail($id,$username,$email,$newpass,$status)
+function xalkysendUserEmail($id,$username,$email,$newpass,$status)
 {
 	// include files
 	include(getDocPath()."includes/session.php");
@@ -2726,29 +2746,29 @@ function sendUserEmail($id,$username,$email,$newpass,$status)
 	$headers .= "X-Priority: 3\n";
 	$headers .= "X-MSMail-Priority: Normal\n";
 	$headers .= "X-Mailer: php\n";
-	$headers .= "From: \"" . $CONFIG['chatroomName'] . "\" <" . $CONFIG['chatroomEmail'] . ">\n";
+	$headers .= "From: \"" . $xalkyConfig['chatroomName'] . "\" <" . $xalkyConfig['chatroomEmail'] . ">\n";
 
 	// send lost password
 	if($status == '1')
 	{
-		$email_subject  = $CONFIG['chatroomName']." - ".C_LANG29;
-		$email_message  = C_LANG30." ".urldecode($username).",\r\n\r\n";
-		$email_message .= C_LANG31.": ".$newpass."\r\n\r\n";
-		$email_message .= C_LANG32."\r\n\r\n";
-		$email_message .= C_LANG33.",\r\n";
-		$email_message .= $CONFIG['chatroomName'];
+		$email_subject  = $xalkyConfig['chatroomName']." - "._MN_XALKY_CONST29;
+		$email_message  = _MN_XALKY_CONST30." ".urldecode($username).",\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST31.": ".$newpass."\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST32."\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST33.",\r\n";
+		$email_message .= $xalkyConfig['chatroomName'];
 	}
 
 	// send confirmation register email
 	if($status == '2')
 	{
-		$email_subject = $CONFIG['chatroomName']." - ".C_LANG34;
-		$email_message  = C_LANG30." ".urldecode($username).",\r\n\r\n";
-		$email_message .= C_LANG35.": ".$CONFIG['chatroomName']."\r\n\r\n";
-		$email_message .= C_LANG36.",\r\n\r\n";
-		$email_message .= $CONFIG['chatroomUrl']."?nReg=".$id."&email=".$email."\r\n\r\n";
-		$email_message .= C_LANG33.",\r\n";
-		$email_message .= $CONFIG['chatroomName'];
+		$email_subject = $xalkyConfig['chatroomName']." - "._MN_XALKY_CONST34;
+		$email_message  = _MN_XALKY_CONST30." ".urldecode($username).",\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST35.": ".$xalkyConfig['chatroomName']."\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST36.",\r\n\r\n";
+		$email_message .= $xalkyConfig['chatroomUrl']."?nReg=".$id."&email=".$email."\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST33.",\r\n";
+		$email_message .= $xalkyConfig['chatroomName'];
 	}
 
 	mail($email, $email_subject, $email_message, $headers);
@@ -2760,7 +2780,7 @@ function sendUserEmail($id,$username,$email,$newpass,$status)
 *
 */
 
-function sendAdminEmail($status,$report,$message)
+function xalkysendAdminEmail($status,$report,$message)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -2772,12 +2792,12 @@ function sendAdminEmail($status,$report,$message)
 
 	if(empty($message))
 	{
-		return C_LANG65." [<a href=\"javascript:history.go(-1)\">".C_LANG159."</a>]";
+		return _MN_XALKY_CONST65." [<a href=\"javascript:history.go(-1)\">"._MN_XALKY_CONST159."</a>]";
 	}
 
 	if(!$_POST['sCaptcha'] || $_POST['sCaptcha'] != $_POST['uCaptcha'])
 	{
-		return C_LANG158." [<a href=\"javascript:history.go(-1)\">".C_LANG159."</a>]";
+		return _MN_XALKY_CONST158." [<a href=\"javascript:history.go(-1)\">"._MN_XALKY_CONST159."</a>]";
 	}
 
 	// create headers
@@ -2786,37 +2806,37 @@ function sendAdminEmail($status,$report,$message)
 	$headers .= "X-Priority: 3\n";
 	$headers .= "X-MSMail-Priority: Normal\n";
 	$headers .= "X-Mailer: php\n";
-	$headers .= "From: \"" . $CONFIG['chatroomName'] . "\" <" . $CONFIG['chatroomEmail'] . ">\n";
+	$headers .= "From: \"" . $xalkyConfig['chatroomName'] . "\" <" . $xalkyConfig['chatroomEmail'] . ">\n";
 
 	// send confirmation register email
 	if($status == '1')
 	{
-		$email_subject = $CONFIG['chatroomName']." - ".C_LANG37;
-		$email_message  = C_LANG38.",\r\n\r\n";
-		$email_message .= C_LANG39." ".$_SESSION['username']." ".C_LANG40.": ".urldecode($report)."\r\n\r\n";
-		$email_message .= C_LANG41.":\r\n\r\n";
+		$email_subject = $xalkyConfig['chatroomName']." - "._MN_XALKY_CONST37;
+		$email_message  = _MN_XALKY_CONST38.",\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST39." ".$_SESSION['username']." "._MN_XALKY_CONST40.": ".urldecode($report)."\r\n\r\n";
+		$email_message .= _MN_XALKY_CONST41.":\r\n\r\n";
 		$email_message .= $message."\r\n\r\n";
-		$email_message .= C_LANG33.",\r\n";
-		$email_message .= $CONFIG['chatroomName'];
+		$email_message .= _MN_XALKY_CONST33.",\r\n";
+		$email_message .= $xalkyConfig['chatroomName'];
 	}
 
 	if(empty($message))	
 	{
-		return C_LANG42;
+		return _MN_XALKY_CONST42;
 	}
 
 	if(isset($_SESSION['lastReportAgainst']) && $_SESSION['lastReportAgainst'] == $report)
 	{
-		return C_LANG43;
+		return _MN_XALKY_CONST43;
 	}
 
 	if($_SESSION['username'])
 	{
 		$_SESSION['lastReportAgainst'] = $report;
 
-		mail($CONFIG['chatroomEmail'], $email_subject, $email_message, $headers);
+		mail($xalkyConfig['chatroomEmail'], $email_subject, $email_message, $headers);
 
-		return C_LANG44;
+		return _MN_XALKY_CONST44;
 	}
 
 }
@@ -2826,7 +2846,7 @@ function sendAdminEmail($status,$report,$message)
 *
 */
 
-function confirmReg($id,$email)
+function xalkyconfirmReg($id,$email)
 {
 	// include files
 	include(getDocPath()."includes/session.php");
@@ -2887,12 +2907,12 @@ function confirmReg($id,$email)
 			debugError($error);
 		}		
 
-		return C_LANG45;
+		return _MN_XALKY_CONST45;
 	}
 
 	if(!$confirm)
 	{
-		return C_LANG46;
+		return _MN_XALKY_CONST46;
 	}
 
 }
@@ -2902,7 +2922,7 @@ function confirmReg($id,$email)
 *
 */
 
-function getTranscripts($room)
+function xalkygetTranscripts($room)
 {
 	// include files
 	include(getDocPath()."includes/session.php");
@@ -2919,7 +2939,7 @@ function getTranscripts($room)
 	// check active session
 	if(!$_SESSION['username'])
 	{
-		return C_LANG47;
+		return _MN_XALKY_CONST47;
 		die;
 	}
 
@@ -2971,7 +2991,7 @@ function getTranscripts($room)
 					  FROM xalky_message
 					  WHERE id >= :transcriptID
 					  AND room = :room
-					  AND uid NOT IN (:blockedIDs)
+					  AND userID NOT IN (:blockedIDs)
 					  ";			
 		}
 		else
@@ -2990,8 +3010,8 @@ function getTranscripts($room)
 		$action = $dbh->prepare($query);
 		$action->execute($params);				
 					
-		$html ="<table class='table' width='100%' style='background-color:#333333;'>";
-		$html .="<tr class='header' style='color:#FFFFFF'><td>".C_LANG49."</td><td>".C_LANG50."</td><td>".C_LANG51."</td><td>".C_LANG52."</td><td>".C_LANG53."</td></tr>";
+		$html ="<table class='table' width='100%' style='background-colour:#333333;'>";
+		$html .="<tr class='header' style='colour:#FFFFFF'><td>"._MN_XALKY_CONST49."</td><td>"._MN_XALKY_CONST50."</td><td>"._MN_XALKY_CONST51."</td><td>"._MN_XALKY_CONST52."</td><td>"._MN_XALKY_CONST53."</td></tr>";
 
 		foreach ($action as $i) 
 		{
@@ -3013,7 +3033,7 @@ function getTranscripts($room)
 					$i['message'][4] = str_replace("[[","<",$i['message'][4]);
 					$i['message'][4] = str_replace("]]",">",$i['message'][4]);
 
-					$message = "<span style=\"color:".$i['message'][1].";font-size:".$i['message'][2].";font-family:".$i['message'][3].";\">".html_entity_decode(stripslashes($i['message'][4]))."</span>";
+					$message = "<span style=\"colour:".$i['message'][1].";font-size:".$i['message'][2].";font-family:".$i['message'][3].";\">".html_entity_decode(stripslashes($i['message'][4]))."</span>";
 
 					// add <pre> if required
 					// used for formatting multi-line messages.
@@ -3058,7 +3078,7 @@ function getTranscripts($room)
 *
 */
 
-function banKickUser($message, $toname)
+function xalkybanKickUser($message, $toname)
 {
 	// check username contains only characters AZaz09_
 	if(!preg_match('/^[A-Za-z0-9_]+$/',$toname))
@@ -3074,7 +3094,7 @@ function banKickUser($message, $toname)
 		
 		if($message == 'KICK')
 		{
-			$kickTime = $CONFIG['kickTime'] * 60;
+			$kickTime = $xalkyConfig['kickTime'] * 60;
 			$dropKick = getTime()+$kickTime;
 			
 			$params = array(
@@ -3142,7 +3162,7 @@ function banKickUser($message, $toname)
 *
 */
 
-function getUsersOnline($id)
+function xalkygetUsersOnline($id)
 {
 	// include files
 	include(getDocPath()."includes/session.php");
@@ -3175,11 +3195,11 @@ function getUsersOnline($id)
 			// display users online table
 			$html = "";
 			$html .= "<table class='table'>";
-			$html .= "<tr class='header'><td>".C_LANG54."</td><td>".C_LANG50."</td></tr>";
+			$html .= "<tr class='header'><td>"._MN_XALKY_CONST54."</td><td>"._MN_XALKY_CONST50."</td></tr>";
 			
 			foreach ($action as $i) 
 			{
-				if($CONFIG['invisibleAdminsPlugin'] && getAdmin($i['username']))
+				if($xalkyConfig['invisibleAdminsPlugin'] && getAdmin($i['username']))
 				{
 					// hide admin user
 				}
@@ -3211,7 +3231,7 @@ function getUsersOnline($id)
 *
 */
 
-function getRoomOwner()
+function xalkygetRoomOwner()
 {
 	try {
 		$dbh = db_connect();
@@ -3242,10 +3262,10 @@ function getRoomOwner()
 
 /*
 * delete any expired rooms created by users 
-* ( function runs on index load if no users in chat room )
+* ( function xalkyruns on index load if no users in chat room )
 */
 
-function delete_expired_rooms()
+function xalkydelete_expired_rooms()
 {
 	if( getUsersOnline('1') < 1 )
 	{
@@ -3275,7 +3295,7 @@ function delete_expired_rooms()
 *
 */
 
-function getIP()
+function xalkygetIP()
 {
 	return $_SERVER['REMOTE_ADDR'];
 }
@@ -3285,7 +3305,7 @@ function getIP()
 *
 */
 
-function getIPBanList($id)
+function xalkygetIPBanList($id)
 {
 	try {
 		$dbh = db_connect();
@@ -3320,7 +3340,7 @@ function getIPBanList($id)
 * requires remove branding plugin
 */
 
-function remBrand()
+function xalkyremBrand()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
@@ -3340,12 +3360,12 @@ function remBrand()
 * requires event plugin
 */
 
-function checkEvent()
+function xalkycheckEvent()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	if($CONFIG['eventsPlugin'])
+	if($xalkyConfig['eventsPlugin'])
 	{
 		if(file_exists(getDocPath()."plugins/events/index.php"))
 		{
@@ -3361,12 +3381,12 @@ function checkEvent()
 * requires virtual credits plugin
 */
 
-function virtualCredits()
+function xalkyvirtualCredits()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
-	if($CONFIG['virtualCreditsPlugin'])
+	if($xalkyConfig['virtualCreditsPlugin'])
 	{
 		if(file_exists(getDocPath()."plugins/virtual_credits/index.php"))
 		{
@@ -3380,14 +3400,14 @@ function virtualCredits()
 * requires moderated chat plugin
 */
 
-function moderatedXalky()
+function xalkymoderatedXalky()
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
 	$result = '0';
 
-	if($CONFIG['moderatedXalkyPlugin'])
+	if($xalkyConfig['moderatedXalkyPlugin'])
 	{
 		if(file_exists(getDocPath()."plugins/moderated_chat/index.php"))
 		{
@@ -3403,14 +3423,14 @@ function moderatedXalky()
 * requires invisible admins plugin
 */
 
-function invisibleAdmins($username)
+function xalkyinvisibleAdmins($username)
 {
 	// include files
 	include(getDocPath()."includes/config.php");
 
 	$result = '0';
 
-	if($CONFIG['invisibleAdminsPlugin'])
+	if($xalkyConfig['invisibleAdminsPlugin'])
 	{
 		if(file_exists(getDocPath()."plugins/invisible/index.js.php"))
 		{
@@ -3426,7 +3446,7 @@ function invisibleAdmins($username)
 * @Param $page Page
 */
 
-function showPlugins($page)
+function xalkyshowPlugins($page)
 {
 	$html ='';
 	$plugin ='';
