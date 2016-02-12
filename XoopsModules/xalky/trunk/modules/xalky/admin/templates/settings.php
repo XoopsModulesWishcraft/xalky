@@ -10,7 +10,7 @@
 	<table>
 	<tr><td class="header" colspan="3">Settings</td></tr>
 	<tr><td colspan="3">&nbsp;</td></tr>
-	<tr><td colspan="3">Note: Additional settings can be found in the file: <i>xalky/includes/config.php</i></td></tr>
+	<tr><td colspan="3">Note: Additional settings can be found in the file: <i>xalky/include/config.php</i></td></tr>
 	<tr><td colspan="3">&nbsp;</td></tr>
 	<tr><td><b>Option</b></td><td><b>Value</b></td><td><b>Description</b></td></tr>
 	<tr><td>login username</td><td><input type="text" name="admin" value="<?php echo $admin;?>"></td><td>Username to login to admin area.</td></tr>

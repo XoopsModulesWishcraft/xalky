@@ -18,9 +18,9 @@
 <meta name="description" content="">
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
-<script type="text/javascript" src="includes/lang.js.php"></script>
+<script type="text/javascript" src="include/lang.js.php"></script>
 <script type="text/javascript" src="js/XmlHttpRequest.js.php"></script>
-<script type="text/javascript" src="includes/settings.js.php"></script>
+<script type="text/javascript" src="include/settings.js.php"></script>
 <script type="text/javascript" src="js/functions.js.php"></script>
 
 <?php echo showPlugins('login');?>

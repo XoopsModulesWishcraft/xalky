@@ -21,7 +21,7 @@
  */
 
 global $xalkyConfig;
-include(dirname(dirname(__DIR__))."/includes/config.php");
+include(dirname(dirname(__DIR__))."/include/config.php");
 
 /**
  * Declare header

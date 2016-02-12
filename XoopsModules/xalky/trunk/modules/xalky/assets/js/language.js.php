@@ -20,8 +20,8 @@
  * @since		1.0.1
  */
 
-require_once(dirname(dirname(__DIR__))."/includes/session.php");
-require_once(dirname(dirname(__DIR__))."/includes/config.php");
+require_once(dirname(dirname(__DIR__))."/include/session.php");
+require_once(dirname(dirname(__DIR__))."/include/config.php");
 
 /**
  * Declare header

@@ -25,9 +25,9 @@
 * 
 */
 
-include("../includes/ini.php");
-include("../includes/db.php");
-include("../includes/functions.php");
+include("../include/ini.php");
+include("../include/db.php");
+include("../include/functions.php");
 
 /*
 * get image details

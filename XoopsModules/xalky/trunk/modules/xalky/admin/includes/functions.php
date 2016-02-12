@@ -24,7 +24,7 @@ function getAdminLogin()
 
 	$html .= '<tr><td>&nbsp;</td><td><input style="cursor:pointer;" type="submit" name="submit" value="Login"></td></tr>';
 
-	include("../includes/config.php");
+	include("../include/config.php");
 	
 	if($xalkyConfig['showAdminResetPasswordLink']){
 		$html .= '<tr><td>&nbsp;</td><td>&#187;&nbsp;<a href="?option=lostPassword">Reset Password?</a></td></tr>';
@@ -87,7 +87,7 @@ function updateAdminLogin($data)
 function resetAdminLogin($status)
 {
 	// include files
-	include("../includes/config.php");
+	include("../include/config.php");
 
 	// create a random password 
 	$newPass = substr(md5(date("U").rand(1,99999)),0,-16);
@@ -1098,11 +1098,11 @@ function getAdminGroups()
 		$html .= '<tr><td colspan="9">&nbsp;</td><td align="right">&nbsp;</td><td align="center"><input class="submit" type="submit" name="update" value="Submit"><br><br></td></tr>';
 
 		// include files
-		include("../includes/config.php");
+		include("../include/config.php");
 
 		$html .= '<tr><td colspan="11"><b>Default Group ID: '.$xalkyConfig['userGroup'].'</b></td></tr>';
 		$html .= '<tr><td colspan="11">This is the Group ID a user is assigned to the first time they login to the chat room.</td></tr>';
-		$html .= '<tr><td colspan="11">You can change the default Group ID value by editing the file "includes/config.php".</td></tr>';
+		$html .= '<tr><td colspan="11">You can change the default Group ID value by editing the file "include/config.php".</td></tr>';
 		$html .= '<tr><td colspan="11">To assign a user to a different user group, click Users > Search Username > Group ID </td></tr>';
 			
 		$dbh = null;
@@ -2176,7 +2176,7 @@ function getAdminGroupEmail()
 function sendAdminGroupEmail($data)
 {
 	// include files
-	include("../includes/config.php");
+	include("../include/config.php");
 
 	// create headers
 	$headers = "MIME-Version: 1.0\n";

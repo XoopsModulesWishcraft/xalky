@@ -20,8 +20,8 @@
  * @since		1.0.1
  */
 
-include("../../includes/session.php");
-include("../../includes/functions.php");
+include("../../include/session.php");
+include("../../include/functions.php");
 include("../../lang/".getLang(''));
 ?>
 

@@ -21,7 +21,7 @@
  */
 
 global $xalkyConfig;
-require_once (dirname(dirname(__DIR__))."/includes/config.php");
+require_once (dirname(dirname(__DIR__))."/include/config.php");
 
 /**
  * Declare header
