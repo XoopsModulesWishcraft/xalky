@@ -14,7 +14,7 @@
  * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
  * @see			http://sourceforge.net/projects/xoops/
  * @see			http://sourceforge.net/projects/chronolabs/
- * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://sourceforge.net/projects/chronolabsapis/
  * @see			http://labs.coop
  * @version     1.0.5
  * @since		1.0.1
@@ -46,7 +46,7 @@ xoops_loadLanguage('main', basename(dirname(dirname(__DIR__))));
  * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
  * @see			http://sourceforge.net/projects/xoops/
  * @see			http://sourceforge.net/projects/chronolabs/
- * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://sourceforge.net/projects/chronolabsapis/
  * @see			http://labs.coop
  * @version     1.0.5
  * @since		1.0.1

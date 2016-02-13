@@ -14,7 +14,7 @@
  * @author      Simon Antony Roberts <wishcraft@users.sourceforge.net>
  * @see			http://sourceforge.net/projects/xoops/
  * @see			http://sourceforge.net/projects/chronolabs/
- * @see			http://sourceforge.net/projects/chronolabsapi/
+ * @see			http://sourceforge.net/projects/chronolabsapis/
  * @see			http://labs.coop
  * @version     1.0.5
  * @since		1.0.1
@@ -49,7 +49,7 @@ class XalkyCorePreload extends XoopsPreloadItem
 		mt_srand(mt_rand(-microtime(true), microtime(true))/$parts[1]);
 		mt_srand(mt_rand(-microtime(true), microtime(true))/$parts[1]);
 		
-		// Sets Contextual Headers with Encrytion Blowfish Keys for Discovery method
+		// Sets Contextual Headers with Encryption Blowfish Keys for Discovery method
 		header('Xalky-URL-Site: '. XOOPS_URL);
 		header('Xalky-URL-Chat: '. XOOPS_URL . '/modules/xalky/');
 		header('Xalky-API-Callback: '. XOOPS_URL . '/modules/xalky/%s/callback.api');
@@ -60,6 +60,10 @@ class XalkyCorePreload extends XoopsPreloadItem
 		header('Xalky-Peer-Slogan: '.$GLOBALS['xoopsConfig']['slogan']);
 		header('Xalky-Peer-Email: '.$GLOBALS['xoopsConfig']['admin_email']);
 		header('Xalky-Peer-ID: '.($GLOBALS['xalkyPeerID'] = self::getPeerID()));
+		if (!is_array($_SESSION['xalkyOldIssuedSalt']))
+			$_SESSION['xalkyOldIssuedSalt'] = array();
+		if (isset($_SESSION['xalkyIssuedSalt']))
+			$_SESSION['xalkyOldIssuedSalt'][microtime(true)] = $_SESSION['xalkyIssuedSalt'];
 		header('Xalky-AES-Salt: '. ($_SESSION['xalkyIssuedSalt'] = $GLOBALS['xalkyIssuedSalt'] = self::getSalt(0,127,'')));
 	}
     
